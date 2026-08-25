@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace SPV_Client
+{
+    public partial class FrmConfiguracion : Form
+    {
+        public FrmConfiguracion()
+        {
+            InitializeComponent();
+        }
+
+        private void FrmConfiguracion_Load(object sender, EventArgs e)
+        {
+            lblUsuarioActivo.Text = "Usuario actual: " + Session.NombreUsuario;
+        }
+    }
+}
