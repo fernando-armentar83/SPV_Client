@@ -45,6 +45,12 @@
             this.ColVelec = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblValorDiferenciaTotal = new System.Windows.Forms.Label();
+            this.lblDiferenciaTotal = new System.Windows.Forms.Label();
+            this.lblValorDiferenciaElectronico = new System.Windows.Forms.Label();
+            this.lblDiferenciaElectronico = new System.Windows.Forms.Label();
+            this.txtElectronicoContado = new System.Windows.Forms.TextBox();
+            this.lblElectronicoContado = new System.Windows.Forms.Label();
             this.txtObservaciones = new System.Windows.Forms.TextBox();
             this.lblObservaciones = new System.Windows.Forms.Label();
             this.lblValorDiferenciaEfectivo = new System.Windows.Forms.Label();
@@ -57,13 +63,8 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblUsuarioActivo = new System.Windows.Forms.Label();
             this.lblHoraCorte = new System.Windows.Forms.Label();
-            this.lblElectronicoContado = new System.Windows.Forms.Label();
-            this.txtElectronicoContado = new System.Windows.Forms.TextBox();
-            this.lblDiferenciaElectronico = new System.Windows.Forms.Label();
-            this.lblValorDiferenciaElectronico = new System.Windows.Forms.Label();
-            this.lblDiferenciaTotal = new System.Windows.Forms.Label();
-            this.lblValorDiferenciaTotal = new System.Windows.Forms.Label();
             this.btnConteoEfectivo = new System.Windows.Forms.Button();
+            this.lblTurnoActivo = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentasSocios)).BeginInit();
@@ -266,6 +267,70 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Control de Cierre";
             // 
+            // lblValorDiferenciaTotal
+            // 
+            this.lblValorDiferenciaTotal.AutoSize = true;
+            this.lblValorDiferenciaTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblValorDiferenciaTotal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValorDiferenciaTotal.ForeColor = System.Drawing.Color.Black;
+            this.lblValorDiferenciaTotal.Location = new System.Drawing.Point(283, 252);
+            this.lblValorDiferenciaTotal.Name = "lblValorDiferenciaTotal";
+            this.lblValorDiferenciaTotal.Size = new System.Drawing.Size(2, 24);
+            this.lblValorDiferenciaTotal.TabIndex = 11;
+            // 
+            // lblDiferenciaTotal
+            // 
+            this.lblDiferenciaTotal.AutoSize = true;
+            this.lblDiferenciaTotal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiferenciaTotal.ForeColor = System.Drawing.Color.Black;
+            this.lblDiferenciaTotal.Location = new System.Drawing.Point(66, 252);
+            this.lblDiferenciaTotal.Name = "lblDiferenciaTotal";
+            this.lblDiferenciaTotal.Size = new System.Drawing.Size(190, 22);
+            this.lblDiferenciaTotal.TabIndex = 10;
+            this.lblDiferenciaTotal.Text = "Diferencia Total :";
+            // 
+            // lblValorDiferenciaElectronico
+            // 
+            this.lblValorDiferenciaElectronico.AutoSize = true;
+            this.lblValorDiferenciaElectronico.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblValorDiferenciaElectronico.ForeColor = System.Drawing.Color.Black;
+            this.lblValorDiferenciaElectronico.Location = new System.Drawing.Point(283, 202);
+            this.lblValorDiferenciaElectronico.Name = "lblValorDiferenciaElectronico";
+            this.lblValorDiferenciaElectronico.Size = new System.Drawing.Size(2, 26);
+            this.lblValorDiferenciaElectronico.TabIndex = 9;
+            // 
+            // lblDiferenciaElectronico
+            // 
+            this.lblDiferenciaElectronico.AutoSize = true;
+            this.lblDiferenciaElectronico.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiferenciaElectronico.ForeColor = System.Drawing.Color.Black;
+            this.lblDiferenciaElectronico.Location = new System.Drawing.Point(6, 202);
+            this.lblDiferenciaElectronico.Name = "lblDiferenciaElectronico";
+            this.lblDiferenciaElectronico.Size = new System.Drawing.Size(250, 22);
+            this.lblDiferenciaElectronico.TabIndex = 8;
+            this.lblDiferenciaElectronico.Text = "Diferencia Electrónico :";
+            // 
+            // txtElectronicoContado
+            // 
+            this.txtElectronicoContado.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtElectronicoContado.Location = new System.Drawing.Point(283, 82);
+            this.txtElectronicoContado.Name = "txtElectronicoContado";
+            this.txtElectronicoContado.Size = new System.Drawing.Size(147, 29);
+            this.txtElectronicoContado.TabIndex = 7;
+            this.txtElectronicoContado.Text = "0.00";
+            this.txtElectronicoContado.TextChanged += new System.EventHandler(this.txtElectronicoContado_TextChanged);
+            // 
+            // lblElectronicoContado
+            // 
+            this.lblElectronicoContado.AutoSize = true;
+            this.lblElectronicoContado.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblElectronicoContado.ForeColor = System.Drawing.Color.Black;
+            this.lblElectronicoContado.Location = new System.Drawing.Point(46, 82);
+            this.lblElectronicoContado.Name = "lblElectronicoContado";
+            this.lblElectronicoContado.Size = new System.Drawing.Size(210, 22);
+            this.lblElectronicoContado.TabIndex = 6;
+            this.lblElectronicoContado.Text = "Electrónico Contado:";
+            // 
             // txtObservaciones
             // 
             this.txtObservaciones.Location = new System.Drawing.Point(241, 307);
@@ -394,70 +459,6 @@
             this.lblHoraCorte.Size = new System.Drawing.Size(2, 23);
             this.lblHoraCorte.TabIndex = 12;
             // 
-            // lblElectronicoContado
-            // 
-            this.lblElectronicoContado.AutoSize = true;
-            this.lblElectronicoContado.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblElectronicoContado.ForeColor = System.Drawing.Color.Black;
-            this.lblElectronicoContado.Location = new System.Drawing.Point(46, 82);
-            this.lblElectronicoContado.Name = "lblElectronicoContado";
-            this.lblElectronicoContado.Size = new System.Drawing.Size(210, 22);
-            this.lblElectronicoContado.TabIndex = 6;
-            this.lblElectronicoContado.Text = "Electrónico Contado:";
-            // 
-            // txtElectronicoContado
-            // 
-            this.txtElectronicoContado.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtElectronicoContado.Location = new System.Drawing.Point(283, 82);
-            this.txtElectronicoContado.Name = "txtElectronicoContado";
-            this.txtElectronicoContado.Size = new System.Drawing.Size(147, 29);
-            this.txtElectronicoContado.TabIndex = 7;
-            this.txtElectronicoContado.Text = "0.00";
-            this.txtElectronicoContado.TextChanged += new System.EventHandler(this.txtElectronicoContado_TextChanged);
-            // 
-            // lblDiferenciaElectronico
-            // 
-            this.lblDiferenciaElectronico.AutoSize = true;
-            this.lblDiferenciaElectronico.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiferenciaElectronico.ForeColor = System.Drawing.Color.Black;
-            this.lblDiferenciaElectronico.Location = new System.Drawing.Point(6, 202);
-            this.lblDiferenciaElectronico.Name = "lblDiferenciaElectronico";
-            this.lblDiferenciaElectronico.Size = new System.Drawing.Size(250, 22);
-            this.lblDiferenciaElectronico.TabIndex = 8;
-            this.lblDiferenciaElectronico.Text = "Diferencia Electrónico :";
-            // 
-            // lblValorDiferenciaElectronico
-            // 
-            this.lblValorDiferenciaElectronico.AutoSize = true;
-            this.lblValorDiferenciaElectronico.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblValorDiferenciaElectronico.ForeColor = System.Drawing.Color.Black;
-            this.lblValorDiferenciaElectronico.Location = new System.Drawing.Point(283, 202);
-            this.lblValorDiferenciaElectronico.Name = "lblValorDiferenciaElectronico";
-            this.lblValorDiferenciaElectronico.Size = new System.Drawing.Size(2, 26);
-            this.lblValorDiferenciaElectronico.TabIndex = 9;
-            // 
-            // lblDiferenciaTotal
-            // 
-            this.lblDiferenciaTotal.AutoSize = true;
-            this.lblDiferenciaTotal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiferenciaTotal.ForeColor = System.Drawing.Color.Black;
-            this.lblDiferenciaTotal.Location = new System.Drawing.Point(66, 252);
-            this.lblDiferenciaTotal.Name = "lblDiferenciaTotal";
-            this.lblDiferenciaTotal.Size = new System.Drawing.Size(190, 22);
-            this.lblDiferenciaTotal.TabIndex = 10;
-            this.lblDiferenciaTotal.Text = "Diferencia Total :";
-            // 
-            // lblValorDiferenciaTotal
-            // 
-            this.lblValorDiferenciaTotal.AutoSize = true;
-            this.lblValorDiferenciaTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblValorDiferenciaTotal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValorDiferenciaTotal.ForeColor = System.Drawing.Color.Black;
-            this.lblValorDiferenciaTotal.Location = new System.Drawing.Point(283, 252);
-            this.lblValorDiferenciaTotal.Name = "lblValorDiferenciaTotal";
-            this.lblValorDiferenciaTotal.Size = new System.Drawing.Size(2, 24);
-            this.lblValorDiferenciaTotal.TabIndex = 11;
-            // 
             // btnConteoEfectivo
             // 
             this.btnConteoEfectivo.BackColor = System.Drawing.Color.MintCream;
@@ -470,6 +471,16 @@
             this.btnConteoEfectivo.UseVisualStyleBackColor = false;
             this.btnConteoEfectivo.Click += new System.EventHandler(this.btnConteoEfectivo_Click);
             // 
+            // lblTurnoActivo
+            // 
+            this.lblTurnoActivo.AutoSize = true;
+            this.lblTurnoActivo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTurnoActivo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTurnoActivo.Location = new System.Drawing.Point(578, 64);
+            this.lblTurnoActivo.Name = "lblTurnoActivo";
+            this.lblTurnoActivo.Size = new System.Drawing.Size(2, 30);
+            this.lblTurnoActivo.TabIndex = 14;
+            // 
             // FrmCierreSesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -478,6 +489,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(839, 1050);
+            this.Controls.Add(this.lblTurnoActivo);
             this.Controls.Add(this.btnConteoEfectivo);
             this.Controls.Add(this.lblHoraCorte);
             this.Controls.Add(this.lblUsuarioActivo);
@@ -491,8 +503,10 @@
             this.Controls.Add(this.lblH);
             this.Controls.Add(this.lblU);
             this.Controls.Add(this.lblTitulo);
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCierreSesion";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cierre de Turno";
             this.Load += new System.EventHandler(this.FrmCierreSesion_Load);
@@ -545,5 +559,6 @@
         private System.Windows.Forms.Label lblDiferenciaTotal;
         private System.Windows.Forms.Label lblValorDiferenciaElectronico;
         private System.Windows.Forms.Button btnConteoEfectivo;
+        private System.Windows.Forms.Label lblTurnoActivo;
     }
 }

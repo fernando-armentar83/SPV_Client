@@ -17,6 +17,7 @@ namespace SPV_Client
         private decimal totalElectronico = 0m;
         private decimal totalTurno = 0m;
         private readonly FrmConteoEfectivo frmConteo = new FrmConteoEfectivo();
+        private decimal totalVales = 0m;
 
         private readonly string connString = "server=localhost;database=spv_tlapaleria;uid=fer;pwd=129112;";
         
@@ -37,11 +38,13 @@ namespace SPV_Client
             }
 
             lblUsuarioActivo.Text = Session.NombreUsuario;
+            lblTurnoActivo.Text = $"Turno #{Session.IdTurno}";
             lblHoraCorte.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
 
             // Reset totales
             totalEfectivo = 0;
             totalElectronico = 0;
+            totalVales = 0;
             totalTurno = 0;
 
             lblVentasEfectivo.Text = FormatCurrency(0);
@@ -52,6 +55,7 @@ namespace SPV_Client
             dgvVentasSocios.Columns.Add("socio", "Socio");
             dgvVentasSocios.Columns.Add("efectivo", "Efectivo");
             dgvVentasSocios.Columns.Add("electronico", "Electrónico");
+            dgvVentasSocios.Columns.Add("vales", "Vales");
             dgvVentasSocios.Columns.Add("total", "Total");
 
             dgvVentasSocios.Rows.Clear();
@@ -115,16 +119,22 @@ namespace SPV_Client
                     // 1) TOTAL POR FORMA DE PAGO (FILTRADO POR id_turno)
                     // ================================================
                     string queryTotales = @"
-        SELECT
-            fp.nombre AS forma_pago,
-            SUM(vp.importe) AS total
-        FROM ventas v
-        INNER JOIN ventas_pagos vp
-            ON v.id_venta = vp.id_venta
-        INNER JOIN formas_pago fp
-            ON vp.id_forma_pago = fp.id_forma_pago
-        WHERE v.id_turno = @id_turno
-        GROUP BY fp.id_forma_pago, fp.nombre;";
+    SELECT
+        fp.id_forma_pago,
+        fp.nombre AS forma_pago,
+        COALESCE(SUM(vp.importe), 0) AS total
+    FROM ventas v
+    INNER JOIN ventas_pagos vp
+        ON vp.id_venta = v.id_venta
+    INNER JOIN formas_pago fp
+        ON fp.id_forma_pago = vp.id_forma_pago
+    WHERE v.id_turno = @id_turno
+      AND v.estado = 'ACTIVA'
+    GROUP BY
+        fp.id_forma_pago,
+        fp.nombre
+    ORDER BY
+        fp.id_forma_pago;";
 
                     using (var cmd = new MySqlCommand(queryTotales, cn))
                     {
@@ -137,15 +147,25 @@ namespace SPV_Client
                                 string forma = reader["forma_pago"].ToString().ToLower();
                                 decimal total = Convert.ToDecimal(reader["total"]);
 
-                                if (forma.Contains("efectivo"))
+                                if (forma == "efectivo")
+                                {
                                     totalEfectivo += total;
-                                else
+                                }
+                                else if (forma == "tarjeta" ||
+                                         forma == "transferencia")
+                                {
                                     totalElectronico += total;
+                                }
+                                else if (forma == "vale")
+                                { 
+                                    totalVales += total;
+                                }
+                                
                             }
                         }
                     }
 
-                    totalTurno = totalEfectivo + totalElectronico;
+                    totalTurno = totalEfectivo + totalElectronico + totalVales;
 
                     lblVentasEfectivo.Text = FormatCurrency(totalEfectivo);
                     lblVentasElectronico.Text = FormatCurrency(totalElectronico);
@@ -158,54 +178,51 @@ namespace SPV_Client
     SELECT
         s.nombre_socio,
 
-        SUM(
+        COALESCE(SUM(
             CASE
                 WHEN fp.id_forma_pago = 1
-                THEN vp.importe * (ds.subtotal / v.total)
+                THEN vp.importe
                 ELSE 0
             END
-        ) AS efectivo,
+        ), 0) AS efectivo,
 
-        SUM(
+        COALESCE(SUM(
             CASE
-                WHEN fp.id_forma_pago <> 1
-                THEN vp.importe * (ds.subtotal / v.total)
+                WHEN fp.id_forma_pago IN (2, 3)
+                THEN vp.importe
                 ELSE 0
             END
-        ) AS electronico,
+        ), 0) AS electronico,
 
-        SUM(ds.subtotal) AS total
+        COALESCE(SUM(
+            CASE
+                WHEN fp.id_forma_pago = 4
+                THEN vp.importe
+                ELSE 0
+            END
+        ), 0) AS vales,
+
+        COALESCE(SUM(vp.importe), 0) AS total
 
     FROM ventas v
 
-    INNER JOIN (
-        SELECT
-            dv.id_venta,
-            p.id_socio,
-            SUM(dv.subtotal) AS subtotal
-        FROM detalle_ventas dv
-        INNER JOIN productos p
-            ON dv.id_producto = p.id_producto
-        GROUP BY
-            dv.id_venta,
-            p.id_socio
-    ) ds
-        ON v.id_venta = ds.id_venta
-
     INNER JOIN socios s
-        ON ds.id_socio = s.id_socio
+        ON s.id_socio = v.id_socio
 
     INNER JOIN ventas_pagos vp
-        ON v.id_venta = vp.id_venta
+        ON vp.id_venta = v.id_venta
 
     INNER JOIN formas_pago fp
-        ON vp.id_forma_pago = fp.id_forma_pago
+        ON fp.id_forma_pago = vp.id_forma_pago
 
     WHERE v.id_turno = @id_turno
-      AND v.total > 0
+      AND v.estado = 'ACTIVA'
 
     GROUP BY
         s.id_socio,
+        s.nombre_socio
+
+    ORDER BY
         s.nombre_socio;";
 
                     using (var cmd = new MySqlCommand(querySocios, cn))
@@ -222,6 +239,7 @@ namespace SPV_Client
                                     reader["nombre_socio"].ToString(),
                                     FormatCurrency(Convert.ToDecimal(reader["efectivo"])),
                                     FormatCurrency(Convert.ToDecimal(reader["electronico"])),
+                                    FormatCurrency(Convert.ToDecimal(reader["vales"])),
                                     FormatCurrency(Convert.ToDecimal(reader["total"]))
                                 );
                             }
@@ -294,7 +312,7 @@ namespace SPV_Client
             }
 
             decimal montoFinal = efectivoContado + electronicoContado;
-            decimal totalVentas = totalTurno;
+            decimal totalVentas = totalEfectivo + totalElectronico;
             decimal diferencia = montoFinal - totalVentas;
             string observaciones = txtObservaciones.Text.Trim();
 
@@ -317,17 +335,50 @@ namespace SPV_Client
                 using (var cn = new MySqlConnection(connString))
                 {
                     cn.Open();
+                    string validarTurno = @"
+SELECT fecha_cierre
+FROM cajas_turnos
+WHERE id_turno = @id_turno;";
 
+                    using (var cmdValidar = new MySqlCommand(validarTurno, cn))
+                    {
+                        cmdValidar.Parameters.AddWithValue("@id_turno", Session.IdTurno);
+
+                        object resultado = cmdValidar.ExecuteScalar();
+
+                        if (resultado == null)
+                        {
+                            MessageBox.Show(
+                                "El turno ya no existe en la base de datos.",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        if (resultado != DBNull.Value)
+                        {
+                            MessageBox.Show(
+                                "Este turno ya fue cerrado anteriormente.",
+                                "Turno cerrado",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
                     string query = @"
 UPDATE cajas_turnos
 SET fecha_cierre = NOW(),
+    id_usuario_cierre = @id_usuario_cierre,
+                    
     monto_final = @monto_final,
     efectivo_contado = @efectivo,
     electronico_contado = @electronico,
     total_ventas = @total_ventas,
     diferencia = @diferencia,
     observaciones = @obs
-WHERE id_turno = @id_turno;";
+WHERE id_turno = @id_turno
+  AND fecha_cierre IS NULL;";
 
                     using (var cmd = new MySqlCommand(query, cn))
                     {
@@ -338,8 +389,21 @@ WHERE id_turno = @id_turno;";
                         cmd.Parameters.AddWithValue("@diferencia", diferencia);
                         cmd.Parameters.AddWithValue("@obs", observaciones);
                         cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
+                        cmd.Parameters.AddWithValue("@id_usuario_cierre", Session.IdUsuario);
 
                         cmd.ExecuteNonQuery();
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        if (filasAfectadas != 1)
+                        {
+                            MessageBox.Show(
+                                "No fue posible cerrar el turno. Es posible que ya haya sido cerrado.",
+                                "Cierre no realizado",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            return;
+                        }
                     }
                 }
 
