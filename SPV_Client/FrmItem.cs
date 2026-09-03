@@ -33,6 +33,12 @@ namespace SPV_Client
 
         private void LimpiarFormulario()
         {
+            idProducto = 0;
+
+            modoEdicion = false;
+
+            hayCambios = false;
+
             txtProducto.Clear();
 
             cmbCategoria.SelectedIndex = -1;
@@ -630,9 +636,37 @@ VALUES
 
         }
 
+        private void PrepararNuevoProducto()
+        {
+            idProducto = 0;
+
+            modoEdicion = false;
+
+            hayCambios = false;
+
+            LimpiarFormulario();
+
+            btnGuardarItem.Enabled = true;
+
+            txtProducto.Focus();
+        }
+
         private void btnNuevoItem_Click(object sender, EventArgs e)
         {
+            PrepararNuevoProducto();
+
+            //LimpiarFormulario();
+            /*idProducto = 0;
+
+            modoEdicion = false;
+
+            hayCambios = false;
+
             LimpiarFormulario();
+
+            btnGuardarItem.Enabled = true;
+
+            txtProducto.Focus();*/
         }
 
         private void btnGuardarItem_Click(object sender, EventArgs e)
@@ -673,7 +707,7 @@ VALUES
 
             bool resultado = false;
 
-            if (modoEdicion)
+            if (idProducto > 0)
             {
                 resultado = ActualizarProducto();
             }

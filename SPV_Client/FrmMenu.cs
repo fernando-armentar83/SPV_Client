@@ -17,7 +17,7 @@ namespace SPV_Client
         public FrmMenu()
         {
             InitializeComponent();
-
+            this.FormClosing += FrmMenu_FormClosing;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -102,7 +102,31 @@ namespace SPV_Client
 
         }
 
+        private void FrmMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Solo avisar si existe un turno abierto
+            if (Session.IdTurno != 0)
+            {
+                DialogResult resultado = MessageBox.Show(
+                    $"Existe un turno abierto actualmente.\n\n" +
+                    $"Usuario: {Session.NombreUsuario}\n" +
+                    $"Rol: {Session.NombreRol}\n" +
+                    $"Turno: #{Session.IdTurno}\n\n" +
+                    $"Si cierras el SPV, el turno permanecerá abierto.\n" +
+                    $"Al volver a iniciar sesión podrás continuar con ese turno.\n\n" +
+                    $"¿Deseas cerrar el SPV?",
+                    "Turno abierto",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
 
+                // NO = cancelar el cierre
+                if (resultado == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+        }
 
         /*private void button1_Click(object sender, EventArgs e)
         {

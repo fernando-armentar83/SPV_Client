@@ -27,6 +27,7 @@ namespace SPV_Client
             IdRol = 0;
             NombreRol = string.Empty;
             IdTurno = 0;
+            MontoInicial = 0;
             IdUsuarioAutoriza = 0;
             NombreUsuarioAutoriza = string.Empty;
         }

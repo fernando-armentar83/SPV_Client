@@ -318,11 +318,11 @@ namespace SPV_Client
 
             DialogResult confirmar = MessageBox.Show(
                 $"¿Confirmar cierre del turno #{Session.IdTurno}?\n\n" +
-                $"Total ventas: {FormatCurrency(totalVentas)}\n" +
-                $"Efectivo contado: {FormatCurrency(efectivoContado)}\n" +
-                $"Electrónico contado: {FormatCurrency(electronicoContado)}\n" +
-                $"Total contado: {FormatCurrency(montoFinal)}\n" +
-                $"Diferencia: {FormatCurrency(diferencia)}",
+                $"Total ventas: {FormatCurrency(totalVentas)}\n\n" +
+                $"Efectivo contado: {FormatCurrency(efectivoContado)}\n\n" +
+                $"Electrónico contado: {FormatCurrency(electronicoContado)}\n\n" +
+                $"Total contado: {FormatCurrency(montoFinal)}\n\n" +
+                $"Diferencia: {FormatCurrency(diferencia)}\n",
                 "Confirmar cierre",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -391,7 +391,7 @@ WHERE id_turno = @id_turno
                         cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
                         cmd.Parameters.AddWithValue("@id_usuario_cierre", Session.IdUsuario);
 
-                        cmd.ExecuteNonQuery();
+                        //cmd.ExecuteNonQuery();
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
 
