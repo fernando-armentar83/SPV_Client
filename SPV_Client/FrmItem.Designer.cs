@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmItem));
             this.pnlDatosGenerales = new System.Windows.Forms.Panel();
+            this.btnHabilitarEdicion = new System.Windows.Forms.Button();
             this.lblIdProducto = new System.Windows.Forms.Label();
             this.txtModelo = new System.Windows.Forms.TextBox();
             this.lblModelo = new System.Windows.Forms.Label();
@@ -94,6 +95,7 @@
             // 
             this.pnlDatosGenerales.BackColor = System.Drawing.Color.LightBlue;
             this.pnlDatosGenerales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDatosGenerales.Controls.Add(this.btnHabilitarEdicion);
             this.pnlDatosGenerales.Controls.Add(this.lblIdProducto);
             this.pnlDatosGenerales.Controls.Add(this.txtModelo);
             this.pnlDatosGenerales.Controls.Add(this.lblModelo);
@@ -111,6 +113,19 @@
             this.pnlDatosGenerales.Name = "pnlDatosGenerales";
             this.pnlDatosGenerales.Size = new System.Drawing.Size(1276, 230);
             this.pnlDatosGenerales.TabIndex = 0;
+            // 
+            // btnHabilitarEdicion
+            // 
+            this.btnHabilitarEdicion.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.btnHabilitarEdicion.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHabilitarEdicion.Location = new System.Drawing.Point(1110, 51);
+            this.btnHabilitarEdicion.Name = "btnHabilitarEdicion";
+            this.btnHabilitarEdicion.Size = new System.Drawing.Size(108, 78);
+            this.btnHabilitarEdicion.TabIndex = 42;
+            this.btnHabilitarEdicion.Text = "Habilitar edición";
+            this.btnHabilitarEdicion.UseVisualStyleBackColor = false;
+            this.btnHabilitarEdicion.Visible = false;
+            this.btnHabilitarEdicion.Click += new System.EventHandler(this.btnHabilitarEdicion_Click);
             // 
             // lblIdProducto
             // 
@@ -810,5 +825,6 @@
         private System.Windows.Forms.Button btnCerrarItem;
         private System.Windows.Forms.Label lblIdProducto;
         private System.Windows.Forms.CheckBox chkPermiteVentaImporte;
+        private System.Windows.Forms.Button btnHabilitarEdicion;
     }
 }

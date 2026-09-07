@@ -8,8 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SPV_Client.Enums;
 using SPV_Client.Helpers;
 using SPV_Client.Models;
+using SPV_Client.Enums;
 
 namespace SPV_Client
 {
@@ -521,14 +523,93 @@ WHERE tipo = 'COMPRA';
             if (dgvDetalleCompra.CurrentRow == null)
                 return;
 
+            int filaSeleccionada =
+                dgvDetalleCompra.CurrentRow.Index;
+
             int idProducto = Convert.ToInt32(
-                dgvDetalleCompra.CurrentRow.Cells["IdProducto"].Value);
+                dgvDetalleCompra.Rows[filaSeleccionada]
+                .Cells["IdProducto"].Value);
 
             FrmItem frm = new FrmItem();
 
             frm.IdProducto = idProducto;
 
+            frm.ModoApertura =
+                ModoAperturaItem.Consulta;
+
             frm.ShowDialog();
+
+            ActualizarProductoDesdeBaseDeDatos(
+                filaSeleccionada,
+                idProducto);
+        }
+
+        private void ActualizarProductoDesdeBaseDeDatos(
+    int fila,
+    int idProducto)
+        {
+            using (MySqlConnection conn = DB.GetConnection())
+            {
+                conn.Open();
+
+                string sql = @"
+SELECT
+    nombre,
+    modelo,
+    precio_compra,
+    codigo_compra
+FROM productos
+WHERE id_producto = @idProducto;";
+
+                using (MySqlCommand cmd =
+                    new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue(
+                        "@idProducto",
+                        idProducto);
+
+                    using (MySqlDataReader reader =
+                        cmd.ExecuteReader())
+                    {
+                        if (!reader.Read())
+                            return;
+
+                        DataGridViewRow row =
+                            dgvDetalleCompra.Rows[fila];
+
+                        decimal precioCompra =
+                            Convert.ToDecimal(
+                                reader["precio_compra"]);
+
+                        decimal cantidad =
+                            Convert.ToDecimal(
+                                row.Cells["colCantidad"].Value);
+
+                        decimal subtotal =
+                            cantidad * precioCompra;
+
+                        row.Cells["colProducto"].Value =
+                            reader["nombre"].ToString();
+
+                        row.Cells["Modelo"].Value =
+                            reader["modelo"] == DBNull.Value
+                                ? ""
+                                : reader["modelo"].ToString();
+
+                        row.Cells["Precio_compra"].Value =
+                            precioCompra;
+
+                        row.Cells["colSubtotal"].Value =
+                            subtotal;
+                        RecalcularTotal();
+
+                        row.Cells["CodigoCompra"].Value =
+                            reader["codigo_compra"] == DBNull.Value
+                                ? ""
+                                : reader["codigo_compra"].ToString();
+                    }
+                }
+            }
         }
 
         private void EditarCantidadCompra()
@@ -1075,6 +1156,20 @@ VALUES
                                 cmdMovimiento.Parameters.AddWithValue("@id_compra", idCompra);
 
                                 cmdMovimiento.ExecuteNonQuery();
+                            }
+                            string sqlActualizarFechaCompra = @"
+UPDATE productos
+SET fecha_compra = CURDATE()
+WHERE id_producto = @id_producto;";
+
+                            using (var cmdFechaCompra =
+                                new MySqlCommand(sqlActualizarFechaCompra, conn, transaction))
+                            {
+                                cmdFechaCompra.Parameters.AddWithValue(
+                                    "@id_producto",
+                                    idProducto);
+
+                                cmdFechaCompra.ExecuteNonQuery();
                             }
                         }
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SPV_Client.Enums;
 
 namespace SPV_Client
 {
@@ -18,12 +19,16 @@ namespace SPV_Client
         private bool modoEdicion = false;
         private bool calculandoPrecio = false;
         private bool hayCambios = false;
+        private bool edicionHabilitada = false;
 
         public int IdProducto
         {
             get { return idProducto; }
-            set { idProducto = value; }            
+            set { idProducto = value; }  
+            
         }
+
+        public ModoAperturaItem ModoApertura { get; set; }
 
         public FrmItem()
         {
@@ -33,11 +38,11 @@ namespace SPV_Client
 
         private void LimpiarFormulario()
         {
-            idProducto = 0;
+            //idProducto = 0;
 
-            modoEdicion = false;
+            //modoEdicion = false;
 
-            hayCambios = false;
+            //hayCambios = false;
 
             txtProducto.Clear();
 
@@ -68,9 +73,7 @@ namespace SPV_Client
 
             txtObservaciones.Clear();
 
-            //idProducto = 0;
-            //modoEdicion = false;
-
+            
             btnDesactivarItem.Enabled = false;
             btnKardexItem.Enabled = false;
 
@@ -78,6 +81,8 @@ namespace SPV_Client
 
             txtProducto.Focus();
         }
+
+
 
         private bool ValidarFormulario()
         {
@@ -610,11 +615,15 @@ VALUES
 
             LimpiarFormulario();
 
+            edicionHabilitada = ModoApertura != ModoAperturaItem.Consulta;
+
             if (idProducto > 0)
             {
                 CargarProducto();
                 dtpFechaCompra.Enabled = false;
             }
+
+            ConfigurarModoEdicion();
 
             txtProducto.TextChanged += MarcarCambios;
             txtModelo.TextChanged += MarcarCambios;
@@ -636,6 +645,87 @@ VALUES
 
         }
 
+        private void HabilitarEdicion()
+        {
+            txtProducto.Enabled = true;
+
+            cmbCategoria.Enabled = true;
+            cmbMarca.Enabled = true;
+
+            txtModelo.Enabled = true;
+
+            cmbUnidad.Enabled = true;
+            cmbProveedor.Enabled = true;
+            cmbSocio.Enabled = true;
+
+            txtStockMinimo.Enabled = true;
+
+            txtCodigoCompra.Enabled = true;
+
+            txtPrecioCompra.Enabled = true;
+            txtPrecioVenta.Enabled = true;
+
+            txtPorcentajeGanancia.Enabled = true;
+
+            txtCodigoBarras.Enabled = true;
+
+            cmbActivo.Enabled = true;
+
+            txtObservaciones.Enabled = true;
+
+            chkPermiteVentaImporte.Enabled = true;
+
+            btnGuardarItem.Enabled = true;
+
+            btnNuevoItem.Enabled = true;
+
+            btnDesactivarItem.Enabled = true;
+
+            btnHabilitarEdicion.Enabled = false;
+        }
+
+        private void ConfigurarModoEdicion()
+        {
+            bool permitirEdicion = edicionHabilitada;
+
+            txtProducto.Enabled = permitirEdicion;
+
+            cmbCategoria.Enabled = permitirEdicion;
+            cmbMarca.Enabled = permitirEdicion;
+
+            txtModelo.Enabled = permitirEdicion;
+
+            cmbUnidad.Enabled = permitirEdicion;
+            cmbProveedor.Enabled = permitirEdicion;
+            cmbSocio.Enabled = permitirEdicion;
+
+            txtStockMinimo.Enabled = permitirEdicion;
+
+            dtpFechaCompra.Enabled = permitirEdicion;
+
+            txtCodigoCompra.Enabled = permitirEdicion;
+
+            txtPrecioCompra.Enabled = permitirEdicion;
+            txtPrecioVenta.Enabled = permitirEdicion;
+
+            txtPorcentajeGanancia.Enabled = permitirEdicion;
+
+            txtCodigoBarras.Enabled = permitirEdicion;
+
+            cmbActivo.Enabled = permitirEdicion;
+
+            txtObservaciones.Enabled = permitirEdicion;
+
+            chkPermiteVentaImporte.Enabled = permitirEdicion;
+
+            btnGuardarItem.Enabled = permitirEdicion;
+
+            btnNuevoItem.Enabled = permitirEdicion;
+
+            btnHabilitarEdicion.Visible =
+                ModoApertura == ModoAperturaItem.Consulta && !edicionHabilitada;
+        }
+
         private void PrepararNuevoProducto()
         {
             idProducto = 0;
@@ -650,6 +740,42 @@ VALUES
 
             txtProducto.Focus();
         }
+
+        private void BloquearEdicion()
+        {
+            txtProducto.ReadOnly = true;
+            txtModelo.ReadOnly = true;
+            txtCodigoCompra.ReadOnly = true;
+            txtPrecioCompra.ReadOnly = true;
+            txtPrecioVenta.ReadOnly = true;
+            txtPorcentajeGanancia.ReadOnly = true;
+            txtCodigoBarras.ReadOnly = true;
+            txtObservaciones.ReadOnly = true;
+
+            txtStockActual.ReadOnly = true;
+            txtStockMinimo.ReadOnly = true;
+
+            cmbCategoria.Enabled = false;
+            cmbMarca.Enabled = false;
+            cmbUnidad.Enabled = false;
+            cmbProveedor.Enabled = false;
+            cmbSocio.Enabled = false;
+            cmbActivo.Enabled = false;
+
+            dtpFechaCompra.Enabled = false;
+
+            chkPermiteVentaImporte.Enabled = false;
+
+            btnGuardarItem.Enabled = false;
+            btnNuevoItem.Enabled = false;
+
+            btnDesactivarItem.Enabled = false;
+
+            btnHabilitarEdicion.Enabled = true;
+            btnHabilitarEdicion.Visible = true;
+        }
+
+        
 
         private void btnNuevoItem_Click(object sender, EventArgs e)
         {
@@ -1182,6 +1308,13 @@ WHERE id_producto = @idProducto";
             frm.ShowDialog();
 
             CargarSocios();
+        }
+
+        private void btnHabilitarEdicion_Click(object sender, EventArgs e)
+        {
+            HabilitarEdicion();
+
+            btnHabilitarEdicion.Enabled = false;
         }
     }
 }
