@@ -143,6 +143,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmArqueo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmArqueo.Designer.cs">
+      <DependentUpon>FrmArqueo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAutorizacionStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,6 +368,9 @@
     <Compile Include="VentaDetalle.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmArqueo.resx">
+      <DependentUpon>FrmArqueo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAutorizacionStock.resx">
       <DependentUpon>FrmAutorizacionStock.cs</DependentUpon>

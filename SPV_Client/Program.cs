@@ -17,10 +17,10 @@ namespace SPV_Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
-            Application.Run(new FrmMenu());
+            //Application.Run(new FrmMenu());
             //Application.Run(new FrmCatalogoCompras());
             //Application.Run(new FrmDescuento("Producto de prueba", 2, 100, 200));
-            //Application.Run(new FrmItem(0));
+            Application.Run(new FrmArqueo());
             
         }
     }
