@@ -43,6 +43,7 @@
             this.lblIdTurnoTitulo = new System.Windows.Forms.Label();
             this.pnlResumen = new System.Windows.Forms.Panel();
             this.grpConteoFisico = new System.Windows.Forms.GroupBox();
+            this.btnContarEfectivo = new System.Windows.Forms.Button();
             this.lblDiferencia = new System.Windows.Forms.Label();
             this.lblDiferenciaTitulo = new System.Windows.Forms.Label();
             this.lblEfectivoContado = new System.Windows.Forms.Label();
@@ -61,7 +62,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnRealizarArqueo = new System.Windows.Forms.Button();
-            this.btnContarEfectivo = new System.Windows.Forms.Button();
+            this.chkElectronicoVerificado = new System.Windows.Forms.CheckBox();
             this.pnlEncabezado.SuspendLayout();
             this.pnlInformacionTurno.SuspendLayout();
             this.pnlResumen.SuspendLayout();
@@ -78,7 +79,7 @@
             this.pnlEncabezado.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlEncabezado.Location = new System.Drawing.Point(0, 0);
             this.pnlEncabezado.Name = "pnlEncabezado";
-            this.pnlEncabezado.Size = new System.Drawing.Size(978, 50);
+            this.pnlEncabezado.Size = new System.Drawing.Size(1016, 50);
             this.pnlEncabezado.TabIndex = 0;
             // 
             // lblTitulo
@@ -107,13 +108,13 @@
             this.pnlInformacionTurno.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlInformacionTurno.Location = new System.Drawing.Point(0, 50);
             this.pnlInformacionTurno.Name = "pnlInformacionTurno";
-            this.pnlInformacionTurno.Size = new System.Drawing.Size(978, 100);
+            this.pnlInformacionTurno.Size = new System.Drawing.Size(1016, 100);
             this.pnlInformacionTurno.TabIndex = 1;
             // 
             // lblEstadoTurno
             // 
             this.lblEstadoTurno.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstadoTurno.Location = new System.Drawing.Point(423, 54);
+            this.lblEstadoTurno.Location = new System.Drawing.Point(481, 54);
             this.lblEstadoTurno.Name = "lblEstadoTurno";
             this.lblEstadoTurno.Size = new System.Drawing.Size(150, 25);
             this.lblEstadoTurno.TabIndex = 9;
@@ -123,9 +124,9 @@
             // lblEstadoTitulo
             // 
             this.lblEstadoTitulo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstadoTitulo.Location = new System.Drawing.Point(350, 55);
+            this.lblEstadoTitulo.Location = new System.Drawing.Point(393, 55);
             this.lblEstadoTitulo.Name = "lblEstadoTitulo";
-            this.lblEstadoTitulo.Size = new System.Drawing.Size(69, 25);
+            this.lblEstadoTitulo.Size = new System.Drawing.Size(70, 25);
             this.lblEstadoTitulo.TabIndex = 8;
             this.lblEstadoTitulo.Text = "Estado:";
             this.lblEstadoTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -153,7 +154,7 @@
             // lblTipoTurno
             // 
             this.lblTipoTurno.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoTurno.Location = new System.Drawing.Point(655, 20);
+            this.lblTipoTurno.Location = new System.Drawing.Point(703, 20);
             this.lblTipoTurno.Name = "lblTipoTurno";
             this.lblTipoTurno.Size = new System.Drawing.Size(180, 25);
             this.lblTipoTurno.TabIndex = 5;
@@ -163,9 +164,9 @@
             // lblTipoTurnoTitulo
             // 
             this.lblTipoTurnoTitulo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoTurnoTitulo.Location = new System.Drawing.Point(600, 20);
+            this.lblTipoTurnoTitulo.Location = new System.Drawing.Point(643, 20);
             this.lblTipoTurnoTitulo.Name = "lblTipoTurnoTitulo";
-            this.lblTipoTurnoTitulo.Size = new System.Drawing.Size(50, 25);
+            this.lblTipoTurnoTitulo.Size = new System.Drawing.Size(54, 25);
             this.lblTipoTurnoTitulo.TabIndex = 4;
             this.lblTipoTurnoTitulo.Text = "Tipo:";
             this.lblTipoTurnoTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -173,9 +174,9 @@
             // lblUsuario
             // 
             this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuario.Location = new System.Drawing.Point(325, 20);
+            this.lblUsuario.Location = new System.Drawing.Point(381, 20);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(220, 25);
+            this.lblUsuario.Size = new System.Drawing.Size(180, 25);
             this.lblUsuario.TabIndex = 3;
             this.lblUsuario.Text = "---";
             this.lblUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -183,7 +184,7 @@
             // lblUsuarioTitulo
             // 
             this.lblUsuarioTitulo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuarioTitulo.Location = new System.Drawing.Point(250, 20);
+            this.lblUsuarioTitulo.Location = new System.Drawing.Point(293, 20);
             this.lblUsuarioTitulo.Name = "lblUsuarioTitulo";
             this.lblUsuarioTitulo.Size = new System.Drawing.Size(100, 23);
             this.lblUsuarioTitulo.TabIndex = 2;
@@ -218,7 +219,7 @@
             this.pnlResumen.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlResumen.Location = new System.Drawing.Point(0, 150);
             this.pnlResumen.Name = "pnlResumen";
-            this.pnlResumen.Size = new System.Drawing.Size(978, 220);
+            this.pnlResumen.Size = new System.Drawing.Size(1016, 220);
             this.pnlResumen.TabIndex = 2;
             // 
             // grpConteoFisico
@@ -229,12 +230,24 @@
             this.grpConteoFisico.Controls.Add(this.lblDiferenciaTitulo);
             this.grpConteoFisico.Controls.Add(this.lblEfectivoContado);
             this.grpConteoFisico.Controls.Add(this.lblEfectivoContadoTitulo);
-            this.grpConteoFisico.Location = new System.Drawing.Point(456, 3);
+            this.grpConteoFisico.Location = new System.Drawing.Point(542, 3);
             this.grpConteoFisico.Name = "grpConteoFisico";
-            this.grpConteoFisico.Size = new System.Drawing.Size(519, 213);
+            this.grpConteoFisico.Size = new System.Drawing.Size(471, 213);
             this.grpConteoFisico.TabIndex = 1;
             this.grpConteoFisico.TabStop = false;
             this.grpConteoFisico.Text = "Conteo físico";
+            // 
+            // btnContarEfectivo
+            // 
+            this.btnContarEfectivo.BackColor = System.Drawing.Color.MintCream;
+            this.btnContarEfectivo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnContarEfectivo.Location = new System.Drawing.Point(304, 147);
+            this.btnContarEfectivo.Name = "btnContarEfectivo";
+            this.btnContarEfectivo.Size = new System.Drawing.Size(120, 60);
+            this.btnContarEfectivo.TabIndex = 4;
+            this.btnContarEfectivo.Text = "Conteo Efectivo";
+            this.btnContarEfectivo.UseVisualStyleBackColor = false;
+            this.btnContarEfectivo.Click += new System.EventHandler(this.btnContarEfectivo_Click);
             // 
             // lblDiferencia
             // 
@@ -275,6 +288,7 @@
             // grpResumenElectronico
             // 
             this.grpResumenElectronico.BackColor = System.Drawing.Color.Ivory;
+            this.grpResumenElectronico.Controls.Add(this.chkElectronicoVerificado);
             this.grpResumenElectronico.Controls.Add(this.lblTotalVentas);
             this.grpResumenElectronico.Controls.Add(this.lblTotalVentasTitulo);
             this.grpResumenElectronico.Controls.Add(this.lblElectronico);
@@ -283,7 +297,7 @@
             this.grpResumenElectronico.Controls.Add(this.lblEfectivoEsperadoTitulo);
             this.grpResumenElectronico.Location = new System.Drawing.Point(2, 3);
             this.grpResumenElectronico.Name = "grpResumenElectronico";
-            this.grpResumenElectronico.Size = new System.Drawing.Size(450, 213);
+            this.grpResumenElectronico.Size = new System.Drawing.Size(534, 213);
             this.grpResumenElectronico.TabIndex = 0;
             this.grpResumenElectronico.TabStop = false;
             this.grpResumenElectronico.Text = "Resumen electrónico";
@@ -311,7 +325,7 @@
             this.lblElectronico.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblElectronico.Location = new System.Drawing.Point(180, 79);
             this.lblElectronico.Name = "lblElectronico";
-            this.lblElectronico.Size = new System.Drawing.Size(200, 25);
+            this.lblElectronico.Size = new System.Drawing.Size(150, 25);
             this.lblElectronico.TabIndex = 3;
             this.lblElectronico.Text = "$0.00";
             // 
@@ -350,7 +364,7 @@
             this.pnlObservaciones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlObservaciones.Location = new System.Drawing.Point(0, 370);
             this.pnlObservaciones.Name = "pnlObservaciones";
-            this.pnlObservaciones.Size = new System.Drawing.Size(978, 274);
+            this.pnlObservaciones.Size = new System.Drawing.Size(1016, 274);
             this.pnlObservaciones.TabIndex = 3;
             // 
             // txtObservaciones
@@ -379,9 +393,9 @@
             this.pnlBotones.Controls.Add(this.btnLimpiar);
             this.pnlBotones.Controls.Add(this.btnRealizarArqueo);
             this.pnlBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBotones.Location = new System.Drawing.Point(0, 584);
+            this.pnlBotones.Location = new System.Drawing.Point(0, 574);
             this.pnlBotones.Name = "pnlBotones";
-            this.pnlBotones.Size = new System.Drawing.Size(978, 60);
+            this.pnlBotones.Size = new System.Drawing.Size(1016, 70);
             this.pnlBotones.TabIndex = 4;
             // 
             // btnCancelar
@@ -417,24 +431,24 @@
             this.btnRealizarArqueo.Text = "Realizar arqueo";
             this.btnRealizarArqueo.UseVisualStyleBackColor = false;
             // 
-            // btnContarEfectivo
+            // chkElectronicoVerificado
             // 
-            this.btnContarEfectivo.BackColor = System.Drawing.Color.MintCream;
-            this.btnContarEfectivo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContarEfectivo.Location = new System.Drawing.Point(354, 147);
-            this.btnContarEfectivo.Name = "btnContarEfectivo";
-            this.btnContarEfectivo.Size = new System.Drawing.Size(120, 60);
-            this.btnContarEfectivo.TabIndex = 4;
-            this.btnContarEfectivo.Text = "Conteo Efectivo";
-            this.btnContarEfectivo.UseVisualStyleBackColor = false;
-            this.btnContarEfectivo.Click += new System.EventHandler(this.btnContarEfectivo_Click);
+            this.chkElectronicoVerificado.AutoSize = true;
+            this.chkElectronicoVerificado.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkElectronicoVerificado.Location = new System.Drawing.Point(352, 81);
+            this.chkElectronicoVerificado.Name = "chkElectronicoVerificado";
+            this.chkElectronicoVerificado.Size = new System.Drawing.Size(93, 25);
+            this.chkElectronicoVerificado.TabIndex = 6;
+            this.chkElectronicoVerificado.Text = "Verificar";
+            this.chkElectronicoVerificado.UseVisualStyleBackColor = true;
+            this.chkElectronicoVerificado.CheckedChanged += new System.EventHandler(this.chkElectronicoVerificado_CheckedChanged);
             // 
             // FrmArqueo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MistyRose;
-            this.ClientSize = new System.Drawing.Size(978, 644);
+            this.ClientSize = new System.Drawing.Size(1016, 644);
             this.Controls.Add(this.pnlBotones);
             this.Controls.Add(this.pnlObservaciones);
             this.Controls.Add(this.pnlResumen);
@@ -454,6 +468,7 @@
             this.pnlResumen.ResumeLayout(false);
             this.grpConteoFisico.ResumeLayout(false);
             this.grpResumenElectronico.ResumeLayout(false);
+            this.grpResumenElectronico.PerformLayout();
             this.pnlObservaciones.ResumeLayout(false);
             this.pnlObservaciones.PerformLayout();
             this.pnlBotones.ResumeLayout(false);
@@ -497,5 +512,6 @@
         private System.Windows.Forms.Button btnRealizarArqueo;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnContarEfectivo;
+        private System.Windows.Forms.CheckBox chkElectronicoVerificado;
     }
 }

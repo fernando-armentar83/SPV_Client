@@ -38,5 +38,11 @@ namespace SPV_Client
         {
 
         }
+
+        private void chkElectronicoVerificado_CheckedChanged(object sender, EventArgs e)
+        {
+            chkElectronicoVerificado.Text =
+                chkElectronicoVerificado.Checked ? "Verificado" : "Verificar";
+        }
     }
 }
