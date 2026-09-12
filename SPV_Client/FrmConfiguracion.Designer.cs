@@ -30,6 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.lblUsuarioActivo = new System.Windows.Forms.Label();
+            this.btnAbrirArqueo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -52,15 +53,27 @@
             this.lblUsuarioActivo.Size = new System.Drawing.Size(2, 24);
             this.lblUsuarioActivo.TabIndex = 1;
             // 
+            // btnAbrirArqueo
+            // 
+            this.btnAbrirArqueo.Location = new System.Drawing.Point(68, 147);
+            this.btnAbrirArqueo.Name = "btnAbrirArqueo";
+            this.btnAbrirArqueo.Size = new System.Drawing.Size(162, 64);
+            this.btnAbrirArqueo.TabIndex = 2;
+            this.btnAbrirArqueo.Text = "Arqueo de turno";
+            this.btnAbrirArqueo.UseVisualStyleBackColor = true;
+            this.btnAbrirArqueo.Click += new System.EventHandler(this.btnAbrirArqueo_Click);
+            // 
             // FrmConfiguracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAbrirArqueo);
             this.Controls.Add(this.lblUsuarioActivo);
             this.Controls.Add(this.label1);
             this.Name = "FrmConfiguracion";
-            this.Text = "FrmConfiguracion";
+            this.ShowIcon = false;
+            this.Text = "Administración";
             this.Load += new System.EventHandler(this.FrmConfiguracion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -71,5 +84,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblUsuarioActivo;
+        private System.Windows.Forms.Button btnAbrirArqueo;
     }
 }
