@@ -52,6 +52,7 @@
             // 
             // txtUsuarioT
             // 
+            this.txtUsuarioT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtUsuarioT.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUsuarioT.Location = new System.Drawing.Point(196, 71);
             this.txtUsuarioT.Name = "txtUsuarioT";
