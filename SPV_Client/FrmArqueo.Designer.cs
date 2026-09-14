@@ -66,6 +66,8 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnRealizarArqueo = new System.Windows.Forms.Button();
+            this.lblFolioArqueoTitulo = new System.Windows.Forms.Label();
+            this.lblFolioArqueo = new System.Windows.Forms.Label();
             this.pnlEncabezado.SuspendLayout();
             this.pnlInformacionTurno.SuspendLayout();
             this.pnlResumen.SuspendLayout();
@@ -78,11 +80,13 @@
             // pnlEncabezado
             // 
             this.pnlEncabezado.BackColor = System.Drawing.Color.White;
+            this.pnlEncabezado.Controls.Add(this.lblFolioArqueo);
+            this.pnlEncabezado.Controls.Add(this.lblFolioArqueoTitulo);
             this.pnlEncabezado.Controls.Add(this.lblTitulo);
             this.pnlEncabezado.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlEncabezado.Location = new System.Drawing.Point(0, 0);
             this.pnlEncabezado.Name = "pnlEncabezado";
-            this.pnlEncabezado.Size = new System.Drawing.Size(1016, 50);
+            this.pnlEncabezado.Size = new System.Drawing.Size(1088, 50);
             this.pnlEncabezado.TabIndex = 0;
             // 
             // lblTitulo
@@ -90,7 +94,7 @@
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(960, 50);
+            this.lblTitulo.Size = new System.Drawing.Size(761, 50);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "ARQUEO DE CAJA";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -113,7 +117,7 @@
             this.pnlInformacionTurno.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlInformacionTurno.Location = new System.Drawing.Point(0, 50);
             this.pnlInformacionTurno.Name = "pnlInformacionTurno";
-            this.pnlInformacionTurno.Size = new System.Drawing.Size(1016, 100);
+            this.pnlInformacionTurno.Size = new System.Drawing.Size(1088, 100);
             this.pnlInformacionTurno.TabIndex = 1;
             // 
             // lblTipoTurnoCaja
@@ -243,7 +247,7 @@
             this.pnlResumen.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlResumen.Location = new System.Drawing.Point(0, 150);
             this.pnlResumen.Name = "pnlResumen";
-            this.pnlResumen.Size = new System.Drawing.Size(1016, 251);
+            this.pnlResumen.Size = new System.Drawing.Size(1088, 251);
             this.pnlResumen.TabIndex = 2;
             // 
             // lblEstadoArqueo
@@ -267,7 +271,7 @@
             this.grpConteoFisico.Controls.Add(this.lblEfectivoContadoTitulo);
             this.grpConteoFisico.Location = new System.Drawing.Point(542, 3);
             this.grpConteoFisico.Name = "grpConteoFisico";
-            this.grpConteoFisico.Size = new System.Drawing.Size(471, 213);
+            this.grpConteoFisico.Size = new System.Drawing.Size(543, 213);
             this.grpConteoFisico.TabIndex = 1;
             this.grpConteoFisico.TabStop = false;
             this.grpConteoFisico.Text = "Conteo físico";
@@ -411,7 +415,7 @@
             this.pnlObservaciones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlObservaciones.Location = new System.Drawing.Point(0, 401);
             this.pnlObservaciones.Name = "pnlObservaciones";
-            this.pnlObservaciones.Size = new System.Drawing.Size(1016, 243);
+            this.pnlObservaciones.Size = new System.Drawing.Size(1088, 243);
             this.pnlObservaciones.TabIndex = 3;
             // 
             // txtObservaciones
@@ -421,7 +425,7 @@
             this.txtObservaciones.Multiline = true;
             this.txtObservaciones.Name = "txtObservaciones";
             this.txtObservaciones.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtObservaciones.Size = new System.Drawing.Size(770, 100);
+            this.txtObservaciones.Size = new System.Drawing.Size(822, 100);
             this.txtObservaciones.TabIndex = 1;
             // 
             // lblObservaciones
@@ -442,7 +446,7 @@
             this.pnlBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBotones.Location = new System.Drawing.Point(0, 574);
             this.pnlBotones.Name = "pnlBotones";
-            this.pnlBotones.Size = new System.Drawing.Size(1016, 70);
+            this.pnlBotones.Size = new System.Drawing.Size(1088, 70);
             this.pnlBotones.TabIndex = 4;
             // 
             // btnCancelar
@@ -478,12 +482,32 @@
             this.btnRealizarArqueo.Text = "Realizar arqueo";
             this.btnRealizarArqueo.UseVisualStyleBackColor = false;
             // 
+            // lblFolioArqueoTitulo
+            // 
+            this.lblFolioArqueoTitulo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFolioArqueoTitulo.Location = new System.Drawing.Point(766, 9);
+            this.lblFolioArqueoTitulo.Name = "lblFolioArqueoTitulo";
+            this.lblFolioArqueoTitulo.Size = new System.Drawing.Size(125, 25);
+            this.lblFolioArqueoTitulo.TabIndex = 12;
+            this.lblFolioArqueoTitulo.Text = "Folio arqueo:";
+            this.lblFolioArqueoTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblFolioArqueo
+            // 
+            this.lblFolioArqueo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFolioArqueo.Location = new System.Drawing.Point(882, 9);
+            this.lblFolioArqueo.Name = "lblFolioArqueo";
+            this.lblFolioArqueo.Size = new System.Drawing.Size(150, 25);
+            this.lblFolioArqueo.TabIndex = 13;
+            this.lblFolioArqueo.Text = "ARQ-PENDIENTE";
+            this.lblFolioArqueo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // FrmArqueo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MistyRose;
-            this.ClientSize = new System.Drawing.Size(1016, 644);
+            this.ClientSize = new System.Drawing.Size(1088, 644);
             this.Controls.Add(this.pnlBotones);
             this.Controls.Add(this.pnlObservaciones);
             this.Controls.Add(this.pnlResumen);
@@ -552,5 +576,7 @@
         private System.Windows.Forms.Label lblTipoTurnoCaja;
         private System.Windows.Forms.Label lblTipoTurnoCajaTitulo;
         private System.Windows.Forms.Label lblEstadoArqueo;
+        private System.Windows.Forms.Label lblFolioArqueoTitulo;
+        private System.Windows.Forms.Label lblFolioArqueo;
     }
 }

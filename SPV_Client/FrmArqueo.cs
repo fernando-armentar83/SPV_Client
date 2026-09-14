@@ -13,6 +13,8 @@ namespace SPV_Client
 {
     public partial class FrmArqueo : Form
     {
+
+        private string folioArqueo = null;
         public FrmArqueo()
         {
             InitializeComponent();
@@ -116,6 +118,7 @@ namespace SPV_Client
 
             CargarInformacionTurno();
             CargarResumenTurno();
+            MostrarProximoFolioArqueo();
         }
 
         private void CargarInformacionTurno()
@@ -273,6 +276,60 @@ namespace SPV_Client
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
+        }
+
+        private string ObtenerSiguienteFolioArqueo(
+    MySqlConnection conn,
+    MySqlTransaction trans)
+        {
+            string sql = @"
+SELECT ultimo_consecutivo + 1
+FROM folios
+WHERE tipo = 'ARQUEO';";
+
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn, trans))
+            {
+                int siguiente = Convert.ToInt32(cmd.ExecuteScalar());
+
+                return $"ARQ-{siguiente:D6}";
+            }
+        }
+
+        private void MostrarProximoFolioArqueo()
+        {
+            try
+            {
+                using (MySqlConnection conn = DB.GetConnection())
+                {
+                    conn.Open();
+
+                    string sql = @"
+SELECT ultimo_consecutivo + 1
+FROM folios
+WHERE tipo = 'ARQUEO';";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                    {
+                        object resultado = cmd.ExecuteScalar();
+
+                        if (resultado != null)
+                        {
+                            int siguiente = Convert.ToInt32(resultado);
+
+                            lblFolioArqueo.Text =
+                                $"ARQ-{siguiente:D6}";
+                        }
+                        else
+                        {
+                            lblFolioArqueo.Text = "ARQ-SIN-FOLIO";
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                lblFolioArqueo.Text = "ARQ-ERROR";
             }
         }
 
