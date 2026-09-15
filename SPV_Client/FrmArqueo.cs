@@ -213,7 +213,7 @@ namespace SPV_Client
                             lblTipoTurno.Text = Session.NombreRol;
 
                             // Determinar el tipo de turno según el rol
-                            if (Session.IdRol == 1)
+                            /*if (Session.IdRol == 1)
                             {
                                 lblTipoTurnoCaja.Text = "ADMINISTRADOR";
                             }
@@ -224,7 +224,16 @@ namespace SPV_Client
                             else
                             {
                                 lblTipoTurnoCaja.Text = "---";
+                            }*/
+                            // Mostrar el tipo de turno almacenado en la base de datos
+                            if (reader["tipo_turno"] != DBNull.Value)
+                            {
+                                lblTipoTurnoCaja.Text = reader["tipo_turno"].ToString();
                             }
+                            else
+                            {
+                                lblTipoTurnoCaja.Text = "---";
+                            }   
 
                             if (reader["fecha_apertura"] != DBNull.Value)
                             {
