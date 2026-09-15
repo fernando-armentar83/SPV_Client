@@ -493,6 +493,24 @@ WHERE tipo = 'ARQUEO';";
                                 System.Globalization.CultureInfo.CurrentCulture,
                                 out electronico);
 
+                            
+                            decimal electronicoComprobado = 0m;
+
+                            decimal.TryParse(
+                                txtElectronicoComprobado.Text,
+                                System.Globalization.NumberStyles.Currency,
+                                System.Globalization.CultureInfo.CurrentCulture,
+                                out electronicoComprobado);
+
+                            decimal diferenciaElectronico = 0m;
+
+                            decimal.TryParse(
+                                lblDiferenciaElectronico.Text,
+                                System.Globalization.NumberStyles.Currency |
+                                System.Globalization.NumberStyles.AllowLeadingSign,
+                                System.Globalization.CultureInfo.CurrentCulture,
+                                out diferenciaElectronico);
+
                             decimal totalVentas = 0m;
 
                             decimal.TryParse(
@@ -510,6 +528,7 @@ WHERE tipo = 'ARQUEO';";
 
                             // Guardar arqueo
                             string sql = @"
+
 INSERT INTO arqueos_caja
 (
     folio,
@@ -520,6 +539,8 @@ INSERT INTO arqueos_caja
     efectivo_contado,
     diferencia_efectivo,
     electronico,
+    electronico_comprobado,
+    diferencia_electronico,
     electronico_verificado,
     total_ventas,
     estado,
@@ -535,6 +556,8 @@ VALUES
     @efectivo_contado,
     @diferencia_efectivo,
     @electronico,
+    @electronico_comprobado,
+    @diferencia_electronico,
     @electronico_verificado,
     @total_ventas,
     @estado,
@@ -550,6 +573,8 @@ VALUES
                                 cmd.Parameters.AddWithValue("@efectivo_contado", efectivoContado);
                                 cmd.Parameters.AddWithValue("@diferencia_efectivo", diferenciaEfectivo);
                                 cmd.Parameters.AddWithValue("@electronico", electronico);
+                                cmd.Parameters.AddWithValue("@electronico_comprobado", electronicoComprobado);
+                                cmd.Parameters.AddWithValue("@diferencia_electronico", diferenciaElectronico);
                                 cmd.Parameters.AddWithValue(
                                     "@electronico_verificado",
                                     chkElectronicoVerificado.Checked ? 1 : 0);
