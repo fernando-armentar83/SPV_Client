@@ -68,6 +68,7 @@ namespace SPV_Client
         {
             decimal efectivoEsperado = 0m;
             decimal efectivoContado = 0m;
+            decimal diferenciaElectronica = 0m;
 
             decimal.TryParse(
                 lblEfectivoEsperado.Text,
@@ -81,14 +82,33 @@ namespace SPV_Client
                 System.Globalization.CultureInfo.CurrentCulture,
                 out efectivoContado);
 
+            decimal.TryParse(
+                lblDiferenciaElectronico.Text,
+                System.Globalization.NumberStyles.Currency |
+                System.Globalization.NumberStyles.AllowLeadingSign,
+                System.Globalization.CultureInfo.CurrentCulture,
+                out diferenciaElectronica);
+
             bool efectivoContadoRealizado = efectivoContado > 0m;
             bool electronicoVerificado = chkElectronicoVerificado.Checked;
+
+            bool diferenciaEfectivo =
+                efectivoContadoRealizado &&
+                efectivoContado != efectivoEsperado;
+
+            bool diferenciaElectronico =
+                electronicoVerificado &&
+                diferenciaElectronica != 0m;
 
             if (!efectivoContadoRealizado)
             {
                 lblEstadoArqueo.Text = "PENDIENTE";
             }
-            else if (efectivoContado != efectivoEsperado)
+            else if (diferenciaEfectivo && diferenciaElectronico)
+            {
+                lblEstadoArqueo.Text = "DIFERENCIA DE EFECTIVO Y ELECTRÓNICO";
+            }
+            else if (diferenciaEfectivo)
             {
                 lblEstadoArqueo.Text = "DIFERENCIA DE EFECTIVO";
             }
@@ -96,10 +116,38 @@ namespace SPV_Client
             {
                 lblEstadoArqueo.Text = "ELECTRÓNICO NO VERIFICADO";
             }
+            else if (diferenciaElectronico)
+            {
+                lblEstadoArqueo.Text = "DIFERENCIA DE ELECTRÓNICO";
+            }
             else
             {
                 lblEstadoArqueo.Text = "CORRECTO";
             }
+        }
+
+        private void CalcularDiferenciaElectronico()
+        {
+            decimal electronicoEsperado = 0m;
+            decimal electronicoComprobado = 0m;
+
+            decimal.TryParse(
+                lblElectronico.Text,
+                System.Globalization.NumberStyles.Currency,
+                System.Globalization.CultureInfo.CurrentCulture,
+                out electronicoEsperado);
+
+            decimal.TryParse(
+                txtElectronicoComprobado.Text,
+                System.Globalization.NumberStyles.Currency,
+                System.Globalization.CultureInfo.CurrentCulture,
+                out electronicoComprobado);
+
+            decimal diferencia =
+                electronicoComprobado - electronicoEsperado;
+
+            lblDiferenciaElectronico.Text =
+                diferencia.ToString("+$#,##0.00;-$#,##0.00;$0.00");
         }
 
         private void FrmArqueo_Load(object sender, EventArgs e)
@@ -286,13 +334,43 @@ namespace SPV_Client
             string sql = @"
 SELECT ultimo_consecutivo + 1
 FROM folios
+WHERE tipo = 'ARQUEO'
+FOR UPDATE;";
+
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn, trans))
+            {
+                object resultado = cmd.ExecuteScalar();
+
+                if (resultado == null || resultado == DBNull.Value)
+                {
+                    throw new Exception(
+                        "No existe el consecutivo para los folios de tipo ARQUEO.");
+                }
+
+                int siguiente = Convert.ToInt32(resultado);
+
+                return $"ARQ-{siguiente:D6}";
+            }
+        }
+
+        private void ActualizarConsecutivoArqueo(
+    MySqlConnection conn,
+    MySqlTransaction trans)
+        {
+            string sql = @"
+UPDATE folios
+SET ultimo_consecutivo = ultimo_consecutivo + 1
 WHERE tipo = 'ARQUEO';";
 
             using (MySqlCommand cmd = new MySqlCommand(sql, conn, trans))
             {
-                int siguiente = Convert.ToInt32(cmd.ExecuteScalar());
+                int filasAfectadas = cmd.ExecuteNonQuery();
 
-                return $"ARQ-{siguiente:D6}";
+                if (filasAfectadas != 1)
+                {
+                    throw new Exception(
+                        "No fue posible actualizar el consecutivo del folio de ARQUEO.");
+                }
             }
         }
 
@@ -338,6 +416,244 @@ WHERE tipo = 'ARQUEO';";
             chkElectronicoVerificado.Text =
                 chkElectronicoVerificado.Checked ? "Verificado" : "Verificar";
             ActualizarEstadoArqueo();
+        }
+
+        private void btnRealizarArqueo_Click(object sender, EventArgs e)
+        {
+            decimal efectivoEsperado = 0m;
+            decimal efectivoContado = 0m;
+
+            decimal.TryParse(
+                lblEfectivoEsperado.Text,
+                System.Globalization.NumberStyles.Currency,
+                System.Globalization.CultureInfo.CurrentCulture,
+                out efectivoEsperado);
+
+            decimal.TryParse(
+                lblEfectivoContado.Text,
+                System.Globalization.NumberStyles.Currency,
+                System.Globalization.CultureInfo.CurrentCulture,
+                out efectivoContado);
+
+            // Validar que se haya realizado el conteo de efectivo
+            if (efectivoContado <= 0m)
+            {
+                MessageBox.Show(
+                    "Primero debes realizar el conteo de efectivo.",
+                    "Arqueo pendiente",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            // Validar que el electrónico haya sido verificado
+            if (!chkElectronicoVerificado.Checked)
+            {
+                MessageBox.Show(
+                    "Debes verificar el efectivo electrónico antes de realizar el arqueo.",
+                    "Arqueo pendiente",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            // Actualizar diferencia y estado antes de continuar
+            CalcularDiferenciaEfectivo();
+            ActualizarEstadoArqueo();
+
+            try
+            {
+                using (MySqlConnection conn = DB.GetConnection())
+                {
+                    conn.Open();
+
+                    using (MySqlTransaction trans = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Obtener folio definitivo dentro de la transacción
+                            string folio = ObtenerSiguienteFolioArqueo(conn, trans);
+
+                            // Obtener valores del arqueo
+                            decimal diferenciaEfectivo = 0m;
+
+                            decimal.TryParse(
+                                lblDiferencia.Text,
+                                System.Globalization.NumberStyles.Currency,
+                                System.Globalization.CultureInfo.CurrentCulture,
+                                out diferenciaEfectivo);
+
+                            decimal electronico = 0m;
+
+                            decimal.TryParse(
+                                lblElectronico.Text,
+                                System.Globalization.NumberStyles.Currency,
+                                System.Globalization.CultureInfo.CurrentCulture,
+                                out electronico);
+
+                            decimal totalVentas = 0m;
+
+                            decimal.TryParse(
+                                lblTotalVentas.Text,
+                                System.Globalization.NumberStyles.Currency,
+                                System.Globalization.CultureInfo.CurrentCulture,
+                                out totalVentas);
+
+                            string estado = lblEstadoArqueo.Text;
+
+                            string observaciones =
+                                string.IsNullOrWhiteSpace(txtObservaciones.Text)
+                                    ? null
+                                    : txtObservaciones.Text.Trim();
+
+                            // Guardar arqueo
+                            string sql = @"
+INSERT INTO arqueos_caja
+(
+    folio,
+    id_turno,
+    id_usuario,
+    fecha_arqueo,
+    efectivo_esperado,
+    efectivo_contado,
+    diferencia_efectivo,
+    electronico,
+    electronico_verificado,
+    total_ventas,
+    estado,
+    observaciones
+)
+VALUES
+(
+    @folio,
+    @id_turno,
+    @id_usuario,
+    NOW(),
+    @efectivo_esperado,
+    @efectivo_contado,
+    @diferencia_efectivo,
+    @electronico,
+    @electronico_verificado,
+    @total_ventas,
+    @estado,
+    @observaciones
+);";
+
+                            using (MySqlCommand cmd = new MySqlCommand(sql, conn, trans))
+                            {
+                                cmd.Parameters.AddWithValue("@folio", folio);
+                                cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
+                                cmd.Parameters.AddWithValue("@id_usuario", Session.IdUsuario);
+                                cmd.Parameters.AddWithValue("@efectivo_esperado", efectivoEsperado);
+                                cmd.Parameters.AddWithValue("@efectivo_contado", efectivoContado);
+                                cmd.Parameters.AddWithValue("@diferencia_efectivo", diferenciaEfectivo);
+                                cmd.Parameters.AddWithValue("@electronico", electronico);
+                                cmd.Parameters.AddWithValue(
+                                    "@electronico_verificado",
+                                    chkElectronicoVerificado.Checked ? 1 : 0);
+                                cmd.Parameters.AddWithValue("@total_ventas", totalVentas);
+                                cmd.Parameters.AddWithValue("@estado", estado);
+                                cmd.Parameters.AddWithValue("@observaciones", (object)observaciones ?? DBNull.Value);
+
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // Consumir el folio solamente si el arqueo fue insertado correctamente
+                            ActualizarConsecutivoArqueo(conn, trans);
+
+                            // Confirmar toda la operación
+                            trans.Commit();
+
+                            // Guardar el folio generado para utilizarlo posteriormente
+                            folioArqueo = folio;
+
+                            lblFolioArqueo.Text = folio;
+
+                            MessageBox.Show(
+                                "El arqueo se registró correctamente.\n\n" +
+                                "Folio: " + folio + "\n" +
+                                "Estado: " + estado,
+                                "Arqueo registrado",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                        }
+                        catch
+                        {
+                            trans.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "No fue posible registrar el arqueo.\n\n" +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            
+        }
+
+        private void txtElectronicoComprobado_TextChanged(object sender, EventArgs e)
+        {
+            CalcularDiferenciaElectronico();
+            ActualizarEstadoArqueo();
+        }
+
+        private void txtElectronicoComprobado_Enter(object sender, EventArgs e)
+        {
+            if (txtElectronicoComprobado.Text.StartsWith("$"))
+            {
+                decimal importe;
+
+                if (decimal.TryParse(
+                    txtElectronicoComprobado.Text,
+                    System.Globalization.NumberStyles.Currency,
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    out importe))
+                {
+                    txtElectronicoComprobado.Text =
+                        importe.ToString("0.00");
+
+                    txtElectronicoComprobado.SelectAll();
+                }
+            }
+            else if (txtElectronicoComprobado.Text == "0.00")
+            {
+                txtElectronicoComprobado.Clear();
+            }
+        }
+
+        private void txtElectronicoComprobado_Leave(object sender, EventArgs e)
+        {
+            decimal importe;
+
+            if (decimal.TryParse(
+                txtElectronicoComprobado.Text,
+                System.Globalization.NumberStyles.Currency,
+                System.Globalization.CultureInfo.CurrentCulture,
+                out importe))
+            {
+                txtElectronicoComprobado.Text =
+                    importe.ToString("C2");
+            }
+            else
+            {
+                txtElectronicoComprobado.Text = "$0.00";
+            }
+        }
+
+        private void txtElectronicoComprobado_Click(object sender, EventArgs e)
+        {
+            /*if (txtElectronicoComprobado.Text == "0.00")
+            {
+                txtElectronicoComprobado.Clear();
+            }*/
         }
     }
 }
