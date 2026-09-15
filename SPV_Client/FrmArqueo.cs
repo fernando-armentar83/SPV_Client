@@ -15,6 +15,9 @@ namespace SPV_Client
     {
 
         private string folioArqueo = null;
+        private DateTime fechaInicioArqueo;
+        private DateTime fechaFinArqueo;
+
         public FrmArqueo()
         {
             InitializeComponent();
@@ -165,6 +168,18 @@ namespace SPV_Client
             }
 
             CargarInformacionTurno();
+
+            using (MySqlConnection conn = DB.GetConnection())
+            {
+                conn.Open();
+
+                ObtenerPeriodoArqueo(
+                    conn,
+                    null,
+                    out fechaInicioArqueo,
+                    out fechaFinArqueo);
+            }
+
             CargarResumenTurno();
             MostrarProximoFolioArqueo();
         }
@@ -212,19 +227,7 @@ namespace SPV_Client
                             // Mostrar el rol del usuario
                             lblTipoTurno.Text = Session.NombreRol;
 
-                            // Determinar el tipo de turno según el rol
-                            /*if (Session.IdRol == 1)
-                            {
-                                lblTipoTurnoCaja.Text = "ADMINISTRADOR";
-                            }
-                            else if (Session.IdRol == 2 || Session.IdRol == 3)
-                            {
-                                lblTipoTurnoCaja.Text = "OPERATIVO";
-                            }
-                            else
-                            {
-                                lblTipoTurnoCaja.Text = "---";
-                            }*/
+                            
                             // Mostrar el tipo de turno almacenado en la base de datos
                             if (reader["tipo_turno"] != DBNull.Value)
                             {
@@ -293,11 +296,15 @@ namespace SPV_Client
                     ON vp.id_forma_pago = fp.id_forma_pago
                 WHERE v.id_turno = @id_turno
                   AND v.estado = 'ACTIVA'
+                  AND v.fecha_venta > @fecha_inicio
+                  AND v.fecha_venta <= @fecha_fin    
                 GROUP BY fp.id_forma_pago, fp.nombre;";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
+                        cmd.Parameters.AddWithValue("@fecha_inicio", fechaInicioArqueo);
+                        cmd.Parameters.AddWithValue("@fecha_fin", fechaFinArqueo);
 
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -420,6 +427,54 @@ WHERE tipo = 'ARQUEO';";
             }
         }
 
+        private void ObtenerPeriodoArqueo(
+    MySqlConnection conn,
+    MySqlTransaction trans,
+    out DateTime fechaInicio,
+    out DateTime fechaFin)
+        {
+            fechaFin = DateTime.Now;
+
+            string sql = @"
+SELECT
+    COALESCE(
+        (
+            SELECT fecha_arqueo
+            FROM arqueos_caja
+            WHERE id_turno = @id_turno
+            ORDER BY fecha_arqueo DESC
+            LIMIT 1
+        ),
+        (
+            SELECT fecha_apertura
+            FROM cajas_turnos
+            WHERE id_turno = @id_turno
+            LIMIT 1
+        )
+    ) AS fecha_inicio;";
+
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn, trans))
+            {
+                cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
+
+                object resultado = cmd.ExecuteScalar();
+
+                if (resultado == null || resultado == DBNull.Value)
+                {
+                    throw new Exception(
+                        "No fue posible determinar la fecha de inicio del período del arqueo.");
+                }
+
+                fechaInicio = Convert.ToDateTime(resultado);
+            }
+
+            if (fechaInicio >= fechaFin)
+            {
+                throw new Exception(
+                    "La fecha de inicio del arqueo no puede ser igual o posterior a la fecha de fin.");
+            }
+        }
+
         private void chkElectronicoVerificado_CheckedChanged(object sender, EventArgs e)
         {
             chkElectronicoVerificado.Text =
@@ -480,6 +535,14 @@ WHERE tipo = 'ARQUEO';";
 
                     using (MySqlTransaction trans = conn.BeginTransaction())
                     {
+                        DateTime fechaInicio;
+                        DateTime fechaFin;
+
+                        ObtenerPeriodoArqueo(
+                            conn,
+                            trans,
+                            out fechaInicio,
+                            out fechaFin);
                         try
                         {
                             // Obtener folio definitivo dentro de la transacción
@@ -544,6 +607,8 @@ INSERT INTO arqueos_caja
     id_turno,
     id_usuario,
     fecha_arqueo,
+    fecha_inicio,
+    fecha_fin,
     efectivo_esperado,
     efectivo_contado,
     diferencia_efectivo,
@@ -560,7 +625,9 @@ VALUES
     @folio,
     @id_turno,
     @id_usuario,
-    NOW(),
+    @fecha_arqueo,
+    @fecha_inicio,
+    @fecha_fin,
     @efectivo_esperado,
     @efectivo_contado,
     @diferencia_efectivo,
@@ -578,6 +645,9 @@ VALUES
                                 cmd.Parameters.AddWithValue("@folio", folio);
                                 cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
                                 cmd.Parameters.AddWithValue("@id_usuario", Session.IdUsuario);
+                                cmd.Parameters.AddWithValue("@fecha_arqueo", fechaFin);
+                                cmd.Parameters.AddWithValue("@fecha_inicio", fechaInicio);
+                                cmd.Parameters.AddWithValue("@fecha_fin", fechaFin);
                                 cmd.Parameters.AddWithValue("@efectivo_esperado", efectivoEsperado);
                                 cmd.Parameters.AddWithValue("@efectivo_contado", efectivoContado);
                                 cmd.Parameters.AddWithValue("@diferencia_efectivo", diferenciaEfectivo);
