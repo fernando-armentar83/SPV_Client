@@ -316,12 +316,14 @@ LIMIT 1;";
 INSERT INTO cajas_turnos
 (
     id_usuario,
+    tipo_turno,
     fecha_apertura,
     monto_inicial
 )
 VALUES
 (
     @idUsuario,
+    @tipoTurno,
     NOW(),
     0
 );";
@@ -331,6 +333,9 @@ VALUES
                     {
                         cmd.Parameters.AddWithValue(
                             "@idUsuario", idUsuario);
+                        string tipoTurno = idRol == 1 ? "ADMINISTRADOR" : "OPERATIVO";
+
+                        cmd.Parameters.AddWithValue("@tipoTurno", tipoTurno);
 
                         cmd.ExecuteNonQuery();
 
