@@ -178,6 +178,8 @@ namespace SPV_Client
                     null,
                     out fechaInicioArqueo,
                     out fechaFinArqueo);
+                lblInicioArqueo.Text = fechaInicioArqueo.ToString("dd/MM/yyyy HH:mm:ss");
+                lblFinArqueo.Text = fechaFinArqueo.ToString("dd/MM/yyyy HH:mm:ss");
             }
 
             CargarResumenTurno();

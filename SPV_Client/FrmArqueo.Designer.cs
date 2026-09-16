@@ -72,6 +72,10 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnRealizarArqueo = new System.Windows.Forms.Button();
+            this.lblInicioArqueoTitulo = new System.Windows.Forms.Label();
+            this.lblFinArqueoTitulo = new System.Windows.Forms.Label();
+            this.lblInicioArqueo = new System.Windows.Forms.Label();
+            this.lblFinArqueo = new System.Windows.Forms.Label();
             this.pnlEncabezado.SuspendLayout();
             this.pnlInformacionTurno.SuspendLayout();
             this.pnlResumen.SuspendLayout();
@@ -126,6 +130,10 @@
             // pnlInformacionTurno
             // 
             this.pnlInformacionTurno.BackColor = System.Drawing.Color.White;
+            this.pnlInformacionTurno.Controls.Add(this.lblFinArqueo);
+            this.pnlInformacionTurno.Controls.Add(this.lblInicioArqueo);
+            this.pnlInformacionTurno.Controls.Add(this.lblFinArqueoTitulo);
+            this.pnlInformacionTurno.Controls.Add(this.lblInicioArqueoTitulo);
             this.pnlInformacionTurno.Controls.Add(this.lblTipoTurnoCaja);
             this.pnlInformacionTurno.Controls.Add(this.lblTipoTurnoCajaTitulo);
             this.pnlInformacionTurno.Controls.Add(this.lblEstadoTurno);
@@ -141,7 +149,7 @@
             this.pnlInformacionTurno.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlInformacionTurno.Location = new System.Drawing.Point(0, 50);
             this.pnlInformacionTurno.Name = "pnlInformacionTurno";
-            this.pnlInformacionTurno.Size = new System.Drawing.Size(1088, 100);
+            this.pnlInformacionTurno.Size = new System.Drawing.Size(1088, 139);
             this.pnlInformacionTurno.TabIndex = 1;
             // 
             // lblTipoTurnoCaja
@@ -269,7 +277,7 @@
             this.pnlResumen.Controls.Add(this.grpConteoFisico);
             this.pnlResumen.Controls.Add(this.grpResumenElectronico);
             this.pnlResumen.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlResumen.Location = new System.Drawing.Point(0, 150);
+            this.pnlResumen.Location = new System.Drawing.Point(0, 189);
             this.pnlResumen.Name = "pnlResumen";
             this.pnlResumen.Size = new System.Drawing.Size(1088, 315);
             this.pnlResumen.TabIndex = 2;
@@ -306,7 +314,7 @@
             // 
             this.lblDiferenciaElectronico.AutoSize = true;
             this.lblDiferenciaElectronico.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiferenciaElectronico.Location = new System.Drawing.Point(195, 170);
+            this.lblDiferenciaElectronico.Location = new System.Drawing.Point(195, 156);
             this.lblDiferenciaElectronico.Name = "lblDiferenciaElectronico";
             this.lblDiferenciaElectronico.Size = new System.Drawing.Size(71, 30);
             this.lblDiferenciaElectronico.TabIndex = 6;
@@ -317,7 +325,7 @@
             // 
             this.lblDiferenciaElectronicoTitulo.AutoSize = true;
             this.lblDiferenciaElectronicoTitulo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiferenciaElectronicoTitulo.Location = new System.Drawing.Point(20, 175);
+            this.lblDiferenciaElectronicoTitulo.Location = new System.Drawing.Point(20, 161);
             this.lblDiferenciaElectronicoTitulo.Name = "lblDiferenciaElectronicoTitulo";
             this.lblDiferenciaElectronicoTitulo.Size = new System.Drawing.Size(162, 21);
             this.lblDiferenciaElectronicoTitulo.TabIndex = 5;
@@ -488,9 +496,9 @@
             this.pnlObservaciones.Controls.Add(this.txtObservaciones);
             this.pnlObservaciones.Controls.Add(this.lblObservaciones);
             this.pnlObservaciones.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlObservaciones.Location = new System.Drawing.Point(0, 465);
+            this.pnlObservaciones.Location = new System.Drawing.Point(0, 504);
             this.pnlObservaciones.Name = "pnlObservaciones";
-            this.pnlObservaciones.Size = new System.Drawing.Size(1088, 242);
+            this.pnlObservaciones.Size = new System.Drawing.Size(1088, 203);
             this.pnlObservaciones.TabIndex = 3;
             // 
             // txtObservaciones
@@ -558,6 +566,46 @@
             this.btnRealizarArqueo.UseVisualStyleBackColor = false;
             this.btnRealizarArqueo.Click += new System.EventHandler(this.btnRealizarArqueo_Click);
             // 
+            // lblInicioArqueoTitulo
+            // 
+            this.lblInicioArqueoTitulo.AutoSize = true;
+            this.lblInicioArqueoTitulo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInicioArqueoTitulo.Location = new System.Drawing.Point(20, 98);
+            this.lblInicioArqueoTitulo.Name = "lblInicioArqueoTitulo";
+            this.lblInicioArqueoTitulo.Size = new System.Drawing.Size(103, 21);
+            this.lblInicioArqueoTitulo.TabIndex = 12;
+            this.lblInicioArqueoTitulo.Text = "Inicio arqueo:";
+            // 
+            // lblFinArqueoTitulo
+            // 
+            this.lblFinArqueoTitulo.AutoSize = true;
+            this.lblFinArqueoTitulo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinArqueoTitulo.Location = new System.Drawing.Point(364, 98);
+            this.lblFinArqueoTitulo.Name = "lblFinArqueoTitulo";
+            this.lblFinArqueoTitulo.Size = new System.Drawing.Size(87, 21);
+            this.lblFinArqueoTitulo.TabIndex = 13;
+            this.lblFinArqueoTitulo.Text = "Fin arqueo:";
+            // 
+            // lblInicioArqueo
+            // 
+            this.lblInicioArqueo.AutoSize = true;
+            this.lblInicioArqueo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInicioArqueo.Location = new System.Drawing.Point(132, 95);
+            this.lblInicioArqueo.Name = "lblInicioArqueo";
+            this.lblInicioArqueo.Size = new System.Drawing.Size(33, 25);
+            this.lblInicioArqueo.TabIndex = 14;
+            this.lblInicioArqueo.Text = "---";
+            // 
+            // lblFinArqueo
+            // 
+            this.lblFinArqueo.AutoSize = true;
+            this.lblFinArqueo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinArqueo.Location = new System.Drawing.Point(466, 98);
+            this.lblFinArqueo.Name = "lblFinArqueo";
+            this.lblFinArqueo.Size = new System.Drawing.Size(28, 21);
+            this.lblFinArqueo.TabIndex = 15;
+            this.lblFinArqueo.Text = "---";
+            // 
             // FrmArqueo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -580,6 +628,7 @@
             this.Load += new System.EventHandler(this.FrmArqueo_Load);
             this.pnlEncabezado.ResumeLayout(false);
             this.pnlInformacionTurno.ResumeLayout(false);
+            this.pnlInformacionTurno.PerformLayout();
             this.pnlResumen.ResumeLayout(false);
             this.pnlResumen.PerformLayout();
             this.grpConteoFisico.ResumeLayout(false);
@@ -639,5 +688,9 @@
         private System.Windows.Forms.Label lblDiferenciaElectronico;
         private System.Windows.Forms.Label lblDiferenciaElectronicoTitulo;
         private System.Windows.Forms.TextBox txtElectronicoComprobado;
+        private System.Windows.Forms.Label lblFinArqueoTitulo;
+        private System.Windows.Forms.Label lblInicioArqueoTitulo;
+        private System.Windows.Forms.Label lblFinArqueo;
+        private System.Windows.Forms.Label lblInicioArqueo;
     }
 }
