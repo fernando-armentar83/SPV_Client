@@ -17,6 +17,9 @@ namespace SPV_Client
         private string folioArqueo = null;
         private DateTime fechaInicioArqueo;
         private DateTime fechaFinArqueo;
+        private decimal totalEfectivo = 0m;
+        private decimal totalElectronico = 0m;
+        private bool efectivoContadoRealizado = false;
 
         public FrmArqueo()
         {
@@ -92,7 +95,11 @@ namespace SPV_Client
                 System.Globalization.CultureInfo.CurrentCulture,
                 out diferenciaElectronica);
 
-            bool efectivoContadoRealizado = efectivoContado > 0m;
+            bool efectivoRequerido = efectivoEsperado > 0m;
+            bool efectivoContadoRealizado =
+                efectivoRequerido && efectivoContado >= 0m;
+
+            bool electronicoRequerido = totalElectronico > 0m;
             bool electronicoVerificado = chkElectronicoVerificado.Checked;
 
             bool diferenciaEfectivo =
@@ -100,10 +107,11 @@ namespace SPV_Client
                 efectivoContado != efectivoEsperado;
 
             bool diferenciaElectronico =
+                electronicoRequerido &&
                 electronicoVerificado &&
                 diferenciaElectronica != 0m;
 
-            if (!efectivoContadoRealizado)
+            if (!efectivoContadoRealizado && efectivoRequerido)
             {
                 lblEstadoArqueo.Text = "PENDIENTE";
             }
@@ -115,7 +123,7 @@ namespace SPV_Client
             {
                 lblEstadoArqueo.Text = "DIFERENCIA DE EFECTIVO";
             }
-            else if (!electronicoVerificado)
+            else if (electronicoRequerido && !electronicoVerificado)
             {
                 lblEstadoArqueo.Text = "ELECTRÓNICO NO VERIFICADO";
             }
@@ -183,6 +191,9 @@ namespace SPV_Client
             }
 
             CargarResumenTurno();
+            btnRealizarArqueo.Enabled =
+            lblEfectivoEsperado.Text != "$0.00" ||
+            lblElectronico.Text != "$0.00";
             MostrarProximoFolioArqueo();
         }
 
@@ -278,10 +289,7 @@ namespace SPV_Client
 
         private void CargarResumenTurno()
         {
-            decimal totalEfectivo = 0m;
-            decimal totalElectronico = 0m;
-
-            try
+           try
             {
                 using (MySqlConnection conn = DB.GetConnection())
                 {
@@ -334,6 +342,8 @@ namespace SPV_Client
                 lblEfectivoEsperado.Text = totalEfectivo.ToString("C2");
                 lblElectronico.Text = totalElectronico.ToString("C2");
                 lblTotalVentas.Text = totalVentas.ToString("C2");
+                btnRealizarArqueo.Enabled =
+                            totalEfectivo > 0m || totalElectronico > 0m;
             }
             catch (Exception ex)
             {
@@ -489,6 +499,8 @@ SELECT
             decimal efectivoEsperado = 0m;
             decimal efectivoContado = 0m;
 
+            
+
             decimal.TryParse(
                 lblEfectivoEsperado.Text,
                 System.Globalization.NumberStyles.Currency,
@@ -501,17 +513,8 @@ SELECT
                 System.Globalization.CultureInfo.CurrentCulture,
                 out efectivoContado);
 
-            // Validar que se haya realizado el conteo de efectivo
-            if (efectivoContado <= 0m)
-            {
-                MessageBox.Show(
-                    "Primero debes realizar el conteo de efectivo.",
-                    "Arqueo pendiente",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-
-                return;
-            }
+            
+            
 
             // Validar que el electrónico haya sido verificado
             if (!chkElectronicoVerificado.Checked)
