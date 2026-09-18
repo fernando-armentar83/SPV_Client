@@ -97,8 +97,8 @@ namespace SPV_Client
                 out diferenciaElectronica);
 
             bool efectivoRequerido = efectivoEsperado > 0m;
-            bool efectivoContadoRealizado =
-                efectivoRequerido && efectivoContado >= 0m;
+            bool conteoRealizado =
+                    !efectivoRequerido || efectivoContadoRealizado;
 
             bool electronicoRequerido = totalElectronico > 0m;
             bool electronicoVerificado = chkElectronicoVerificado.Checked;
@@ -112,7 +112,7 @@ namespace SPV_Client
                 electronicoVerificado &&
                 diferenciaElectronica != 0m;
 
-            if (!efectivoContadoRealizado && efectivoRequerido)
+            if (!conteoRealizado && efectivoRequerido)
             {
                 lblEstadoArqueo.Text = "PENDIENTE";
             }
@@ -514,14 +514,14 @@ SELECT
                 System.Globalization.CultureInfo.CurrentCulture,
                 out efectivoContado);
 
-            
-            
+
+
 
             // Validar que el electrónico haya sido verificado
-            if (!chkElectronicoVerificado.Checked)
+            if (totalElectronico > 0m && !chkElectronicoVerificado.Checked)
             {
                 MessageBox.Show(
-                    "Debes verificar el efectivo electrónico antes de realizar el arqueo.",
+                    "Debes Verificar el efectivo electrónico antes de realizar el arqueo.",
                     "Arqueo pendiente",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
