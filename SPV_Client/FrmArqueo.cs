@@ -37,6 +37,7 @@ namespace SPV_Client
             {
                 if (frmConteo.ShowDialog() == DialogResult.OK)
                 {
+                    efectivoContadoRealizado = true;
                     decimal efectivoContado = frmConteo.TotalContado;
 
                     lblEfectivoContado.Text =
