@@ -192,9 +192,9 @@ namespace SPV_Client
             }
 
             CargarResumenTurno();
-            btnRealizarArqueo.Enabled =
-            lblEfectivoEsperado.Text != "$0.00" ||
-            lblElectronico.Text != "$0.00";
+            //btnRealizarArqueo.Enabled =
+            //lblEfectivoEsperado.Text != "$0.00" ||
+            //lblElectronico.Text != "$0.00";
             MostrarProximoFolioArqueo();
         }
 
@@ -292,6 +292,9 @@ namespace SPV_Client
         {
            try
             {
+                totalEfectivo = 0m;
+                totalElectronico = 0m;
+
                 using (MySqlConnection conn = DB.GetConnection())
                 {
                     conn.Open();
@@ -532,6 +535,20 @@ SELECT
             // Actualizar diferencia y estado antes de continuar
             CalcularDiferenciaEfectivo();
             ActualizarEstadoArqueo();
+
+            if ((efectivoContadoRealizado && efectivoContado != efectivoEsperado ||
+     totalElectronico > 0m && txtElectronicoComprobado.Text != lblElectronico.Text) &&
+    string.IsNullOrWhiteSpace(txtObservaciones.Text))
+            {
+                MessageBox.Show(
+                    "Debes ingresar una observación cuando existe una diferencia en el arqueo.",
+                    "Observación requerida",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtObservaciones.Focus();
+                return;
+            }
 
             try
             {
