@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SPV_Client.Models;
 
 namespace SPV_Client
 {
@@ -233,7 +234,7 @@ namespace SPV_Client
                                 this.Close();
                                 return;
                             }
-                                                        
+
                             lblIdTurno.Text = reader["id_turno"].ToString();
 
                             lblUsuario.Text = Session.NombreUsuario;
@@ -241,7 +242,7 @@ namespace SPV_Client
                             // Mostrar el rol del usuario
                             lblTipoTurno.Text = Session.NombreRol;
 
-                            
+
                             // Mostrar el tipo de turno almacenado en la base de datos
                             if (reader["tipo_turno"] != DBNull.Value)
                             {
@@ -250,7 +251,7 @@ namespace SPV_Client
                             else
                             {
                                 lblTipoTurnoCaja.Text = "---";
-                            }   
+                            }
 
                             if (reader["fecha_apertura"] != DBNull.Value)
                             {
@@ -290,7 +291,7 @@ namespace SPV_Client
 
         private void CargarResumenTurno()
         {
-           try
+            try
             {
                 totalEfectivo = 0m;
                 totalElectronico = 0m;
@@ -348,6 +349,9 @@ namespace SPV_Client
                 lblTotalVentas.Text = totalVentas.ToString("C2");
                 btnRealizarArqueo.Enabled =
                             totalEfectivo > 0m || totalElectronico > 0m;
+                btnContarEfectivo.Enabled = totalEfectivo > 0m;
+                txtElectronicoComprobado.Enabled = totalElectronico > 0m;
+                chkElectronicoVerificado.Enabled = totalElectronico > 0m;
             }
             catch (Exception ex)
             {
@@ -404,6 +408,75 @@ WHERE tipo = 'ARQUEO';";
                         "No fue posible actualizar el consecutivo del folio de ARQUEO.");
                 }
             }
+        }
+
+        private ArqueoReimpresion ObtenerArqueoParaTicket(string folio)
+        {
+            ArqueoReimpresion arqueo = null;
+
+            using (MySqlConnection conn = DB.GetConnection())
+            {
+                conn.Open();
+
+                string sql = @"
+SELECT
+    a.folio,
+    a.fecha_arqueo,
+    a.fecha_inicio,
+    a.fecha_fin,
+    a.id_turno,
+    u.nombre AS usuario,
+    a.efectivo_esperado,
+    a.efectivo_contado,
+    a.diferencia_efectivo,
+    a.electronico,
+    a.electronico_comprobado,
+    a.diferencia_electronico,
+    a.electronico_verificado,
+    a.total_ventas,
+    a.estado,
+    a.observaciones
+FROM arqueos_caja a
+INNER JOIN usuarios u
+    ON a.id_usuario = u.id_usuario
+WHERE a.folio = @folio
+LIMIT 1;";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@folio", folio);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            arqueo = new ArqueoReimpresion
+                            {
+                                Folio = reader["folio"].ToString(),
+                                FechaArqueo = Convert.ToDateTime(reader["fecha_arqueo"]),
+                                FechaInicio = Convert.ToDateTime(reader["fecha_inicio"]),
+                                FechaFin = Convert.ToDateTime(reader["fecha_fin"]),
+                                IdTurno = Convert.ToInt32(reader["id_turno"]),
+                                Usuario = reader["usuario"].ToString(),
+                                EfectivoEsperado = Convert.ToDecimal(reader["efectivo_esperado"]),
+                                EfectivoContado = Convert.ToDecimal(reader["efectivo_contado"]),
+                                DiferenciaEfectivo = Convert.ToDecimal(reader["diferencia_efectivo"]),
+                                Electronico = Convert.ToDecimal(reader["electronico"]),
+                                ElectronicoComprobado = Convert.ToDecimal(reader["electronico_comprobado"]),
+                                DiferenciaElectronico = Convert.ToDecimal(reader["diferencia_electronico"]),
+                                ElectronicoVerificado = Convert.ToBoolean(reader["electronico_verificado"]),
+                                TotalVentas = Convert.ToDecimal(reader["total_ventas"]),
+                                Estado = reader["estado"].ToString(),
+                                Observaciones = reader["observaciones"] == DBNull.Value
+                                    ? null
+                                    : reader["observaciones"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+
+            return arqueo;
         }
 
         private void MostrarProximoFolioArqueo()
@@ -491,6 +564,52 @@ SELECT
             }
         }
 
+        public static bool HayVentasSinArquear()
+        {
+            bool hayVentas = false;
+
+            using (MySqlConnection conn = DB.GetConnection())
+            {
+                conn.Open();
+
+                string sql = @"
+SELECT EXISTS (
+    SELECT 1
+    FROM ventas v
+    WHERE v.id_turno = @id_turno
+      AND v.estado = 'ACTIVA'
+      AND v.fecha_venta > (
+          SELECT COALESCE(
+              (
+                  SELECT fecha_arqueo
+                  FROM arqueos_caja
+                  WHERE id_turno = @id_turno
+                  ORDER BY fecha_arqueo DESC
+                  LIMIT 1
+              ),
+              (
+                  SELECT fecha_apertura
+                  FROM cajas_turnos
+                  WHERE id_turno = @id_turno
+                  LIMIT 1
+              )
+          )
+      )
+) AS hay_ventas;";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
+
+                    object resultado = cmd.ExecuteScalar();
+
+                    hayVentas = resultado != null && Convert.ToBoolean(resultado);
+                }
+            }
+
+            return hayVentas;
+        }
+
         private void chkElectronicoVerificado_CheckedChanged(object sender, EventArgs e)
         {
             chkElectronicoVerificado.Text =
@@ -500,10 +619,20 @@ SELECT
 
         private void btnRealizarArqueo_Click(object sender, EventArgs e)
         {
+            if (totalEfectivo > 0m && !efectivoContadoRealizado)
+            {
+                MessageBox.Show(
+                "Debes contar el efectivo antes de realizar el arqueo.",
+                "Conteo requerido",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                return;
+            }
+
             decimal efectivoEsperado = 0m;
             decimal efectivoContado = 0m;
 
-            
+
 
             decimal.TryParse(
                 lblEfectivoEsperado.Text,
@@ -536,8 +665,18 @@ SELECT
             CalcularDiferenciaEfectivo();
             ActualizarEstadoArqueo();
 
+
+
+            decimal electronicoComprobadoParaValidar = 0m;
+
+            decimal.TryParse(
+                txtElectronicoComprobado.Text,
+                System.Globalization.NumberStyles.Currency,
+                System.Globalization.CultureInfo.CurrentCulture,
+                out electronicoComprobadoParaValidar);
+
             if ((efectivoContadoRealizado && efectivoContado != efectivoEsperado ||
-     totalElectronico > 0m && txtElectronicoComprobado.Text != lblElectronico.Text) &&
+     totalElectronico > 0m && electronicoComprobadoParaValidar != totalElectronico) &&
     string.IsNullOrWhiteSpace(txtObservaciones.Text))
             {
                 MessageBox.Show(
@@ -550,6 +689,8 @@ SELECT
                 return;
             }
 
+            btnRealizarArqueo.Enabled = false;
+
             try
             {
                 using (MySqlConnection conn = DB.GetConnection())
@@ -558,14 +699,9 @@ SELECT
 
                     using (MySqlTransaction trans = conn.BeginTransaction())
                     {
-                        DateTime fechaInicio;
-                        DateTime fechaFin;
-
-                        ObtenerPeriodoArqueo(
-                            conn,
-                            trans,
-                            out fechaInicio,
-                            out fechaFin);
+                        
+                        DateTime fechaInicio = fechaInicioArqueo;
+                        DateTime fechaFin = fechaFinArqueo;
                         try
                         {
                             // Obtener folio definitivo dentro de la transacción
@@ -588,7 +724,7 @@ SELECT
                                 System.Globalization.CultureInfo.CurrentCulture,
                                 out electronico);
 
-                            
+
                             decimal electronicoComprobado = 0m;
 
                             decimal.TryParse(
@@ -634,6 +770,7 @@ INSERT INTO arqueos_caja
     fecha_fin,
     efectivo_esperado,
     efectivo_contado,
+    efectivo_retirado,
     diferencia_efectivo,
     electronico,
     electronico_comprobado,
@@ -653,6 +790,7 @@ VALUES
     @fecha_fin,
     @efectivo_esperado,
     @efectivo_contado,
+    @efectivo_retirado,
     @diferencia_efectivo,
     @electronico,
     @electronico_comprobado,
@@ -673,6 +811,7 @@ VALUES
                                 cmd.Parameters.AddWithValue("@fecha_fin", fechaFin);
                                 cmd.Parameters.AddWithValue("@efectivo_esperado", efectivoEsperado);
                                 cmd.Parameters.AddWithValue("@efectivo_contado", efectivoContado);
+                                cmd.Parameters.AddWithValue("@efectivo_retirado", efectivoContado);
                                 cmd.Parameters.AddWithValue("@diferencia_efectivo", diferenciaEfectivo);
                                 cmd.Parameters.AddWithValue("@electronico", electronico);
                                 cmd.Parameters.AddWithValue("@electronico_comprobado", electronicoComprobado);
@@ -698,13 +837,13 @@ VALUES
 
                             lblFolioArqueo.Text = folio;
 
-                            MessageBox.Show(
-                                "El arqueo se registró correctamente.\n\n" +
-                                "Folio: " + folio + "\n" +
-                                "Estado: " + estado,
-                                "Arqueo registrado",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                            ArqueoReimpresion arqueoTicket = ObtenerArqueoParaTicket(folio);
+
+                            using (FrmTicketArqueo frmTicket = new FrmTicketArqueo(arqueoTicket))
+                            {
+                                frmTicket.ModoReimpresion = false;
+                                frmTicket.ShowDialog();
+                            }
                         }
                         catch
                         {
@@ -713,9 +852,13 @@ VALUES
                         }
                     }
                 }
+
+                this.Close();
             }
             catch (Exception ex)
             {
+                btnRealizarArqueo.Enabled = true;
+
                 MessageBox.Show(
                     "No fue posible registrar el arqueo.\n\n" +
                     ex.Message,
@@ -723,7 +866,7 @@ VALUES
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            
+
         }
 
         private void txtElectronicoComprobado_TextChanged(object sender, EventArgs e)
@@ -781,6 +924,39 @@ VALUES
             {
                 txtElectronicoComprobado.Clear();
             }*/
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (totalEfectivo > 0m || totalElectronico > 0m)
+            {
+                DialogResult resultado = MessageBox.Show(
+                    "Existen ventas pendientes de arquear en este período.\n\n" +
+                    "¿Deseas cancelar de todas formas, sin realizar el arqueo?",
+                    "Arqueo pendiente",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (resultado == DialogResult.No)
+                {
+                    return;
+                }
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            lblEfectivoContado.Text = "$0.00";
+            efectivoContadoRealizado = false;
+            lblDiferencia.Text = "$0.00";
+
+            txtElectronicoComprobado.Text = "$0.00";
+            chkElectronicoVerificado.Checked = false;
+            lblDiferenciaElectronico.Text = "$0.00";
+
+            txtObservaciones.Clear();
+
+            ActualizarEstadoArqueo();
         }
     }
 }

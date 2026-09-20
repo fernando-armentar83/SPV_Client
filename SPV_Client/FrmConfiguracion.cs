@@ -25,6 +25,16 @@ namespace SPV_Client
 
         private void btnAbrirArqueo_Click(object sender, EventArgs e)
         {
+            if (!FrmArqueo.HayVentasSinArquear())
+            {
+                MessageBox.Show(
+                    "No existen datos para realizar un arqueo.",
+                    "Arqueo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
             FormManager.AbrirFormularioUnico<FrmArqueo>();
         }
     }

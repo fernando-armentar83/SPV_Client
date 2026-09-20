@@ -33,6 +33,10 @@
             this.lblFolioArqueoTitulo = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.pnlInformacionTurno = new System.Windows.Forms.Panel();
+            this.lblFinArqueo = new System.Windows.Forms.Label();
+            this.lblInicioArqueo = new System.Windows.Forms.Label();
+            this.lblFinArqueoTitulo = new System.Windows.Forms.Label();
+            this.lblInicioArqueoTitulo = new System.Windows.Forms.Label();
             this.lblTipoTurnoCaja = new System.Windows.Forms.Label();
             this.lblTipoTurnoCajaTitulo = new System.Windows.Forms.Label();
             this.lblEstadoTurno = new System.Windows.Forms.Label();
@@ -72,10 +76,6 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnRealizarArqueo = new System.Windows.Forms.Button();
-            this.lblInicioArqueoTitulo = new System.Windows.Forms.Label();
-            this.lblFinArqueoTitulo = new System.Windows.Forms.Label();
-            this.lblInicioArqueo = new System.Windows.Forms.Label();
-            this.lblFinArqueo = new System.Windows.Forms.Label();
             this.pnlEncabezado.SuspendLayout();
             this.pnlInformacionTurno.SuspendLayout();
             this.pnlResumen.SuspendLayout();
@@ -151,6 +151,46 @@
             this.pnlInformacionTurno.Name = "pnlInformacionTurno";
             this.pnlInformacionTurno.Size = new System.Drawing.Size(1088, 139);
             this.pnlInformacionTurno.TabIndex = 1;
+            // 
+            // lblFinArqueo
+            // 
+            this.lblFinArqueo.AutoSize = true;
+            this.lblFinArqueo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinArqueo.Location = new System.Drawing.Point(466, 98);
+            this.lblFinArqueo.Name = "lblFinArqueo";
+            this.lblFinArqueo.Size = new System.Drawing.Size(28, 21);
+            this.lblFinArqueo.TabIndex = 15;
+            this.lblFinArqueo.Text = "---";
+            // 
+            // lblInicioArqueo
+            // 
+            this.lblInicioArqueo.AutoSize = true;
+            this.lblInicioArqueo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInicioArqueo.Location = new System.Drawing.Point(132, 95);
+            this.lblInicioArqueo.Name = "lblInicioArqueo";
+            this.lblInicioArqueo.Size = new System.Drawing.Size(33, 25);
+            this.lblInicioArqueo.TabIndex = 14;
+            this.lblInicioArqueo.Text = "---";
+            // 
+            // lblFinArqueoTitulo
+            // 
+            this.lblFinArqueoTitulo.AutoSize = true;
+            this.lblFinArqueoTitulo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinArqueoTitulo.Location = new System.Drawing.Point(364, 98);
+            this.lblFinArqueoTitulo.Name = "lblFinArqueoTitulo";
+            this.lblFinArqueoTitulo.Size = new System.Drawing.Size(87, 21);
+            this.lblFinArqueoTitulo.TabIndex = 13;
+            this.lblFinArqueoTitulo.Text = "Fin arqueo:";
+            // 
+            // lblInicioArqueoTitulo
+            // 
+            this.lblInicioArqueoTitulo.AutoSize = true;
+            this.lblInicioArqueoTitulo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInicioArqueoTitulo.Location = new System.Drawing.Point(20, 98);
+            this.lblInicioArqueoTitulo.Name = "lblInicioArqueoTitulo";
+            this.lblInicioArqueoTitulo.Size = new System.Drawing.Size(103, 21);
+            this.lblInicioArqueoTitulo.TabIndex = 12;
+            this.lblInicioArqueoTitulo.Text = "Inicio arqueo:";
             // 
             // lblTipoTurnoCaja
             // 
@@ -542,6 +582,7 @@
             this.btnCancelar.TabIndex = 2;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnLimpiar
             // 
@@ -553,6 +594,7 @@
             this.btnLimpiar.TabIndex = 1;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnRealizarArqueo
             // 
@@ -565,46 +607,6 @@
             this.btnRealizarArqueo.Text = "Realizar arqueo";
             this.btnRealizarArqueo.UseVisualStyleBackColor = false;
             this.btnRealizarArqueo.Click += new System.EventHandler(this.btnRealizarArqueo_Click);
-            // 
-            // lblInicioArqueoTitulo
-            // 
-            this.lblInicioArqueoTitulo.AutoSize = true;
-            this.lblInicioArqueoTitulo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInicioArqueoTitulo.Location = new System.Drawing.Point(20, 98);
-            this.lblInicioArqueoTitulo.Name = "lblInicioArqueoTitulo";
-            this.lblInicioArqueoTitulo.Size = new System.Drawing.Size(103, 21);
-            this.lblInicioArqueoTitulo.TabIndex = 12;
-            this.lblInicioArqueoTitulo.Text = "Inicio arqueo:";
-            // 
-            // lblFinArqueoTitulo
-            // 
-            this.lblFinArqueoTitulo.AutoSize = true;
-            this.lblFinArqueoTitulo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinArqueoTitulo.Location = new System.Drawing.Point(364, 98);
-            this.lblFinArqueoTitulo.Name = "lblFinArqueoTitulo";
-            this.lblFinArqueoTitulo.Size = new System.Drawing.Size(87, 21);
-            this.lblFinArqueoTitulo.TabIndex = 13;
-            this.lblFinArqueoTitulo.Text = "Fin arqueo:";
-            // 
-            // lblInicioArqueo
-            // 
-            this.lblInicioArqueo.AutoSize = true;
-            this.lblInicioArqueo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInicioArqueo.Location = new System.Drawing.Point(132, 95);
-            this.lblInicioArqueo.Name = "lblInicioArqueo";
-            this.lblInicioArqueo.Size = new System.Drawing.Size(33, 25);
-            this.lblInicioArqueo.TabIndex = 14;
-            this.lblInicioArqueo.Text = "---";
-            // 
-            // lblFinArqueo
-            // 
-            this.lblFinArqueo.AutoSize = true;
-            this.lblFinArqueo.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinArqueo.Location = new System.Drawing.Point(466, 98);
-            this.lblFinArqueo.Name = "lblFinArqueo";
-            this.lblFinArqueo.Size = new System.Drawing.Size(28, 21);
-            this.lblFinArqueo.TabIndex = 15;
-            this.lblFinArqueo.Text = "---";
             // 
             // FrmArqueo
             // 
