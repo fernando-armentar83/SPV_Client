@@ -175,9 +175,38 @@ namespace SPV_Client
             dgvDetalleVenta.Rows.Clear();
         }
 
+        private bool arqueoBloqueoActivo = false;
+
         private void Reloj_Tick(object sender, EventArgs e)
         {
             lblHoraVenta.Text = DateTime.Now.ToString("HH:mm:ss");
+
+            ActualizarBloqueoPorArqueo();
+        }
+
+        private void ActualizarBloqueoPorArqueo()
+        {
+            bool debeBloquear = Session.ArqueoEnProceso;
+
+            if (debeBloquear == arqueoBloqueoActivo)
+                return;
+
+            arqueoBloqueoActivo = debeBloquear;
+
+            txtCodigoBarrasVenta.Enabled = !debeBloquear;
+            btnAgregarVenta.Enabled = !debeBloquear;
+            btnPagarVenta.Enabled = !debeBloquear;
+            dgvDetalleVenta.Enabled = !debeBloquear;
+
+            if (debeBloquear)
+            {
+                MessageBox.Show(
+                    "Hay un arqueo en proceso.\n\n" +
+                    "La venta se reanudará automáticamente cuando finalice.",
+                    "Arqueo en proceso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
         }
 
         private void MostrarProximoFolio()

@@ -9,7 +9,6 @@ namespace SPV_Client
         public static string NombreRol { get; set; } = string.Empty;
 
         public static int IdUsuarioAutoriza { get; set; } = 0;
-
         public static string NombreUsuarioAutoriza { get; set; } = string.Empty;
 
         // 🔹 Nuevo campo: identificador del turno activo
@@ -18,6 +17,8 @@ namespace SPV_Client
         // 🔹 Nuevo: monto inicial del turno
         public static decimal MontoInicial { get; set; } = 0;
 
+        // 🔹 Nuevo: indica si hay un arqueo en proceso para el turno activo
+        public static bool ArqueoEnProceso { get; set; } = false;
 
         // 🔹 Método para limpiar sesión completamente al cerrar
         public static void Clear()
@@ -30,6 +31,7 @@ namespace SPV_Client
             MontoInicial = 0;
             IdUsuarioAutoriza = 0;
             NombreUsuarioAutoriza = string.Empty;
+            ArqueoEnProceso = false;
         }
     }
 }

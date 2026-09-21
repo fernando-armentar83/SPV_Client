@@ -627,6 +627,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Arqueo de Caja";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmArqueo_FormClosing);
             this.Load += new System.EventHandler(this.FrmArqueo_Load);
             this.pnlEncabezado.ResumeLayout(false);
             this.pnlInformacionTurno.ResumeLayout(false);

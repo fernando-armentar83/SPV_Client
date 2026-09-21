@@ -176,7 +176,7 @@ namespace SPV_Client
                 this.Close();
                 return;
             }
-
+            Session.ArqueoEnProceso = true;
             CargarInformacionTurno();
 
             using (MySqlConnection conn = DB.GetConnection())
@@ -957,6 +957,11 @@ VALUES
             txtObservaciones.Clear();
 
             ActualizarEstadoArqueo();
+        }
+
+        private void FrmArqueo_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Session.ArqueoEnProceso = false;
         }
     }
 }
