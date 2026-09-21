@@ -1306,22 +1306,25 @@ LIMIT 1;";
 
         private void FrmVenta_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (detalleVenta.Count == 0 && idProductoActual == 0)
-                return;
-
-            DialogResult r = MessageBox.Show(
-                "Hay una venta en proceso.\n\n¿Desea salir y perder la venta actual?",
-                "Confirmar salida",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (r == DialogResult.No)
+            if (detalleVenta.Count > 0 || idProductoActual != 0)
             {
-                e.Cancel = true;
-                return;
+                DialogResult r = MessageBox.Show(
+                    "Hay una venta en proceso.\n\n¿Desea salir y perder la venta actual?",
+                    "Confirmar salida",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (r == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                LimpiarVenta();
             }
 
-            LimpiarVenta();
+            reloj.Stop();
+            reloj.Dispose();
         }
 
         private void btnHistorialVenta_Click(object sender, EventArgs e)
