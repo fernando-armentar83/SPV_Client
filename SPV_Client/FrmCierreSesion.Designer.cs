@@ -65,6 +65,10 @@
             this.lblHoraCorte = new System.Windows.Forms.Label();
             this.btnConteoEfectivo = new System.Windows.Forms.Button();
             this.lblTurnoActivo = new System.Windows.Forms.Label();
+            this.lblArqueosRealizados = new System.Windows.Forms.Label();
+            this.lblValorArqueosRealizados = new System.Windows.Forms.Label();
+            this.lblTotalRetirado = new System.Windows.Forms.Label();
+            this.lblValorTotalRetirado = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentasSocios)).BeginInit();
@@ -106,6 +110,10 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Snow;
+            this.groupBox1.Controls.Add(this.lblValorTotalRetirado);
+            this.groupBox1.Controls.Add(this.lblTotalRetirado);
+            this.groupBox1.Controls.Add(this.lblValorArqueosRealizados);
+            this.groupBox1.Controls.Add(this.lblArqueosRealizados);
             this.groupBox1.Controls.Add(this.lblTotalTurno);
             this.groupBox1.Controls.Add(this.lblVentasElectronico);
             this.groupBox1.Controls.Add(this.lblVentasEfectivo);
@@ -116,7 +124,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.DarkBlue;
             this.groupBox1.Location = new System.Drawing.Point(58, 164);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(675, 163);
+            this.groupBox1.Size = new System.Drawing.Size(760, 163);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Resumen General de Turno";
@@ -127,7 +135,7 @@
             this.lblTotalTurno.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblTotalTurno.Font = new System.Drawing.Font("Arial Black", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalTurno.ForeColor = System.Drawing.Color.Black;
-            this.lblTotalTurno.Location = new System.Drawing.Point(248, 119);
+            this.lblTotalTurno.Location = new System.Drawing.Point(306, 119);
             this.lblTotalTurno.Name = "lblTotalTurno";
             this.lblTotalTurno.Size = new System.Drawing.Size(2, 30);
             this.lblTotalTurno.TabIndex = 5;
@@ -137,7 +145,7 @@
             this.lblVentasElectronico.AutoSize = true;
             this.lblVentasElectronico.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblVentasElectronico.ForeColor = System.Drawing.Color.Black;
-            this.lblVentasElectronico.Location = new System.Drawing.Point(248, 80);
+            this.lblVentasElectronico.Location = new System.Drawing.Point(306, 80);
             this.lblVentasElectronico.Name = "lblVentasElectronico";
             this.lblVentasElectronico.Size = new System.Drawing.Size(2, 26);
             this.lblVentasElectronico.TabIndex = 4;
@@ -147,7 +155,7 @@
             this.lblVentasEfectivo.AutoSize = true;
             this.lblVentasEfectivo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblVentasEfectivo.ForeColor = System.Drawing.Color.Black;
-            this.lblVentasEfectivo.Location = new System.Drawing.Point(248, 36);
+            this.lblVentasEfectivo.Location = new System.Drawing.Point(306, 36);
             this.lblVentasEfectivo.Name = "lblVentasEfectivo";
             this.lblVentasEfectivo.Size = new System.Drawing.Size(2, 26);
             this.lblVentasEfectivo.TabIndex = 3;
@@ -157,33 +165,33 @@
             this.lbl3.AutoSize = true;
             this.lbl3.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl3.ForeColor = System.Drawing.Color.Black;
-            this.lbl3.Location = new System.Drawing.Point(62, 119);
+            this.lbl3.Location = new System.Drawing.Point(15, 119);
             this.lbl3.Name = "lbl3";
-            this.lbl3.Size = new System.Drawing.Size(164, 25);
+            this.lbl3.Size = new System.Drawing.Size(278, 25);
             this.lbl3.TabIndex = 2;
-            this.lbl3.Text = "Total del Turno :";
+            this.lbl3.Text = "Total Pendiente de Verificar :";
             // 
             // lbl2
             // 
             this.lbl2.AutoSize = true;
             this.lbl2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl2.ForeColor = System.Drawing.Color.Black;
-            this.lbl2.Location = new System.Drawing.Point(22, 80);
+            this.lbl2.Location = new System.Drawing.Point(54, 80);
             this.lbl2.Name = "lbl2";
-            this.lbl2.Size = new System.Drawing.Size(220, 22);
+            this.lbl2.Size = new System.Drawing.Size(240, 22);
             this.lbl2.TabIndex = 1;
-            this.lbl2.Text = "Ventas Electrónicas :";
+            this.lbl2.Text = "Electrónico Pendiente :";
             // 
             // lbl1
             // 
             this.lbl1.AutoSize = true;
             this.lbl1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl1.ForeColor = System.Drawing.Color.Black;
-            this.lbl1.Location = new System.Drawing.Point(32, 38);
+            this.lbl1.Location = new System.Drawing.Point(15, 41);
             this.lbl1.Name = "lbl1";
-            this.lbl1.Size = new System.Drawing.Size(210, 22);
+            this.lbl1.Size = new System.Drawing.Size(280, 22);
             this.lbl1.TabIndex = 0;
-            this.lbl1.Text = "Ventas en Efectivo :";
+            this.lbl1.Text = "Efectivo Esperado en Caja :";
             // 
             // groupBox2
             // 
@@ -212,7 +220,7 @@
             this.dgvVentasSocios.ReadOnly = true;
             this.dgvVentasSocios.RowHeadersWidth = 62;
             this.dgvVentasSocios.RowTemplate.Height = 28;
-            this.dgvVentasSocios.Size = new System.Drawing.Size(675, 146);
+            this.dgvVentasSocios.Size = new System.Drawing.Size(760, 146);
             this.dgvVentasSocios.TabIndex = 0;
             // 
             // ColSocio
@@ -262,7 +270,7 @@
             this.groupBox3.ForeColor = System.Drawing.Color.DarkBlue;
             this.groupBox3.Location = new System.Drawing.Point(58, 525);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(669, 394);
+            this.groupBox3.Size = new System.Drawing.Size(760, 394);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Control de Cierre";
@@ -396,7 +404,7 @@
             // 
             this.btnImprimirCorte.BackColor = System.Drawing.Color.LightCyan;
             this.btnImprimirCorte.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImprimirCorte.Location = new System.Drawing.Point(16, 939);
+            this.btnImprimirCorte.Location = new System.Drawing.Point(82, 939);
             this.btnImprimirCorte.Name = "btnImprimirCorte";
             this.btnImprimirCorte.Size = new System.Drawing.Size(121, 63);
             this.btnImprimirCorte.TabIndex = 7;
@@ -407,7 +415,7 @@
             // 
             this.btnConfirmarCorte.BackColor = System.Drawing.Color.LightCyan;
             this.btnConfirmarCorte.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmarCorte.Location = new System.Drawing.Point(157, 939);
+            this.btnConfirmarCorte.Location = new System.Drawing.Point(223, 939);
             this.btnConfirmarCorte.Name = "btnConfirmarCorte";
             this.btnConfirmarCorte.Size = new System.Drawing.Size(127, 63);
             this.btnConfirmarCorte.TabIndex = 8;
@@ -419,7 +427,7 @@
             // 
             this.btnCerrarSesion.BackColor = System.Drawing.Color.LightCyan;
             this.btnCerrarSesion.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrarSesion.Location = new System.Drawing.Point(306, 939);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(372, 939);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(112, 63);
             this.btnCerrarSesion.TabIndex = 9;
@@ -431,7 +439,7 @@
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.LightCyan;
             this.btnCancelar.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(452, 939);
+            this.btnCancelar.Location = new System.Drawing.Point(518, 939);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(116, 63);
             this.btnCancelar.TabIndex = 10;
@@ -463,7 +471,7 @@
             // 
             this.btnConteoEfectivo.BackColor = System.Drawing.Color.MintCream;
             this.btnConteoEfectivo.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConteoEfectivo.Location = new System.Drawing.Point(613, 940);
+            this.btnConteoEfectivo.Location = new System.Drawing.Point(679, 940);
             this.btnConteoEfectivo.Name = "btnConteoEfectivo";
             this.btnConteoEfectivo.Size = new System.Drawing.Size(114, 63);
             this.btnConteoEfectivo.TabIndex = 13;
@@ -481,6 +489,50 @@
             this.lblTurnoActivo.Size = new System.Drawing.Size(2, 30);
             this.lblTurnoActivo.TabIndex = 14;
             // 
+            // lblArqueosRealizados
+            // 
+            this.lblArqueosRealizados.AutoSize = true;
+            this.lblArqueosRealizados.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArqueosRealizados.ForeColor = System.Drawing.Color.Black;
+            this.lblArqueosRealizados.Location = new System.Drawing.Point(558, 38);
+            this.lblArqueosRealizados.Name = "lblArqueosRealizados";
+            this.lblArqueosRealizados.Size = new System.Drawing.Size(93, 25);
+            this.lblArqueosRealizados.TabIndex = 6;
+            this.lblArqueosRealizados.Text = "Arqueos :";
+            // 
+            // lblValorArqueosRealizados
+            // 
+            this.lblValorArqueosRealizados.AutoSize = true;
+            this.lblValorArqueosRealizados.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValorArqueosRealizados.ForeColor = System.Drawing.Color.Black;
+            this.lblValorArqueosRealizados.Location = new System.Drawing.Point(654, 36);
+            this.lblValorArqueosRealizados.Name = "lblValorArqueosRealizados";
+            this.lblValorArqueosRealizados.Size = new System.Drawing.Size(33, 25);
+            this.lblValorArqueosRealizados.TabIndex = 7;
+            this.lblValorArqueosRealizados.Text = "---";
+            // 
+            // lblTotalRetirado
+            // 
+            this.lblTotalRetirado.AutoSize = true;
+            this.lblTotalRetirado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRetirado.ForeColor = System.Drawing.Color.Black;
+            this.lblTotalRetirado.Location = new System.Drawing.Point(454, 80);
+            this.lblTotalRetirado.Name = "lblTotalRetirado";
+            this.lblTotalRetirado.Size = new System.Drawing.Size(197, 25);
+            this.lblTotalRetirado.TabIndex = 8;
+            this.lblTotalRetirado.Text = "Retirado en Arqueos :";
+            // 
+            // lblValorTotalRetirado
+            // 
+            this.lblValorTotalRetirado.AutoSize = true;
+            this.lblValorTotalRetirado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValorTotalRetirado.ForeColor = System.Drawing.Color.Black;
+            this.lblValorTotalRetirado.Location = new System.Drawing.Point(654, 78);
+            this.lblValorTotalRetirado.Name = "lblValorTotalRetirado";
+            this.lblValorTotalRetirado.Size = new System.Drawing.Size(33, 25);
+            this.lblValorTotalRetirado.TabIndex = 9;
+            this.lblValorTotalRetirado.Text = "---";
+            // 
             // FrmCierreSesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -488,7 +540,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(839, 1050);
+            this.ClientSize = new System.Drawing.Size(904, 1050);
             this.Controls.Add(this.lblTurnoActivo);
             this.Controls.Add(this.btnConteoEfectivo);
             this.Controls.Add(this.lblHoraCorte);
@@ -560,5 +612,9 @@
         private System.Windows.Forms.Label lblValorDiferenciaElectronico;
         private System.Windows.Forms.Button btnConteoEfectivo;
         private System.Windows.Forms.Label lblTurnoActivo;
+        private System.Windows.Forms.Label lblArqueosRealizados;
+        private System.Windows.Forms.Label lblTotalRetirado;
+        private System.Windows.Forms.Label lblValorArqueosRealizados;
+        private System.Windows.Forms.Label lblValorTotalRetirado;
     }
 }

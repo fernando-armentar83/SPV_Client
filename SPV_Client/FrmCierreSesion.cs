@@ -77,6 +77,86 @@ namespace SPV_Client
             return value.ToString("C2");
         }
 
+        private DateTime ObtenerFechaInicioPendiente(MySqlConnection cn)
+        {
+            string sql = @"
+SELECT COALESCE(
+    (
+        SELECT fecha_arqueo
+        FROM arqueos_caja
+        WHERE id_turno = @id_turno
+        ORDER BY fecha_arqueo DESC
+        LIMIT 1
+    ),
+    (
+        SELECT fecha_apertura
+        FROM cajas_turnos
+        WHERE id_turno = @id_turno
+        LIMIT 1
+    )
+) AS fecha_inicio;";
+
+            using (var cmd = new MySqlCommand(sql, cn))
+            {
+                cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
+
+                object resultado = cmd.ExecuteScalar();
+
+                if (resultado == null || resultado == DBNull.Value)
+                {
+                    throw new Exception("No fue posible determinar el período pendiente del turno.");
+                }
+
+                return Convert.ToDateTime(resultado);
+            }
+        }
+
+        private decimal ObtenerMontoInicial(MySqlConnection cn)
+        {
+            string sql = "SELECT monto_inicial FROM cajas_turnos WHERE id_turno = @id_turno LIMIT 1;";
+
+            using (var cmd = new MySqlCommand(sql, cn))
+            {
+                cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
+
+                object resultado = cmd.ExecuteScalar();
+
+                return (resultado == null || resultado == DBNull.Value)
+                    ? 0m
+                    : Convert.ToDecimal(resultado);
+            }
+        }
+
+        private void ObtenerResumenArqueos(
+            MySqlConnection cn,
+            out int cantidadArqueos,
+            out decimal totalRetirado)
+        {
+            string sql = @"
+SELECT
+    COUNT(*) AS cantidad,
+    COALESCE(SUM(efectivo_retirado), 0) AS total_retirado
+FROM arqueos_caja
+WHERE id_turno = @id_turno;";
+
+            cantidadArqueos = 0;
+            totalRetirado = 0m;
+
+            using (var cmd = new MySqlCommand(sql, cn))
+            {
+                cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        cantidadArqueos = Convert.ToInt32(reader["cantidad"]);
+                        totalRetirado = Convert.ToDecimal(reader["total_retirado"]);
+                    }
+                }
+            }
+        }
+
         private void CalcularDiferencias()
         {
             decimal efectivoContado = 0;
@@ -118,27 +198,35 @@ namespace SPV_Client
                     // ================================================
                     // 1) TOTAL POR FORMA DE PAGO (FILTRADO POR id_turno)
                     // ================================================
+                    // ================================================
+                    // 1) TOTAL POR FORMA DE PAGO (SOLO PERÍODO PENDIENTE)
+                    // ================================================
+                    DateTime fechaInicioPendiente = ObtenerFechaInicioPendiente(cn);
+                    decimal montoInicial = ObtenerMontoInicial(cn);
+
                     string queryTotales = @"
-    SELECT
-        fp.id_forma_pago,
-        fp.nombre AS forma_pago,
-        COALESCE(SUM(vp.importe), 0) AS total
-    FROM ventas v
-    INNER JOIN ventas_pagos vp
-        ON vp.id_venta = v.id_venta
-    INNER JOIN formas_pago fp
-        ON fp.id_forma_pago = vp.id_forma_pago
-    WHERE v.id_turno = @id_turno
-      AND v.estado = 'ACTIVA'
-    GROUP BY
-        fp.id_forma_pago,
-        fp.nombre
-    ORDER BY
-        fp.id_forma_pago;";
+SELECT
+    fp.id_forma_pago,
+    fp.nombre AS forma_pago,
+    COALESCE(SUM(vp.importe), 0) AS total
+FROM ventas v
+INNER JOIN ventas_pagos vp
+    ON vp.id_venta = v.id_venta
+INNER JOIN formas_pago fp
+    ON fp.id_forma_pago = vp.id_forma_pago
+WHERE v.id_turno = @id_turno
+  AND v.estado = 'ACTIVA'
+  AND v.fecha_venta > @fecha_inicio
+GROUP BY
+    fp.id_forma_pago,
+    fp.nombre
+ORDER BY
+    fp.id_forma_pago;";
 
                     using (var cmd = new MySqlCommand(queryTotales, cn))
                     {
                         cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
+                        cmd.Parameters.AddWithValue("@fecha_inicio", fechaInicioPendiente);
 
                         using (var reader = cmd.ExecuteReader())
                         {
@@ -157,19 +245,25 @@ namespace SPV_Client
                                     totalElectronico += total;
                                 }
                                 else if (forma == "vale")
-                                { 
+                                {
                                     totalVales += total;
                                 }
-                                
                             }
                         }
                     }
+
+                    totalEfectivo += montoInicial;
 
                     totalTurno = totalEfectivo + totalElectronico + totalVales;
 
                     lblVentasEfectivo.Text = FormatCurrency(totalEfectivo);
                     lblVentasElectronico.Text = FormatCurrency(totalElectronico);
                     lblTotalTurno.Text = FormatCurrency(totalTurno);
+
+                    ObtenerResumenArqueos(cn, out int cantidadArqueos, out decimal totalRetirado);
+
+                    lblValorArqueosRealizados.Text = cantidadArqueos.ToString();
+                    lblValorTotalRetirado.Text = FormatCurrency(totalRetirado);
 
                     // ================================================
                     // 2) VENTAS POR SOCIO
@@ -313,7 +407,10 @@ namespace SPV_Client
 
             decimal montoFinal = efectivoContado + electronicoContado;
             decimal totalVentas = totalEfectivo + totalElectronico;
-            decimal diferencia = montoFinal - totalVentas;
+
+            decimal diferenciaEfectivo = efectivoContado - totalEfectivo;
+            decimal diferenciaElectronico = electronicoContado - totalElectronico;
+            decimal diferencia = diferenciaEfectivo + diferenciaElectronico;
             string observaciones = txtObservaciones.Text.Trim();
 
             DialogResult confirmar = MessageBox.Show(
@@ -370,12 +467,13 @@ WHERE id_turno = @id_turno;";
 UPDATE cajas_turnos
 SET fecha_cierre = NOW(),
     id_usuario_cierre = @id_usuario_cierre,
-                    
     monto_final = @monto_final,
     efectivo_contado = @efectivo,
     electronico_contado = @electronico,
     total_ventas = @total_ventas,
     diferencia = @diferencia,
+    diferencia_efectivo = @diferencia_efectivo,
+    diferencia_electronico = @diferencia_electronico,
     observaciones = @obs
 WHERE id_turno = @id_turno
   AND fecha_cierre IS NULL;";
@@ -387,6 +485,8 @@ WHERE id_turno = @id_turno
                         cmd.Parameters.AddWithValue("@electronico", electronicoContado);
                         cmd.Parameters.AddWithValue("@total_ventas", totalVentas);
                         cmd.Parameters.AddWithValue("@diferencia", diferencia);
+                        cmd.Parameters.AddWithValue("@diferencia_efectivo", diferenciaEfectivo);
+                        cmd.Parameters.AddWithValue("@diferencia_electronico", diferenciaElectronico);
                         cmd.Parameters.AddWithValue("@obs", observaciones);
                         cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
                         cmd.Parameters.AddWithValue("@id_usuario_cierre", Session.IdUsuario);
@@ -439,11 +539,7 @@ WHERE id_turno = @id_turno
                 return;
 
             // Limpiar sesión
-            Session.IdUsuario = 0;
-            Session.NombreUsuario = "";
-            Session.IdRol = 0;
-            Session.NombreRol = "";
-            Session.IdTurno = 0;
+            Session.Clear();
 
             // Actualizar menú
             FrmMenu menu = Application.OpenForms["FrmMenu"] as FrmMenu;
