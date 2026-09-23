@@ -18,6 +18,10 @@ namespace SPV_Client
         private decimal totalTurno = 0m;
         private readonly FrmConteoEfectivo frmConteo = new FrmConteoEfectivo();
         private decimal totalVales = 0m;
+        private decimal montoInicialTurno = 0m;
+        private decimal totalVentasArqueos = 0m;
+        private decimal totalElectronicoArqueos = 0m;
+        private decimal totalRetiradoArqueos = 0m;
 
         private readonly string connString = "server=localhost;database=spv_tlapaleria;uid=fer;pwd=129112;";
         
@@ -127,20 +131,21 @@ SELECT COALESCE(
             }
         }
 
-        private void ObtenerResumenArqueos(
-            MySqlConnection cn,
-            out int cantidadArqueos,
-            out decimal totalRetirado)
+        private void ObtenerResumenArqueos(MySqlConnection cn, out int cantidadArqueos)
         {
             string sql = @"
 SELECT
     COUNT(*) AS cantidad,
-    COALESCE(SUM(efectivo_retirado), 0) AS total_retirado
+    COALESCE(SUM(efectivo_retirado), 0) AS total_retirado,
+    COALESCE(SUM(electronico_comprobado), 0) AS total_electronico,
+    COALESCE(SUM(total_ventas), 0) AS total_ventas
 FROM arqueos_caja
 WHERE id_turno = @id_turno;";
 
             cantidadArqueos = 0;
-            totalRetirado = 0m;
+            totalRetiradoArqueos = 0m;
+            totalElectronicoArqueos = 0m;
+            totalVentasArqueos = 0m;
 
             using (var cmd = new MySqlCommand(sql, cn))
             {
@@ -151,7 +156,9 @@ WHERE id_turno = @id_turno;";
                     if (reader.Read())
                     {
                         cantidadArqueos = Convert.ToInt32(reader["cantidad"]);
-                        totalRetirado = Convert.ToDecimal(reader["total_retirado"]);
+                        totalRetiradoArqueos = Convert.ToDecimal(reader["total_retirado"]);
+                        totalElectronicoArqueos = Convert.ToDecimal(reader["total_electronico"]);
+                        totalVentasArqueos = Convert.ToDecimal(reader["total_ventas"]);
                     }
                 }
             }
@@ -202,7 +209,7 @@ WHERE id_turno = @id_turno;";
                     // 1) TOTAL POR FORMA DE PAGO (SOLO PERÍODO PENDIENTE)
                     // ================================================
                     DateTime fechaInicioPendiente = ObtenerFechaInicioPendiente(cn);
-                    decimal montoInicial = ObtenerMontoInicial(cn);
+                    montoInicialTurno = ObtenerMontoInicial(cn);
 
                     string queryTotales = @"
 SELECT
@@ -252,7 +259,7 @@ ORDER BY
                         }
                     }
 
-                    totalEfectivo += montoInicial;
+                    totalEfectivo += montoInicialTurno;
 
                     totalTurno = totalEfectivo + totalElectronico + totalVales;
 
@@ -260,10 +267,11 @@ ORDER BY
                     lblVentasElectronico.Text = FormatCurrency(totalElectronico);
                     lblTotalTurno.Text = FormatCurrency(totalTurno);
 
-                    ObtenerResumenArqueos(cn, out int cantidadArqueos, out decimal totalRetirado);
+                    ObtenerResumenArqueos(cn, out int cantidadArqueos);
 
                     lblValorArqueosRealizados.Text = cantidadArqueos.ToString();
-                    lblValorTotalRetirado.Text = FormatCurrency(totalRetirado);
+                    lblValorTotalRetirado.Text = FormatCurrency(totalRetiradoArqueos);
+                    lblValorArqueoElectronico.Text = FormatCurrency(totalElectronicoArqueos);
 
                     // ================================================
                     // 2) VENTAS POR SOCIO
@@ -404,13 +412,16 @@ ORDER BY
                     MessageBoxIcon.Warning);
                 return;
             }
-
             decimal montoFinal = efectivoContado + electronicoContado;
-            decimal totalVentas = totalEfectivo + totalElectronico;
 
             decimal diferenciaEfectivo = efectivoContado - totalEfectivo;
             decimal diferenciaElectronico = electronicoContado - totalElectronico;
             decimal diferencia = diferenciaEfectivo + diferenciaElectronico;
+
+            decimal totalVentas =
+                totalVentasArqueos +
+                (totalEfectivo - montoInicialTurno) +
+                totalElectronico;
             string observaciones = txtObservaciones.Text.Trim();
 
             DialogResult confirmar = MessageBox.Show(

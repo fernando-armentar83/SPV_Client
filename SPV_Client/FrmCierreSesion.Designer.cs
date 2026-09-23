@@ -32,6 +32,10 @@
             this.lblU = new System.Windows.Forms.Label();
             this.lblH = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblValorTotalRetirado = new System.Windows.Forms.Label();
+            this.lblTotalRetirado = new System.Windows.Forms.Label();
+            this.lblValorArqueosRealizados = new System.Windows.Forms.Label();
+            this.lblArqueosRealizados = new System.Windows.Forms.Label();
             this.lblTotalTurno = new System.Windows.Forms.Label();
             this.lblVentasElectronico = new System.Windows.Forms.Label();
             this.lblVentasEfectivo = new System.Windows.Forms.Label();
@@ -65,10 +69,8 @@
             this.lblHoraCorte = new System.Windows.Forms.Label();
             this.btnConteoEfectivo = new System.Windows.Forms.Button();
             this.lblTurnoActivo = new System.Windows.Forms.Label();
-            this.lblArqueosRealizados = new System.Windows.Forms.Label();
-            this.lblValorArqueosRealizados = new System.Windows.Forms.Label();
-            this.lblTotalRetirado = new System.Windows.Forms.Label();
-            this.lblValorTotalRetirado = new System.Windows.Forms.Label();
+            this.lblArqueoElectronico = new System.Windows.Forms.Label();
+            this.lblValorArqueoElectronico = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentasSocios)).BeginInit();
@@ -110,6 +112,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Snow;
+            this.groupBox1.Controls.Add(this.lblValorArqueoElectronico);
+            this.groupBox1.Controls.Add(this.lblArqueoElectronico);
             this.groupBox1.Controls.Add(this.lblValorTotalRetirado);
             this.groupBox1.Controls.Add(this.lblTotalRetirado);
             this.groupBox1.Controls.Add(this.lblValorArqueosRealizados);
@@ -128,6 +132,50 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Resumen General de Turno";
+            // 
+            // lblValorTotalRetirado
+            // 
+            this.lblValorTotalRetirado.AutoSize = true;
+            this.lblValorTotalRetirado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValorTotalRetirado.ForeColor = System.Drawing.Color.Black;
+            this.lblValorTotalRetirado.Location = new System.Drawing.Point(654, 78);
+            this.lblValorTotalRetirado.Name = "lblValorTotalRetirado";
+            this.lblValorTotalRetirado.Size = new System.Drawing.Size(33, 25);
+            this.lblValorTotalRetirado.TabIndex = 9;
+            this.lblValorTotalRetirado.Text = "---";
+            // 
+            // lblTotalRetirado
+            // 
+            this.lblTotalRetirado.AutoSize = true;
+            this.lblTotalRetirado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRetirado.ForeColor = System.Drawing.Color.Black;
+            this.lblTotalRetirado.Location = new System.Drawing.Point(454, 80);
+            this.lblTotalRetirado.Name = "lblTotalRetirado";
+            this.lblTotalRetirado.Size = new System.Drawing.Size(197, 25);
+            this.lblTotalRetirado.TabIndex = 8;
+            this.lblTotalRetirado.Text = "Retirado en Arqueos :";
+            // 
+            // lblValorArqueosRealizados
+            // 
+            this.lblValorArqueosRealizados.AutoSize = true;
+            this.lblValorArqueosRealizados.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValorArqueosRealizados.ForeColor = System.Drawing.Color.Black;
+            this.lblValorArqueosRealizados.Location = new System.Drawing.Point(654, 36);
+            this.lblValorArqueosRealizados.Name = "lblValorArqueosRealizados";
+            this.lblValorArqueosRealizados.Size = new System.Drawing.Size(33, 25);
+            this.lblValorArqueosRealizados.TabIndex = 7;
+            this.lblValorArqueosRealizados.Text = "---";
+            // 
+            // lblArqueosRealizados
+            // 
+            this.lblArqueosRealizados.AutoSize = true;
+            this.lblArqueosRealizados.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArqueosRealizados.ForeColor = System.Drawing.Color.Black;
+            this.lblArqueosRealizados.Location = new System.Drawing.Point(558, 38);
+            this.lblArqueosRealizados.Name = "lblArqueosRealizados";
+            this.lblArqueosRealizados.Size = new System.Drawing.Size(93, 25);
+            this.lblArqueosRealizados.TabIndex = 6;
+            this.lblArqueosRealizados.Text = "Arqueos :";
             // 
             // lblTotalTurno
             // 
@@ -489,49 +537,27 @@
             this.lblTurnoActivo.Size = new System.Drawing.Size(2, 30);
             this.lblTurnoActivo.TabIndex = 14;
             // 
-            // lblArqueosRealizados
+            // lblArqueoElectronico
             // 
-            this.lblArqueosRealizados.AutoSize = true;
-            this.lblArqueosRealizados.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblArqueosRealizados.ForeColor = System.Drawing.Color.Black;
-            this.lblArqueosRealizados.Location = new System.Drawing.Point(558, 38);
-            this.lblArqueosRealizados.Name = "lblArqueosRealizados";
-            this.lblArqueosRealizados.Size = new System.Drawing.Size(93, 25);
-            this.lblArqueosRealizados.TabIndex = 6;
-            this.lblArqueosRealizados.Text = "Arqueos :";
+            this.lblArqueoElectronico.AutoSize = true;
+            this.lblArqueoElectronico.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArqueoElectronico.ForeColor = System.Drawing.Color.Black;
+            this.lblArqueoElectronico.Location = new System.Drawing.Point(445, 119);
+            this.lblArqueoElectronico.Name = "lblArqueoElectronico";
+            this.lblArqueoElectronico.Size = new System.Drawing.Size(206, 25);
+            this.lblArqueoElectronico.TabIndex = 10;
+            this.lblArqueoElectronico.Text = "Electrónico Arqueado :";
             // 
-            // lblValorArqueosRealizados
+            // lblValorArqueoElectronico
             // 
-            this.lblValorArqueosRealizados.AutoSize = true;
-            this.lblValorArqueosRealizados.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValorArqueosRealizados.ForeColor = System.Drawing.Color.Black;
-            this.lblValorArqueosRealizados.Location = new System.Drawing.Point(654, 36);
-            this.lblValorArqueosRealizados.Name = "lblValorArqueosRealizados";
-            this.lblValorArqueosRealizados.Size = new System.Drawing.Size(33, 25);
-            this.lblValorArqueosRealizados.TabIndex = 7;
-            this.lblValorArqueosRealizados.Text = "---";
-            // 
-            // lblTotalRetirado
-            // 
-            this.lblTotalRetirado.AutoSize = true;
-            this.lblTotalRetirado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRetirado.ForeColor = System.Drawing.Color.Black;
-            this.lblTotalRetirado.Location = new System.Drawing.Point(454, 80);
-            this.lblTotalRetirado.Name = "lblTotalRetirado";
-            this.lblTotalRetirado.Size = new System.Drawing.Size(197, 25);
-            this.lblTotalRetirado.TabIndex = 8;
-            this.lblTotalRetirado.Text = "Retirado en Arqueos :";
-            // 
-            // lblValorTotalRetirado
-            // 
-            this.lblValorTotalRetirado.AutoSize = true;
-            this.lblValorTotalRetirado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValorTotalRetirado.ForeColor = System.Drawing.Color.Black;
-            this.lblValorTotalRetirado.Location = new System.Drawing.Point(654, 78);
-            this.lblValorTotalRetirado.Name = "lblValorTotalRetirado";
-            this.lblValorTotalRetirado.Size = new System.Drawing.Size(33, 25);
-            this.lblValorTotalRetirado.TabIndex = 9;
-            this.lblValorTotalRetirado.Text = "---";
+            this.lblValorArqueoElectronico.AutoSize = true;
+            this.lblValorArqueoElectronico.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValorArqueoElectronico.ForeColor = System.Drawing.Color.Black;
+            this.lblValorArqueoElectronico.Location = new System.Drawing.Point(655, 122);
+            this.lblValorArqueoElectronico.Name = "lblValorArqueoElectronico";
+            this.lblValorArqueoElectronico.Size = new System.Drawing.Size(33, 25);
+            this.lblValorArqueoElectronico.TabIndex = 11;
+            this.lblValorArqueoElectronico.Text = "---";
             // 
             // FrmCierreSesion
             // 
@@ -616,5 +642,7 @@
         private System.Windows.Forms.Label lblTotalRetirado;
         private System.Windows.Forms.Label lblValorArqueosRealizados;
         private System.Windows.Forms.Label lblValorTotalRetirado;
+        private System.Windows.Forms.Label lblArqueoElectronico;
+        private System.Windows.Forms.Label lblValorArqueoElectronico;
     }
 }
