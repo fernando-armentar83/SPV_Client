@@ -317,6 +317,12 @@
     <Compile Include="FrmTicket.Designer.cs">
       <DependentUpon>FrmTicket.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmTicketCierre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTicketCierre.Designer.cs">
+      <DependentUpon>FrmTicketCierre.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmTicketCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,6 +362,7 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ArqueoReimpresion.cs" />
+    <Compile Include="Models\CierreReimpresion.cs" />
     <Compile Include="Models\CobroResultado.cs" />
     <Compile Include="Models\ComboBoxItem.cs" />
     <Compile Include="Models\CompraReimpresion.cs" />
@@ -462,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTicket.resx">
       <DependentUpon>FrmTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTicketCierre.resx">
+      <DependentUpon>FrmTicketCierre.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTicketCompra.resx">
       <DependentUpon>FrmTicketCompra.cs</DependentUpon>

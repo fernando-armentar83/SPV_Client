@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SPV_Client.Models;
 
 namespace SPV_Client
 {
@@ -55,18 +56,7 @@ namespace SPV_Client
             lblVentasElectronico.Text = FormatCurrency(0);
             lblTotalTurno.Text = FormatCurrency(0);
 
-            dgvVentasSocios.Columns.Clear();
-            dgvVentasSocios.Columns.Add("socio", "Socio");
-            dgvVentasSocios.Columns.Add("efectivo", "Efectivo");
-            dgvVentasSocios.Columns.Add("electronico", "Electrónico");
-            dgvVentasSocios.Columns.Add("vales", "Vales");
-            dgvVentasSocios.Columns.Add("total", "Total");
-
-            dgvVentasSocios.Rows.Clear();
-
             btnConfirmarCorte.Enabled = false;
-            btnCerrarSesion.Enabled = false;
-            btnImprimirCorte.Enabled = false;
 
             // Cargar datos correctos del turno
             CargarResumenTurno();
@@ -162,6 +152,98 @@ WHERE id_turno = @id_turno;";
                     }
                 }
             }
+        }
+
+        private CierreReimpresion ObtenerCierreParaTicket(int idTurno)
+        {
+            CierreReimpresion cierre = null;
+
+            using (var cn = new MySqlConnection(connString))
+            {
+                cn.Open();
+
+                string sql = @"
+SELECT
+    ct.id_turno,
+    ua.nombre AS usuario_apertura,
+    uc.nombre AS usuario_cierre,
+    ct.fecha_apertura,
+    ct.fecha_cierre,
+    ct.monto_inicial,
+    ct.efectivo_contado,
+    ct.electronico_contado,
+    ct.diferencia_efectivo,
+    ct.diferencia_electronico,
+    ct.total_ventas,
+    ct.observaciones
+FROM cajas_turnos ct
+INNER JOIN usuarios ua ON ct.id_usuario = ua.id_usuario
+LEFT JOIN usuarios uc ON ct.id_usuario_cierre = uc.id_usuario
+WHERE ct.id_turno = @id_turno
+LIMIT 1;";
+
+                using (var cmd = new MySqlCommand(sql, cn))
+                {
+                    cmd.Parameters.AddWithValue("@id_turno", idTurno);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            cierre = new CierreReimpresion
+                            {
+                                IdTurno = Convert.ToInt32(reader["id_turno"]),
+                                UsuarioApertura = reader["usuario_apertura"].ToString(),
+                                UsuarioCierre = reader["usuario_cierre"] == DBNull.Value
+                                    ? "" : reader["usuario_cierre"].ToString(),
+                                FechaApertura = Convert.ToDateTime(reader["fecha_apertura"]),
+                                FechaCierre = Convert.ToDateTime(reader["fecha_cierre"]),
+                                MontoInicial = Convert.ToDecimal(reader["monto_inicial"]),
+                                EfectivoContado = Convert.ToDecimal(reader["efectivo_contado"]),
+                                ElectronicoContado = Convert.ToDecimal(reader["electronico_contado"]),
+                                DiferenciaEfectivo = Convert.ToDecimal(reader["diferencia_efectivo"]),
+                                DiferenciaElectronico = Convert.ToDecimal(reader["diferencia_electronico"]),
+                                TotalVentasHistorico = Convert.ToDecimal(reader["total_ventas"]),
+                                Observaciones = reader["observaciones"] == DBNull.Value
+                                    ? null : reader["observaciones"].ToString()
+                            };
+                        }
+                    }
+                }
+
+                if (cierre != null)
+                {
+                    string sqlArqueos = @"
+SELECT
+    COUNT(*) AS cantidad,
+    COALESCE(SUM(efectivo_retirado), 0) AS total_retirado,
+    COALESCE(SUM(electronico_comprobado), 0) AS total_electronico,
+    COALESCE(SUM(total_ventas), 0) AS total_ventas
+FROM arqueos_caja
+WHERE id_turno = @id_turno;";
+
+                    using (var cmd = new MySqlCommand(sqlArqueos, cn))
+                    {
+                        cmd.Parameters.AddWithValue("@id_turno", idTurno);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                cierre.CantidadArqueos = Convert.ToInt32(reader["cantidad"]);
+                                cierre.TotalRetiradoArqueos = Convert.ToDecimal(reader["total_retirado"]);
+                                cierre.TotalElectronicoArqueos = Convert.ToDecimal(reader["total_electronico"]);
+                                cierre.TotalVentasArqueos = Convert.ToDecimal(reader["total_ventas"]);
+                            }
+                        }
+                    }
+
+                    cierre.EfectivoEsperado = cierre.EfectivoContado - cierre.DiferenciaEfectivo;
+                    cierre.ElectronicoEsperado = cierre.ElectronicoContado - cierre.DiferenciaElectronico;
+                }
+            }
+
+            return cierre;
         }
 
         private void CalcularDiferencias()
@@ -273,80 +355,14 @@ ORDER BY
                     lblValorTotalRetirado.Text = FormatCurrency(totalRetiradoArqueos);
                     lblValorArqueoElectronico.Text = FormatCurrency(totalElectronicoArqueos);
 
-                    // ================================================
-                    // 2) VENTAS POR SOCIO
-                    // ================================================
-                    string querySocios = @"
-    SELECT
-        s.nombre_socio,
+                    decimal totalHistoricoTurno =
+                        totalVentasArqueos +
+                        (totalEfectivo - montoInicialTurno) +
+                        totalElectronico;
 
-        COALESCE(SUM(
-            CASE
-                WHEN fp.id_forma_pago = 1
-                THEN vp.importe
-                ELSE 0
-            END
-        ), 0) AS efectivo,
+                    lblValorTotalHistorico.Text = FormatCurrency(totalHistoricoTurno);
 
-        COALESCE(SUM(
-            CASE
-                WHEN fp.id_forma_pago IN (2, 3)
-                THEN vp.importe
-                ELSE 0
-            END
-        ), 0) AS electronico,
-
-        COALESCE(SUM(
-            CASE
-                WHEN fp.id_forma_pago = 4
-                THEN vp.importe
-                ELSE 0
-            END
-        ), 0) AS vales,
-
-        COALESCE(SUM(vp.importe), 0) AS total
-
-    FROM ventas v
-
-    INNER JOIN socios s
-        ON s.id_socio = v.id_socio
-
-    INNER JOIN ventas_pagos vp
-        ON vp.id_venta = v.id_venta
-
-    INNER JOIN formas_pago fp
-        ON fp.id_forma_pago = vp.id_forma_pago
-
-    WHERE v.id_turno = @id_turno
-      AND v.estado = 'ACTIVA'
-
-    GROUP BY
-        s.id_socio,
-        s.nombre_socio
-
-    ORDER BY
-        s.nombre_socio;";
-
-                    using (var cmd = new MySqlCommand(querySocios, cn))
-                    {
-                        cmd.Parameters.AddWithValue("@id_turno", Session.IdTurno);
-
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            dgvVentasSocios.Rows.Clear();
-
-                            while (reader.Read())
-                            {
-                                dgvVentasSocios.Rows.Add(
-                                    reader["nombre_socio"].ToString(),
-                                    FormatCurrency(Convert.ToDecimal(reader["efectivo"])),
-                                    FormatCurrency(Convert.ToDecimal(reader["electronico"])),
-                                    FormatCurrency(Convert.ToDecimal(reader["vales"])),
-                                    FormatCurrency(Convert.ToDecimal(reader["total"]))
-                                );
-                            }
-                        }
-                    }
+                   
                 }
                 btnConfirmarCorte.Enabled = true;
                 //btnConfirmarCorte.Enabled = totalTurno > 0;
@@ -518,15 +534,22 @@ WHERE id_turno = @id_turno
                     }
                 }
 
-                MessageBox.Show(
-                    "El turno se cerró correctamente.",
-                    "Cierre guardado",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                CierreReimpresion cierreTicket = ObtenerCierreParaTicket(Session.IdTurno);
 
-                btnConfirmarCorte.Enabled = false;
-                btnImprimirCorte.Enabled = true;
-                btnCerrarSesion.Enabled = true;
+                using (FrmTicketCierre frmTicket = new FrmTicketCierre(cierreTicket))
+                {
+                    frmTicket.ModoReimpresion = false;
+                    frmTicket.ShowDialog();
+                }
+
+                Session.Clear();
+
+                FrmMenu menu = Application.OpenForms["FrmMenu"] as FrmMenu;
+                if (menu != null)
+                    EstadoMenu.Actualizar(menu);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -538,29 +561,7 @@ WHERE id_turno = @id_turno
             }
         }
 
-        private void btnCerrarSesion_Click(object sender, EventArgs e)
-        {
-            DialogResult r = MessageBox.Show(
-                "¿Deseas cerrar la sesión actual?",
-                "Cerrar sesión",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (r != DialogResult.Yes)
-                return;
-
-            // Limpiar sesión
-            Session.Clear();
-
-            // Actualizar menú
-            FrmMenu menu = Application.OpenForms["FrmMenu"] as FrmMenu;
-
-            if (menu != null)
-                EstadoMenu.Actualizar(menu);
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
+        
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
