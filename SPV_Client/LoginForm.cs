@@ -57,27 +57,27 @@ namespace SPV_Client
                     // =====================================================
 
                     string query = @"
-SELECT 
+SELECT
     u.id_usuario,
     u.nombre,
     u.id_rol,
+    u.contrasena,
     r.nombre_rol
 FROM usuarios u
-INNER JOIN roles r 
+INNER JOIN roles r
     ON u.id_rol = r.id_rol
 WHERE u.nombre = @usuario
-  AND u.contrasena = @password
   AND u.activo = 1;";
 
                     int idUsuario;
                     string nombreUsuario;
                     int idRol;
                     string nombreRol;
+                    string contrasenaGuardada;
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("@usuario", usuario);
-                        cmd.Parameters.AddWithValue("@password", password);
 
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -88,7 +88,6 @@ WHERE u.nombre = @usuario
                                     "Error",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
-
                                 return;
                             }
 
@@ -96,7 +95,44 @@ WHERE u.nombre = @usuario
                             nombreUsuario = reader["nombre"].ToString();
                             idRol = Convert.ToInt32(reader["id_rol"]);
                             nombreRol = reader["nombre_rol"].ToString();
+                            contrasenaGuardada = reader["contrasena"].ToString();
                         }
+                    }
+
+                    bool esHashBCrypt = contrasenaGuardada.StartsWith("$2");
+                    bool contrasenaValida;
+
+                    if (esHashBCrypt)
+                    {
+                        contrasenaValida = BCrypt.Net.BCrypt.Verify(password, contrasenaGuardada);
+                    }
+                    else
+                    {
+                        contrasenaValida = contrasenaGuardada == password;
+
+                        if (contrasenaValida)
+                        {
+                            string nuevoHash = BCrypt.Net.BCrypt.HashPassword(password);
+
+                            string sqlMigrar = "UPDATE usuarios SET contrasena = @hash WHERE id_usuario = @id;";
+
+                            using (MySqlCommand cmdMigrar = new MySqlCommand(sqlMigrar, conexion))
+                            {
+                                cmdMigrar.Parameters.AddWithValue("@hash", nuevoHash);
+                                cmdMigrar.Parameters.AddWithValue("@id", idUsuario);
+                                cmdMigrar.ExecuteNonQuery();
+                            }
+                        }
+                    }
+
+                    if (!contrasenaValida)
+                    {
+                        MessageBox.Show(
+                            "Usuario o contraseña incorrectos o inactivo.",
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
                     }
 
                     // =====================================================
