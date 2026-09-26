@@ -37,5 +37,49 @@ namespace SPV_Client
             }
             FormManager.AbrirFormularioUnico<FrmArqueo>();
         }
+
+        private void btnCategorías_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmCategorias>();
+        }
+
+        private void btnDepartamentos_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmDepartamentos>();
+        }
+
+        private void btnMarcas_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmMarcas>();
+        }
+
+        private void btnProductos_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmProductos>();
+        }
+
+        private void btnProveedores_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmProveedores>();
+        }
+
+        private void btnSocios_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmSocios>();
+        }
+
+        private void btnUnidadesMedida_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmUnidadesMedida>();
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+    "Esta función todavía está en desarrollo.",
+    "Usuarios",
+    MessageBoxButtons.OK,
+    MessageBoxIcon.Information);
+        }
     }
 }

@@ -49,7 +49,7 @@
             // 
             this.lblEncabezado.AutoSize = true;
             this.lblEncabezado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEncabezado.Location = new System.Drawing.Point(166, 20);
+            this.lblEncabezado.Location = new System.Drawing.Point(114, 20);
             this.lblEncabezado.Name = "lblEncabezado";
             this.lblEncabezado.Size = new System.Drawing.Size(358, 32);
             this.lblEncabezado.TabIndex = 0;
@@ -60,7 +60,7 @@
             this.lblUsuarioActivo.AutoSize = true;
             this.lblUsuarioActivo.BackColor = System.Drawing.Color.MintCream;
             this.lblUsuarioActivo.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuarioActivo.Location = new System.Drawing.Point(656, 23);
+            this.lblUsuarioActivo.Location = new System.Drawing.Point(542, 23);
             this.lblUsuarioActivo.Name = "lblUsuarioActivo";
             this.lblUsuarioActivo.Size = new System.Drawing.Size(34, 22);
             this.lblUsuarioActivo.TabIndex = 1;
@@ -115,6 +115,7 @@
             this.btnCategorías.TabIndex = 3;
             this.btnCategorías.Text = "Categorías";
             this.btnCategorías.UseVisualStyleBackColor = true;
+            this.btnCategorías.Click += new System.EventHandler(this.btnCategorías_Click);
             // 
             // btnDepartamentos
             // 
@@ -125,6 +126,7 @@
             this.btnDepartamentos.TabIndex = 4;
             this.btnDepartamentos.Text = "Departamentos";
             this.btnDepartamentos.UseVisualStyleBackColor = true;
+            this.btnDepartamentos.Click += new System.EventHandler(this.btnDepartamentos_Click);
             // 
             // btnMarcas
             // 
@@ -135,6 +137,7 @@
             this.btnMarcas.TabIndex = 5;
             this.btnMarcas.Text = "Marcas";
             this.btnMarcas.UseVisualStyleBackColor = true;
+            this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
             // 
             // btnProductos
             // 
@@ -145,6 +148,7 @@
             this.btnProductos.TabIndex = 6;
             this.btnProductos.Text = "Productos";
             this.btnProductos.UseVisualStyleBackColor = true;
+            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
             // 
             // btnSocios
             // 
@@ -155,6 +159,7 @@
             this.btnSocios.TabIndex = 8;
             this.btnSocios.Text = "Socios";
             this.btnSocios.UseVisualStyleBackColor = true;
+            this.btnSocios.Click += new System.EventHandler(this.btnSocios_Click);
             // 
             // btnUnidadesMedida
             // 
@@ -165,6 +170,7 @@
             this.btnUnidadesMedida.TabIndex = 9;
             this.btnUnidadesMedida.Text = "Unidades de Medida";
             this.btnUnidadesMedida.UseVisualStyleBackColor = true;
+            this.btnUnidadesMedida.Click += new System.EventHandler(this.btnUnidadesMedida_Click);
             // 
             // btnUsuarios
             // 
@@ -175,6 +181,7 @@
             this.btnUsuarios.TabIndex = 10;
             this.btnUsuarios.Text = "Usuarios";
             this.btnUsuarios.UseVisualStyleBackColor = true;
+            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
             // btnProveedores
             // 
@@ -182,9 +189,10 @@
             this.btnProveedores.Location = new System.Drawing.Point(260, 210);
             this.btnProveedores.Name = "btnProveedores";
             this.btnProveedores.Size = new System.Drawing.Size(164, 62);
-            this.btnProveedores.TabIndex = 11;
+            this.btnProveedores.TabIndex = 7;
             this.btnProveedores.Text = "Proveedores";
             this.btnProveedores.UseVisualStyleBackColor = true;
+            this.btnProveedores.Click += new System.EventHandler(this.btnProveedores_Click);
             // 
             // FrmAdministracion
             // 
@@ -193,8 +201,11 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pnlOperacion);
             this.Controls.Add(this.pnlencabezado);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmAdministracion";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administración";
             this.Load += new System.EventHandler(this.FrmAdministracion_Load);
             this.pnlencabezado.ResumeLayout(false);

@@ -240,6 +240,8 @@
             this.Controls.Add(this.chkActivoSocio);
             this.Controls.Add(this.txtSocio);
             this.Controls.Add(this.lblSocio);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmSocios";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

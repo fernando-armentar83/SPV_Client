@@ -37,19 +37,19 @@
             this.lblBuscar = new System.Windows.Forms.Label();
             this.txtBuscarCategoria = new System.Windows.Forms.TextBox();
             this.pnlBotones = new System.Windows.Forms.Panel();
-            this.pnlGrid = new System.Windows.Forms.Panel();
-            this.btnNuevoCategoria = new System.Windows.Forms.Button();
-            this.btnGuardarCategoria = new System.Windows.Forms.Button();
-            this.btnEditarCategoria = new System.Windows.Forms.Button();
-            this.btnDesactivarCategoria = new System.Windows.Forms.Button();
+            this.lblTotalCategorias = new System.Windows.Forms.Label();
             this.btnCerrarCategoria = new System.Windows.Forms.Button();
+            this.btnDesactivarCategoria = new System.Windows.Forms.Button();
+            this.btnEditarCategoria = new System.Windows.Forms.Button();
+            this.btnGuardarCategoria = new System.Windows.Forms.Button();
+            this.btnNuevoCategoria = new System.Windows.Forms.Button();
+            this.pnlGrid = new System.Windows.Forms.Panel();
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
             this.colIdCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIdDepartamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colActivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.lblTotalCategorias = new System.Windows.Forms.Label();
             this.pnlSuperior.SuspendLayout();
             this.pnlBotones.SuspendLayout();
             this.pnlGrid.SuspendLayout();
@@ -158,50 +158,26 @@
             this.pnlBotones.Size = new System.Drawing.Size(1545, 90);
             this.pnlBotones.TabIndex = 1;
             // 
-            // pnlGrid
+            // lblTotalCategorias
             // 
-            this.pnlGrid.BackColor = System.Drawing.Color.White;
-            this.pnlGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlGrid.Controls.Add(this.dgvCategorias);
-            this.pnlGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlGrid.Location = new System.Drawing.Point(0, 210);
-            this.pnlGrid.Name = "pnlGrid";
-            this.pnlGrid.Size = new System.Drawing.Size(1545, 445);
-            this.pnlGrid.TabIndex = 2;
+            this.lblTotalCategorias.AutoSize = true;
+            this.lblTotalCategorias.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalCategorias.Location = new System.Drawing.Point(1419, 58);
+            this.lblTotalCategorias.Name = "lblTotalCategorias";
+            this.lblTotalCategorias.Size = new System.Drawing.Size(21, 22);
+            this.lblTotalCategorias.TabIndex = 5;
+            this.lblTotalCategorias.Text = "0";
             // 
-            // btnNuevoCategoria
+            // btnCerrarCategoria
             // 
-            this.btnNuevoCategoria.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNuevoCategoria.Location = new System.Drawing.Point(65, 22);
-            this.btnNuevoCategoria.Name = "btnNuevoCategoria";
-            this.btnNuevoCategoria.Size = new System.Drawing.Size(90, 35);
-            this.btnNuevoCategoria.TabIndex = 0;
-            this.btnNuevoCategoria.Text = "Nuevo";
-            this.btnNuevoCategoria.UseVisualStyleBackColor = true;
-            this.btnNuevoCategoria.Click += new System.EventHandler(this.btnNuevoCategoria_Click);
-            // 
-            // btnGuardarCategoria
-            // 
-            this.btnGuardarCategoria.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarCategoria.Location = new System.Drawing.Point(277, 22);
-            this.btnGuardarCategoria.Name = "btnGuardarCategoria";
-            this.btnGuardarCategoria.Size = new System.Drawing.Size(90, 35);
-            this.btnGuardarCategoria.TabIndex = 1;
-            this.btnGuardarCategoria.Text = "Guardar";
-            this.btnGuardarCategoria.UseVisualStyleBackColor = true;
-            this.btnGuardarCategoria.Click += new System.EventHandler(this.btnGuardarCategoria_Click);
-            // 
-            // btnEditarCategoria
-            // 
-            this.btnEditarCategoria.Enabled = false;
-            this.btnEditarCategoria.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditarCategoria.Location = new System.Drawing.Point(488, 22);
-            this.btnEditarCategoria.Name = "btnEditarCategoria";
-            this.btnEditarCategoria.Size = new System.Drawing.Size(90, 35);
-            this.btnEditarCategoria.TabIndex = 2;
-            this.btnEditarCategoria.Text = "Editar";
-            this.btnEditarCategoria.UseVisualStyleBackColor = true;
-            this.btnEditarCategoria.Click += new System.EventHandler(this.btnEditarCategoria_Click);
+            this.btnCerrarCategoria.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrarCategoria.Location = new System.Drawing.Point(1052, 22);
+            this.btnCerrarCategoria.Name = "btnCerrarCategoria";
+            this.btnCerrarCategoria.Size = new System.Drawing.Size(90, 35);
+            this.btnCerrarCategoria.TabIndex = 4;
+            this.btnCerrarCategoria.Text = "Cerrar";
+            this.btnCerrarCategoria.UseVisualStyleBackColor = true;
+            this.btnCerrarCategoria.Click += new System.EventHandler(this.btnCerrarCategoria_Click);
             // 
             // btnDesactivarCategoria
             // 
@@ -215,16 +191,50 @@
             this.btnDesactivarCategoria.UseVisualStyleBackColor = true;
             this.btnDesactivarCategoria.Click += new System.EventHandler(this.btnDesactivarCategoria_Click);
             // 
-            // btnCerrarCategoria
+            // btnEditarCategoria
             // 
-            this.btnCerrarCategoria.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrarCategoria.Location = new System.Drawing.Point(1052, 22);
-            this.btnCerrarCategoria.Name = "btnCerrarCategoria";
-            this.btnCerrarCategoria.Size = new System.Drawing.Size(90, 35);
-            this.btnCerrarCategoria.TabIndex = 4;
-            this.btnCerrarCategoria.Text = "Cerrar";
-            this.btnCerrarCategoria.UseVisualStyleBackColor = true;
-            this.btnCerrarCategoria.Click += new System.EventHandler(this.btnCerrarCategoria_Click);
+            this.btnEditarCategoria.Enabled = false;
+            this.btnEditarCategoria.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditarCategoria.Location = new System.Drawing.Point(488, 22);
+            this.btnEditarCategoria.Name = "btnEditarCategoria";
+            this.btnEditarCategoria.Size = new System.Drawing.Size(90, 35);
+            this.btnEditarCategoria.TabIndex = 2;
+            this.btnEditarCategoria.Text = "Editar";
+            this.btnEditarCategoria.UseVisualStyleBackColor = true;
+            this.btnEditarCategoria.Click += new System.EventHandler(this.btnEditarCategoria_Click);
+            // 
+            // btnGuardarCategoria
+            // 
+            this.btnGuardarCategoria.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarCategoria.Location = new System.Drawing.Point(277, 22);
+            this.btnGuardarCategoria.Name = "btnGuardarCategoria";
+            this.btnGuardarCategoria.Size = new System.Drawing.Size(90, 35);
+            this.btnGuardarCategoria.TabIndex = 1;
+            this.btnGuardarCategoria.Text = "Guardar";
+            this.btnGuardarCategoria.UseVisualStyleBackColor = true;
+            this.btnGuardarCategoria.Click += new System.EventHandler(this.btnGuardarCategoria_Click);
+            // 
+            // btnNuevoCategoria
+            // 
+            this.btnNuevoCategoria.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuevoCategoria.Location = new System.Drawing.Point(65, 22);
+            this.btnNuevoCategoria.Name = "btnNuevoCategoria";
+            this.btnNuevoCategoria.Size = new System.Drawing.Size(90, 35);
+            this.btnNuevoCategoria.TabIndex = 0;
+            this.btnNuevoCategoria.Text = "Nuevo";
+            this.btnNuevoCategoria.UseVisualStyleBackColor = true;
+            this.btnNuevoCategoria.Click += new System.EventHandler(this.btnNuevoCategoria_Click);
+            // 
+            // pnlGrid
+            // 
+            this.pnlGrid.BackColor = System.Drawing.Color.White;
+            this.pnlGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlGrid.Controls.Add(this.dgvCategorias);
+            this.pnlGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlGrid.Location = new System.Drawing.Point(0, 210);
+            this.pnlGrid.Name = "pnlGrid";
+            this.pnlGrid.Size = new System.Drawing.Size(1545, 445);
+            this.pnlGrid.TabIndex = 2;
             // 
             // dgvCategorias
             // 
@@ -296,16 +306,6 @@
             this.colActivo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colActivo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // lblTotalCategorias
-            // 
-            this.lblTotalCategorias.AutoSize = true;
-            this.lblTotalCategorias.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalCategorias.Location = new System.Drawing.Point(1419, 58);
-            this.lblTotalCategorias.Name = "lblTotalCategorias";
-            this.lblTotalCategorias.Size = new System.Drawing.Size(21, 22);
-            this.lblTotalCategorias.TabIndex = 5;
-            this.lblTotalCategorias.Text = "0";
-            // 
             // FrmCategorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -319,6 +319,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCategorias";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Catalogo Categorias";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
