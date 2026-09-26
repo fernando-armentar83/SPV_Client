@@ -308,7 +308,7 @@
             this.btnAdministración.Text = "Administración";
             this.btnAdministración.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdministración.UseVisualStyleBackColor = false;
-            this.btnAdministración.Click += new System.EventHandler(this.btnConfiguracion_Click);
+            this.btnAdministración.Click += new System.EventHandler(this.btnAdministracion_Click);
             // 
             // btnAbrirSesion
             // 

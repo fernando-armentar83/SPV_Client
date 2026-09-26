@@ -1,6 +1,6 @@
 ﻿namespace SPV_Client
 {
-    partial class FrmConfiguracion
+    partial class FrmAdministracion
     {
         /// <summary>
         /// Required designer variable.

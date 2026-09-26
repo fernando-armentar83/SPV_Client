@@ -47,12 +47,12 @@ namespace SPV_Client
         }
 
         // 🟢 BOTÓN CONFIGURACIÓN
-        private void btnConfiguracion_Click(object sender, EventArgs e)
+        private void btnAdministracion_Click(object sender, EventArgs e)
         {
             if (!AccesoModulo(Modulos.Administracion))
                 return;
 
-            FormManager.AbrirFormularioUnico<FrmConfiguracion>();
+            FormManager.AbrirFormularioUnico<FrmAdministracion>();
         }
 
         // 🟡 BOTÓN INFORMES

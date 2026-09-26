@@ -11,9 +11,9 @@ using SPV_Client.Helpers;
 
 namespace SPV_Client
 {
-    public partial class FrmConfiguracion : Form
+    public partial class FrmAdministracion : Form
     {
-        public FrmConfiguracion()
+        public FrmAdministracion()
         {
             InitializeComponent();
         }

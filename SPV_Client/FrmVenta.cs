@@ -1008,7 +1008,7 @@ LIMIT 1;";
             }
             
             ttAyuda.SetToolTip(txtCantidadVenta, ayudaCantidad);
-            MessageBox.Show(ayudaCantidad);
+            
         }
 
         private void EliminarRenglonSeleccionado()
