@@ -18,7 +18,7 @@ namespace SPV_Client
             InitializeComponent();
         }
 
-        private void FrmConfiguracion_Load(object sender, EventArgs e)
+        private void FrmAdministracion_Load(object sender, EventArgs e)
         {
             lblUsuarioActivo.Text = "Usuario actual: " + Session.NombreUsuario;
         }
