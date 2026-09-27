@@ -31,7 +31,7 @@ namespace SPV_Client
         private void FrmLoginTemporal_Load(object sender, EventArgs e)
         {
             // lblModulo debe existir en el diseñador con exactamente ese Name
-            if (lblModulo != null) lblModulo.Text = $"Autorización para: {_modulo}";
+            if (lblModulo != null) lblModulo.Text = $"Autoriza: {_modulo}";
         }
 
         // Este método debe estar asignado al Click del botón autorizar (btnAutorizarT)

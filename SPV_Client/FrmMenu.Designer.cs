@@ -222,9 +222,9 @@
             this.btnVentas.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVentas.Image = global::SPV_Client.Properties.Resources.point_of_sale__2_;
             this.btnVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnVentas.Location = new System.Drawing.Point(15, 207);
+            this.btnVentas.Location = new System.Drawing.Point(15, 230);
             this.btnVentas.Name = "btnVentas";
-            this.btnVentas.Size = new System.Drawing.Size(160, 83);
+            this.btnVentas.Size = new System.Drawing.Size(168, 83);
             this.btnVentas.TabIndex = 2;
             this.btnVentas.Text = "Ventas";
             this.btnVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -238,9 +238,9 @@
             this.btnCompras.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCompras.Image = global::SPV_Client.Properties.Resources.shopping_cart_32px1;
             this.btnCompras.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCompras.Location = new System.Drawing.Point(15, 109);
+            this.btnCompras.Location = new System.Drawing.Point(15, 120);
             this.btnCompras.Name = "btnCompras";
-            this.btnCompras.Size = new System.Drawing.Size(160, 72);
+            this.btnCompras.Size = new System.Drawing.Size(168, 83);
             this.btnCompras.TabIndex = 1;
             this.btnCompras.Text = "Compras";
             this.btnCompras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -254,9 +254,9 @@
             this.btnCerrarSesion.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCerrarSesion.Image = global::SPV_Client.Properties.Resources.room__1_;
             this.btnCerrarSesion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(12, 320);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(15, 350);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(160, 83);
+            this.btnCerrarSesion.Size = new System.Drawing.Size(168, 83);
             this.btnCerrarSesion.TabIndex = 3;
             this.btnCerrarSesion.Text = "Cerrar Sesión";
             this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -285,9 +285,9 @@
             this.btnInformes.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInformes.Image = global::SPV_Client.Properties.Resources.list;
             this.btnInformes.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnInformes.Location = new System.Drawing.Point(15, 562);
+            this.btnInformes.Location = new System.Drawing.Point(15, 590);
             this.btnInformes.Name = "btnInformes";
-            this.btnInformes.Size = new System.Drawing.Size(168, 75);
+            this.btnInformes.Size = new System.Drawing.Size(168, 83);
             this.btnInformes.TabIndex = 5;
             this.btnInformes.Text = "Informes de Ventas";
             this.btnInformes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -301,9 +301,9 @@
             this.btnAdministración.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdministración.Image = global::SPV_Client.Properties.Resources.folder;
             this.btnAdministración.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAdministración.Location = new System.Drawing.Point(12, 436);
+            this.btnAdministración.Location = new System.Drawing.Point(15, 470);
             this.btnAdministración.Name = "btnAdministración";
-            this.btnAdministración.Size = new System.Drawing.Size(160, 81);
+            this.btnAdministración.Size = new System.Drawing.Size(168, 83);
             this.btnAdministración.TabIndex = 4;
             this.btnAdministración.Text = "Administración";
             this.btnAdministración.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -317,10 +317,10 @@
             this.btnAbrirSesion.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAbrirSesion.Image = global::SPV_Client.Properties.Resources.confirmation__1_;
             this.btnAbrirSesion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAbrirSesion.Location = new System.Drawing.Point(12, 17);
+            this.btnAbrirSesion.Location = new System.Drawing.Point(15, 14);
             this.btnAbrirSesion.Name = "btnAbrirSesion";
             this.btnAbrirSesion.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnAbrirSesion.Size = new System.Drawing.Size(160, 72);
+            this.btnAbrirSesion.Size = new System.Drawing.Size(168, 83);
             this.btnAbrirSesion.TabIndex = 0;
             this.btnAbrirSesion.Text = "Abrir Sesión";
             this.btnAbrirSesion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -329,8 +329,7 @@
             // 
             // FrmMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1288, 727);

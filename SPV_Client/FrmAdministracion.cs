@@ -75,11 +75,7 @@ namespace SPV_Client
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-    "Esta función todavía está en desarrollo.",
-    "Usuarios",
-    MessageBoxButtons.OK,
-    MessageBoxIcon.Information);
+            FormManager.AbrirFormularioUnico<FrmUsuarios>();
         }
     }
 }

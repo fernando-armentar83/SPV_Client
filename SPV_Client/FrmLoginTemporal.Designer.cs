@@ -82,9 +82,9 @@
             // 
             this.btnAutorizarT.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAutorizarT.BackgroundImage")));
             this.btnAutorizarT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAutorizarT.Location = new System.Drawing.Point(164, 174);
+            this.btnAutorizarT.Location = new System.Drawing.Point(164, 167);
             this.btnAutorizarT.Name = "btnAutorizarT";
-            this.btnAutorizarT.Size = new System.Drawing.Size(64, 43);
+            this.btnAutorizarT.Size = new System.Drawing.Size(68, 50);
             this.btnAutorizarT.TabIndex = 4;
             this.btnAutorizarT.UseVisualStyleBackColor = true;
             this.btnAutorizarT.Click += new System.EventHandler(this.btnAutorizarT_Click);
@@ -93,32 +93,33 @@
             // 
             this.btnCancelarT.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancelarT.BackgroundImage")));
             this.btnCancelarT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCancelarT.Location = new System.Drawing.Point(282, 174);
+            this.btnCancelarT.Location = new System.Drawing.Point(282, 167);
             this.btnCancelarT.Name = "btnCancelarT";
-            this.btnCancelarT.Size = new System.Drawing.Size(68, 43);
+            this.btnCancelarT.Size = new System.Drawing.Size(68, 50);
             this.btnCancelarT.TabIndex = 5;
             this.btnCancelarT.UseVisualStyleBackColor = true;
             this.btnCancelarT.Click += new System.EventHandler(this.btnCancelarT_Click);
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BackColor = System.Drawing.Color.MintCream;
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Location = new System.Drawing.Point(385, 93);
+            this.pictureBox2.Location = new System.Drawing.Point(401, 84);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(41, 36);
+            this.pictureBox2.Size = new System.Drawing.Size(57, 53);
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             // 
             // lblModulo
             // 
             this.lblModulo.AutoSize = true;
-            this.lblModulo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblModulo.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModulo.Location = new System.Drawing.Point(19, 19);
+            this.lblModulo.Location = new System.Drawing.Point(79, 19);
             this.lblModulo.Name = "lblModulo";
-            this.lblModulo.Size = new System.Drawing.Size(2, 26);
+            this.lblModulo.Size = new System.Drawing.Size(37, 24);
             this.lblModulo.TabIndex = 7;
+            this.lblModulo.Text = "---";
             // 
             // FrmLoginTemporal
             // 
@@ -137,6 +138,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmLoginTemporal";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGIN-TEMP";
