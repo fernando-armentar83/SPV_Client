@@ -88,27 +88,54 @@ namespace SPV_Client
             }
 
             int idUsuario = Convert.ToInt32(cboUsuarioAutoriza.SelectedValue);
-            string password = txtPasswordAuto.Text.Trim().Normalize();
-
+            string password = txtPasswordAuto.Text.Trim();
 
             try
             {
                 using (var conn = DB.GetConnection())
-                using (var cmd = new MySqlCommand(@"
-                    SELECT COUNT(*)
-                    FROM usuarios
-                    WHERE id_usuario = @id
-                      AND contrasena = @pass
-                      AND activo = 1
-                ", conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", idUsuario);
-                    cmd.Parameters.AddWithValue("@pass", password);
-
                     conn.Open();
-                    int valido = Convert.ToInt32(cmd.ExecuteScalar());
 
-                    if (valido == 1)
+                    string contrasenaGuardada;
+
+                    using (var cmd = new MySqlCommand(
+                        "SELECT contrasena FROM usuarios WHERE id_usuario = @id AND activo = 1;", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", idUsuario);
+
+                        object resultado = cmd.ExecuteScalar();
+
+                        contrasenaGuardada = (resultado == null || resultado == DBNull.Value)
+                            ? null
+                            : resultado.ToString();
+                    }
+
+                    bool valido = false;
+
+                    if (contrasenaGuardada != null)
+                    {
+                        if (contrasenaGuardada.StartsWith("$2"))
+                        {
+                            valido = BCrypt.Net.BCrypt.Verify(password, contrasenaGuardada);
+                        }
+                        else
+                        {
+                            valido = contrasenaGuardada == password;
+
+                            if (valido)
+                            {
+                                using (var cmdMigrar = new MySqlCommand(
+                                    "UPDATE usuarios SET contrasena = @hash WHERE id_usuario = @id;", conn))
+                                {
+                                    cmdMigrar.Parameters.AddWithValue("@hash", BCrypt.Net.BCrypt.HashPassword(password));
+                                    cmdMigrar.Parameters.AddWithValue("@id", idUsuario);
+                                    cmdMigrar.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+
+                    if (valido)
                     {
                         IdUsuarioAutorizo = idUsuario;
                         DialogResult = DialogResult.OK;

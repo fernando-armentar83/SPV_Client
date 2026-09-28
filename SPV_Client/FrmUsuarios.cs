@@ -13,7 +13,7 @@ namespace SPV_Client
 {
     public partial class FrmUsuarios : Form
     {
-        private static readonly int[] IdsUsuariosProtegidos = { 1 };
+        private static readonly int[] IdsUsuariosProtegidos = { 2 };
 
         private int idUsuarioSeleccionado = 0;
 
@@ -119,7 +119,7 @@ ORDER BY u.nombre;";
             try
             {
                 string nombre = txtNombreUsuario.Text.Trim();
-                string contrasena = txtContraseña.Text;
+                string contrasena = txtContraseña.Text.Trim();
 
                 if (string.IsNullOrWhiteSpace(nombre))
                 {
@@ -277,7 +277,7 @@ VALUES (@nombre, @contrasena, @id_rol, @activo);";
                         }
                     }
 
-                    string contrasenaNueva = txtContraseña.Text;
+                    string contrasenaNueva = txtContraseña.Text.Trim();
 
                     string sql;
                     if (string.IsNullOrWhiteSpace(contrasenaNueva))

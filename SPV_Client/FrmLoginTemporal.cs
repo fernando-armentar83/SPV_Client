@@ -52,77 +52,105 @@ namespace SPV_Client
                 {
                     cn.Open();
 
-                    // Ajusta columnas: aquí uso nombres que has usado antes: nombre y contrasena (sin ñ)
-                    string sql = @"SELECT u.id_usuario, u.nombre, u.id_rol, r.nombre_rol
-                                   FROM usuarios u
-                                   INNER JOIN roles r ON u.id_rol = r.id_rol
-                                   WHERE u.nombre = @usuario AND u.contrasena = @password AND u.activo = 1
-                                   LIMIT 1;";
+                    string sql = @"SELECT u.id_usuario, u.nombre, u.id_rol, u.contrasena
+FROM usuarios u
+INNER JOIN roles r ON u.id_rol = r.id_rol
+WHERE u.nombre = @usuario AND u.activo = 1
+LIMIT 1;";
+
+                    int idUsuario;
+                    string nombreUsuario;
+                    int idRol;
+                    string contrasenaGuardada;
 
                     using (var cmd = new MySqlCommand(sql, cn))
                     {
                         cmd.Parameters.AddWithValue("@usuario", usuario);
-                        cmd.Parameters.AddWithValue("@password", contraseña);
 
                         using (var reader = cmd.ExecuteReader())
                         {
-                            if (reader.Read())
-                            {
-                                int idRol = reader["id_rol"] == DBNull.Value ? 0 : Convert.ToInt32(reader["id_rol"]);
-                                string nombreRol = reader["nombre_rol"]?.ToString() ?? "";
-
-                                // Acciones que SOLO puede autorizar un Administrador
-                                if (_modulo == "Catálogo" ||
-                                    _modulo == "Editar producto")
-                                {
-                                    if (idRol != 1)
-                                    {
-                                        MessageBox.Show(
-                                            "Esta acción solo puede ser autorizada por un Administrador.",
-                                            "Acceso denegado",
-                                            MessageBoxButtons.OK,
-                                            MessageBoxIcon.Warning);
-
-                                        return;
-                                    }
-                                }
-                                else
-                                {
-                                    // El resto de acciones pueden ser autorizadas por Administrador o Supervisor
-                                    if (idRol != 1 && idRol != 2)
-                                    {
-                                        MessageBox.Show(
-                                            "El usuario no tiene permisos para autorizar esta acción.",
-                                            "Acceso denegado",
-                                            MessageBoxButtons.OK,
-                                            MessageBoxIcon.Warning);
-
-                                        return;
-                                    }
-                                }
-
-                                // Autorización concedida
-                                Session.IdUsuarioAutoriza = Convert.ToInt32(reader["id_usuario"]);
-                                Session.NombreUsuarioAutoriza = reader["nombre"].ToString();
-
-                                this.DialogResult = DialogResult.OK;
-                                this.Close();
-                                return;
-                            }
-                            else
+                            if (!reader.Read())
                             {
                                 MessageBox.Show("Credenciales incorrectas o usuario inactivo.",
-                                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
+                            }
+
+                            idUsuario = Convert.ToInt32(reader["id_usuario"]);
+                            nombreUsuario = reader["nombre"].ToString();
+                            idRol = reader["id_rol"] == DBNull.Value ? 0 : Convert.ToInt32(reader["id_rol"]);
+                            contrasenaGuardada = reader["contrasena"].ToString();
+                        }
+                    }
+
+                    bool contrasenaValida;
+
+                    if (contrasenaGuardada.StartsWith("$2"))
+                    {
+                        contrasenaValida = BCrypt.Net.BCrypt.Verify(contraseña, contrasenaGuardada);
+                    }
+                    else
+                    {
+                        contrasenaValida = contrasenaGuardada == contraseña;
+
+                        if (contrasenaValida)
+                        {
+                            using (var cmdMigrar = new MySqlCommand(
+                                "UPDATE usuarios SET contrasena = @hash WHERE id_usuario = @id;", cn))
+                            {
+                                cmdMigrar.Parameters.AddWithValue("@hash", BCrypt.Net.BCrypt.HashPassword(contraseña));
+                                cmdMigrar.Parameters.AddWithValue("@id", idUsuario);
+                                cmdMigrar.ExecuteNonQuery();
                             }
                         }
                     }
+
+                    if (!contrasenaValida)
+                    {
+                        MessageBox.Show("Credenciales incorrectas o usuario inactivo.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // Acciones que SOLO puede autorizar un Administrador
+                    if (_modulo == "Catálogo" ||
+                        _modulo == "Editar producto")
+                    {
+                        if (idRol != 1)
+                        {
+                            MessageBox.Show(
+                                "Esta acción solo puede ser autorizada por un Administrador.",
+                                "Acceso denegado",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        // El resto de acciones pueden ser autorizadas por Administrador o Supervisor
+                        if (idRol != 1 && idRol != 2)
+                        {
+                            MessageBox.Show(
+                                "El usuario no tiene permisos para autorizar esta acción.",
+                                "Acceso denegado",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+
+                    // Autorización concedida
+                    Session.IdUsuarioAutoriza = idUsuario;
+                    Session.NombreUsuarioAutoriza = nombreUsuario;
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al conectar con la base de datos: " + ex.Message, "Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
