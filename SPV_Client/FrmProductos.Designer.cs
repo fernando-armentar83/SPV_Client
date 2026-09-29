@@ -240,7 +240,6 @@
             this.lblTotalProductos.Size = new System.Drawing.Size(190, 22);
             this.lblTotalProductos.TabIndex = 5;
             this.lblTotalProductos.Text = "Total productos: 0";
-            this.lblTotalProductos.Click += new System.EventHandler(this.lblTotalProductos_Click);
             // 
             // btnCerrarProductos
             // 
@@ -357,9 +356,7 @@
             this.dgvProductos.Size = new System.Drawing.Size(1493, 293);
             this.dgvProductos.TabIndex = 0;
             this.dgvProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellClick);
-            this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
             this.dgvProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellDoubleClick);
-            this.dgvProductos.DoubleClick += new System.EventHandler(this.dgvProductos_DoubleClick);
             this.dgvProductos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProductos_KeyDown);
             // 
             // colIdProducto

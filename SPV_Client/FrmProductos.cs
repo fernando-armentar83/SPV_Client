@@ -38,14 +38,15 @@ namespace SPV_Client
                 using (var conn = DB.GetConnection())
                 {
                     conn.Open();
-
                     string sql = @"
 SELECT
-    id_categoria,
-    nombre
-FROM categorias
-WHERE activo = 1
-ORDER BY nombre";
+    c.id_categoria,
+    CONCAT(d.nombre, ' - ', c.nombre) AS nombre
+FROM categorias c
+INNER JOIN departamentos d ON c.id_departamento = d.id_departamento
+WHERE c.activo = 1
+ORDER BY d.nombre, c.nombre";
+
 
                     using (var da = new MySqlDataAdapter(sql, conn))
                     {
@@ -232,6 +233,7 @@ ORDER BY nombre_socio";
 SELECT
     p.id_producto,
     p.nombre,
+    p.id_categoria,
 
     c.nombre AS categoria,
 
@@ -324,18 +326,14 @@ ORDER BY p.nombre";
                 // CATEGORIA
                 if (cmbCategoriaFiltro.SelectedIndex > 0)
                 {
-                    DataRowView drv =
-                        (DataRowView)cmbCategoriaFiltro.SelectedItem;
-
-                    string categoria =
-                        drv["nombre"].ToString()
-                        .Replace("'", "''");
+                    int idCategoria =
+                        Convert.ToInt32(cmbCategoriaFiltro.SelectedValue);
 
                     if (filtro != "")
                         filtro += " AND ";
 
                     filtro +=
-                        $"categoria = '{categoria}'";
+                        $"id_categoria = {idCategoria}";
                 }
 
                 // MARCA
@@ -559,16 +557,6 @@ WHERE id_producto = @id";
             frm.ShowDialog();
         }
 
-        private void dgvProductos_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
        
 
         private void dgvProductos_CellDoubleClick(
@@ -686,10 +674,5 @@ WHERE id_producto = @id";
 
                 FiltrarProductos();
             }
-
-        private void lblTotalProductos_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

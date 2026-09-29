@@ -255,7 +255,7 @@ VALUES
 
                 MessageBox.Show(
                     "Unidad guardada correctamente.",
-                    "Correcto",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -429,7 +429,7 @@ WHERE id_medida = @id";
 
                 MessageBox.Show(
                     "Unidad actualizada correctamente.",
-                    "Correcto",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -458,12 +458,41 @@ WHERE id_medida = @id";
                         "Aviso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
-
                     return;
                 }
 
                 bool activar =
                     btnEliminarUnidad.Text == "Activar";
+
+                if (!activar)
+                {
+                    using (var conn = DB.GetConnection())
+                    {
+                        conn.Open();
+
+                        string sqlHijos = @"
+SELECT COUNT(*)
+FROM productos
+WHERE id_medida = @id
+  AND activo = 1";
+
+                        using (var cmd = new MySqlCommand(sqlHijos, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@id", idMedidaSeleccionada);
+                            int hijosActivos = Convert.ToInt32(cmd.ExecuteScalar());
+
+                            if (hijosActivos > 0)
+                            {
+                                MessageBox.Show(
+                                    $"Esta unidad tiene {hijosActivos} producto(s) activo(s). Reasígnelos o desactívelos primero.",
+                                    "Aviso",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                                return;
+                            }
+                        }
+                    }
+                }
 
                 string accion =
                     activar
@@ -503,13 +532,12 @@ WHERE id_medida = @id";
                 }
 
                 MessageBox.Show(
-                    "Estado actualizado correctamente.",
-                    "Correcto",
+                    $"Unidad {(activar ? "activada" : "desactivada")} correctamente.",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
                 LimpiarFormulario();
-
                 CargarUnidades();
             }
             catch (Exception ex)

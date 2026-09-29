@@ -109,7 +109,7 @@ namespace SPV_Client
 
         private Timer reloj = new Timer();
         private int idProductoActual = 0;
-        private int idDepartamentoActual = 0;
+        private int idCategoriaActual = 0;
 
         private decimal precioVentaActual = 0;
         private decimal stockActual = 0;
@@ -447,7 +447,7 @@ LIMIT 1;";
         private void LimpiarProductoActual()
         {
             idProductoActual = 0;
-            idDepartamentoActual = 0;
+            idCategoriaActual = 0;
 
             nombreProductoActual = "";
             modeloActual = "";
@@ -506,7 +506,7 @@ LIMIT 1;";
             VentaDetalle detalle = new VentaDetalle();
 
             detalle.IdProducto = idProductoActual;
-            detalle.IdCategoria = idDepartamentoActual;
+            detalle.IdCategoria = idCategoriaActual;
 
             detalle.Producto = nombreProductoActual;
             detalle.Modelo = modeloActual;
@@ -681,7 +681,7 @@ LIMIT 1;";
             VentaDetalle detalle = detalleVenta[fila];
 
             detalle.IdProducto = idProductoActual;
-            detalle.IdCategoria = idDepartamentoActual;
+            detalle.IdCategoria = idCategoriaActual;
 
             detalle.Producto = nombreProductoActual;
             detalle.Modelo = modeloActual;
@@ -862,7 +862,7 @@ LIMIT 1;";
                                 return false;
 
                             idProductoActual = Convert.ToInt32(dr["id_producto"]);
-                            idDepartamentoActual = Convert.ToInt32(dr["id_categoria"]);
+                            idCategoriaActual = Convert.ToInt32(dr["id_categoria"]);
 
                             nombreProductoActual = dr["nombre"].ToString();
                             modeloActual = dr["modelo"].ToString();
@@ -941,7 +941,7 @@ LIMIT 1;";
         private void CargarProductoDesdeReader(MySqlDataReader dr)
         {
             idProductoActual = Convert.ToInt32(dr["id_producto"]);
-            idDepartamentoActual = Convert.ToInt32(dr["id_categoria"]);
+            idCategoriaActual = Convert.ToInt32(dr["id_categoria"]);
 
             nombreProductoActual = dr["nombre"].ToString();
             modeloActual = dr["modelo"].ToString();

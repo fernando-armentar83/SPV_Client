@@ -13,7 +13,7 @@ namespace SPV_Client
 {
     public partial class FrmDepartamentos : Form
     {
-        private int idDepartamentoSeleccionado = 0;
+        
         private int _idDepartamento = 0;
         public FrmDepartamentos()
         {
@@ -137,7 +137,7 @@ ORDER BY nombre";
 
         private void btnGuardarDepto_Click(object sender, EventArgs e)
         {
-            string nombre = txtDepartamento.Text.Trim().ToUpper();
+            string nombre = txtDepartamento.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(nombre))
             {
@@ -275,7 +275,7 @@ VALUES
                 return;
             }
 
-            string nombre = txtDepartamento.Text.Trim().ToUpper();
+            string nombre = txtDepartamento.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(nombre))
             {
@@ -384,6 +384,37 @@ WHERE id_departamento = @id";
                 ? "desactivar"
                 : "activar";
 
+            if (chkActivo.Checked)
+            {
+                using (var conn = DB.GetConnection())
+                {
+                    conn.Open();
+
+                    string sqlHijos = @"
+SELECT COUNT(*)
+FROM categorias
+WHERE id_departamento = @id
+  AND activo = 1";
+
+                    using (var cmd = new MySqlCommand(sqlHijos, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", _idDepartamento);
+                        int hijosActivos = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        if (hijosActivos > 0)
+                        {
+                            MessageBox.Show(
+                                $"Este departamento tiene {hijosActivos} categoría(s) activa(s). Desactívelas primero.",
+                                "Acción no permitida",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                            );
+                            return;
+                        }
+                    }
+                }
+            }
+
             DialogResult respuesta = MessageBox.Show(
                 $"¿Desea {accion} este departamento?",
                 "Confirmación",
@@ -422,14 +453,13 @@ WHERE id_departamento = @id";
                 }
 
                 MessageBox.Show(
-                    $"Departamento {accion}do correctamente.",
+                    $"Departamento {(chkActivo.Checked ? "desactivado" : "activado")} correctamente.",
                     "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                 );
 
                 CargarDepartamentos();
-
                 LimpiarFormulario();
             }
             catch (Exception ex)
@@ -446,11 +476,6 @@ WHERE id_departamento = @id";
         private void btnCerrarDepto_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void pnlSuperior_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void txtBuscarDepto_TextChanged(object sender, EventArgs e)

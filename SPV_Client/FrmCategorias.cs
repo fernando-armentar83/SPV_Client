@@ -230,15 +230,7 @@ ORDER BY d.nombre, c.nombre";
                     return;
                 }
 
-                DialogResult r = MessageBox.Show(
-                    "¿Guardar categoría?",
-                    "Confirmar",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (r != DialogResult.Yes)
-                    return;
-
+                
                 using (var conn = DB.GetConnection())
                 {
                     conn.Open();
@@ -307,7 +299,7 @@ VALUES
 
                 MessageBox.Show(
                     "Categoría guardada correctamente.",
-                    "Correcto",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -399,15 +391,7 @@ VALUES
                     return;
                 }
 
-                DialogResult r = MessageBox.Show(
-                    "¿Guardar cambios?",
-                    "Confirmar",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (r != DialogResult.Yes)
-                    return;
-
+                
                 using (var conn = DB.GetConnection())
                 {
                     conn.Open();
@@ -479,7 +463,7 @@ WHERE id_categoria = @id_categoria";
 
                 MessageBox.Show(
                     "Categoría actualizada correctamente.",
-                    "Correcto",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -508,11 +492,40 @@ WHERE id_categoria = @id_categoria";
                         "Aviso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
-
                     return;
                 }
 
                 bool nuevoEstado = !chkActivo.Checked;
+
+                if (!nuevoEstado)
+                {
+                    using (var conn = DB.GetConnection())
+                    {
+                        conn.Open();
+
+                        string sqlHijos = @"
+SELECT COUNT(*)
+FROM productos
+WHERE id_categoria = @id_categoria
+  AND activo = 1";
+
+                        using (var cmd = new MySqlCommand(sqlHijos, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@id_categoria", idCategoriaSeleccionada);
+                            int hijosActivos = Convert.ToInt32(cmd.ExecuteScalar());
+
+                            if (hijosActivos > 0)
+                            {
+                                MessageBox.Show(
+                                    $"Esta categoría tiene {hijosActivos} producto(s) activo(s). Desactívelos primero.",
+                                    "Acción no permitida",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                                return;
+                            }
+                        }
+                    }
+                }
 
                 string accion = nuevoEstado
                     ? "activar"
@@ -552,12 +565,11 @@ WHERE id_categoria = @id_categoria";
 
                 MessageBox.Show(
                     $"Categoría {(nuevoEstado ? "activada" : "desactivada")} correctamente.",
-                    "Correcto",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
                 LimpiarFormulario();
-
                 CargarCategorias();
             }
             catch (Exception ex)
@@ -577,16 +589,9 @@ WHERE id_categoria = @id_categoria";
 
         private void btnCerrarCategoria_Click(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show(
-        "¿Desea cerrar el catálogo de categorías?",
-        "Confirmar",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question);
-
-            if (r == DialogResult.Yes)
-            {
+            
                 this.Close();
-            }
+            
         }
     }
 }

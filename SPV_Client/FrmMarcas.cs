@@ -222,7 +222,7 @@ VALUES
 
                 MessageBox.Show(
                     "Marca guardada correctamente.",
-                    "Correcto",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -362,7 +362,7 @@ WHERE id_marca = @id";
 
                 MessageBox.Show(
                     "Marca actualizada correctamente.",
-                    "Correcto",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -391,11 +391,40 @@ WHERE id_marca = @id";
                         "Aviso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
-
                     return;
                 }
 
                 bool nuevoEstado = !chkActivo.Checked;
+
+                if (!nuevoEstado)
+                {
+                    using (var conn = DB.GetConnection())
+                    {
+                        conn.Open();
+
+                        string sqlHijos = @"
+SELECT COUNT(*)
+FROM productos
+WHERE id_marca = @id
+  AND activo = 1";
+
+                        using (var cmd = new MySqlCommand(sqlHijos, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@id", idMarcaSeleccionada);
+                            int hijosActivos = Convert.ToInt32(cmd.ExecuteScalar());
+
+                            if (hijosActivos > 0)
+                            {
+                                MessageBox.Show(
+                                    $"Esta marca tiene {hijosActivos} producto(s) activo(s). Desactívelos primero.",
+                                    "Aviso",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                                return;
+                            }
+                        }
+                    }
+                }
 
                 string accion =
                     nuevoEstado
@@ -435,13 +464,12 @@ WHERE id_marca = @id";
                 }
 
                 MessageBox.Show(
-                    "Registro actualizado correctamente.",
-                    "Correcto",
+                    $"Marca {(nuevoEstado ? "activada" : "desactivada")} correctamente.",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
                 LimpiarFormulario();
-
                 CargarMarcas();
             }
             catch (Exception ex)

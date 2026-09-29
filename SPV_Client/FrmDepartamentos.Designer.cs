@@ -66,7 +66,6 @@
             this.pnlSuperior.Name = "pnlSuperior";
             this.pnlSuperior.Size = new System.Drawing.Size(1165, 90);
             this.pnlSuperior.TabIndex = 0;
-            this.pnlSuperior.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSuperior_Paint);
             // 
             // lblDepartamento
             // 

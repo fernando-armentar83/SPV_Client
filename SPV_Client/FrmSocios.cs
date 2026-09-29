@@ -107,7 +107,7 @@ ORDER BY nombre_socio";
                 {
                     MessageBox.Show(
                         "Ingrese el nombre del socio.",
-                        "Validación",
+                        "Aviso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
 
@@ -166,7 +166,7 @@ VALUES
 
                 MessageBox.Show(
                     "Socio guardado correctamente.",
-                    "Información",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -231,7 +231,7 @@ VALUES
                 {
                     MessageBox.Show(
                         "Seleccione un socio.",
-                        "Validación",
+                        "Aviso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                     return;
@@ -243,7 +243,7 @@ VALUES
                 {
                     MessageBox.Show(
                         "Ingrese el nombre del socio.",
-                        "Validación",
+                        "Aviso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
 
@@ -300,7 +300,7 @@ WHERE id_socio = @id";
 
                 MessageBox.Show(
                     "Socio actualizado correctamente.",
-                    "Información",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -326,7 +326,7 @@ WHERE id_socio = @id";
                 {
                     MessageBox.Show(
                         "Seleccione un socio.",
-                        "Validación",
+                        "Aviso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                     return;
@@ -340,7 +340,7 @@ WHERE id_socio = @id";
 
                 DialogResult resultado = MessageBox.Show(
                     mensaje,
-                    "Confirmación",
+                    "Confirmar",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
@@ -369,7 +369,7 @@ WHERE id_socio = @id";
                     nuevoEstado
                         ? "Socio activado correctamente."
                         : "Socio desactivado correctamente.",
-                    "Información",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 

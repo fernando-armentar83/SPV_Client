@@ -321,7 +321,7 @@ VALUES
 
                 MessageBox.Show(
                     "Proveedor guardado correctamente.",
-                    "Correcto",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -496,7 +496,7 @@ WHERE id_proveedor = @id";
 
                 MessageBox.Show(
                     "Proveedor actualizado correctamente.",
-                    "Correcto",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -525,12 +525,43 @@ WHERE id_proveedor = @id";
                         "Aviso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
-
                     return;
                 }
 
+                bool vaADesactivar = cmbEstadoPro.Text == "ACTIVO";
+
+                if (vaADesactivar)
+                {
+                    using (var conn = DB.GetConnection())
+                    {
+                        conn.Open();
+
+                        string sqlHijos = @"
+SELECT COUNT(*)
+FROM productos
+WHERE id_proveedor = @id
+  AND activo = 1";
+
+                        using (var cmd = new MySqlCommand(sqlHijos, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@id", idProveedorSeleccionado);
+                            int hijosActivos = Convert.ToInt32(cmd.ExecuteScalar());
+
+                            if (hijosActivos > 0)
+                            {
+                                MessageBox.Show(
+                                    $"Este proveedor tiene {hijosActivos} producto(s) activo(s). Reasígnelos o desactívelos primero.",
+                                    "Aviso",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                                return;
+                            }
+                        }
+                    }
+                }
+
                 string nuevoEstado =
-                    cmbEstadoPro.Text == "ACTIVO"
+                    vaADesactivar
                     ? "INACTIVO"
                     : "ACTIVO";
 
@@ -572,13 +603,12 @@ WHERE id_proveedor = @id";
                 }
 
                 MessageBox.Show(
-                    "Estado actualizado correctamente.",
-                    "Correcto",
+                    $"Proveedor {(nuevoEstado == "ACTIVO" ? "activado" : "desactivado")} correctamente.",
+                    "Éxito",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
                 LimpiarFormulario();
-
                 CargarProveedores();
             }
             catch (Exception ex)
