@@ -666,7 +666,7 @@
             this.btnCerrarItem.Font = new System.Drawing.Font("Tahoma", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCerrarItem.ForeColor = System.Drawing.SystemColors.MenuText;
             this.btnCerrarItem.Image = global::SPV_Client.Properties.Resources.close32px;
-            this.btnCerrarItem.Location = new System.Drawing.Point(1059, 6);
+            this.btnCerrarItem.Location = new System.Drawing.Point(1094, 6);
             this.btnCerrarItem.Name = "btnCerrarItem";
             this.btnCerrarItem.Size = new System.Drawing.Size(138, 111);
             this.btnCerrarItem.TabIndex = 4;
@@ -682,13 +682,14 @@
             this.btnKardexItem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnKardexItem.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKardexItem.Image = global::SPV_Client.Properties.Resources.inventorykardex32px;
-            this.btnKardexItem.Location = new System.Drawing.Point(839, 6);
+            this.btnKardexItem.Location = new System.Drawing.Point(874, 6);
             this.btnKardexItem.Name = "btnKardexItem";
             this.btnKardexItem.Size = new System.Drawing.Size(138, 111);
             this.btnKardexItem.TabIndex = 3;
             this.btnKardexItem.Text = "Kardex";
             this.btnKardexItem.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnKardexItem.UseVisualStyleBackColor = false;
+            this.btnKardexItem.Click += new System.EventHandler(this.btnKardexItem_Click);
             // 
             // btnDesactivarItem
             // 
@@ -696,7 +697,7 @@
             this.btnDesactivarItem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDesactivarItem.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDesactivarItem.Image = global::SPV_Client.Properties.Resources.switch_32px;
-            this.btnDesactivarItem.Location = new System.Drawing.Point(608, 6);
+            this.btnDesactivarItem.Location = new System.Drawing.Point(643, 6);
             this.btnDesactivarItem.Name = "btnDesactivarItem";
             this.btnDesactivarItem.Size = new System.Drawing.Size(138, 111);
             this.btnDesactivarItem.TabIndex = 2;
@@ -711,7 +712,7 @@
             this.btnGuardarItem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGuardarItem.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardarItem.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardarItem.Image")));
-            this.btnGuardarItem.Location = new System.Drawing.Point(362, 6);
+            this.btnGuardarItem.Location = new System.Drawing.Point(254, 6);
             this.btnGuardarItem.Name = "btnGuardarItem";
             this.btnGuardarItem.Size = new System.Drawing.Size(138, 111);
             this.btnGuardarItem.TabIndex = 1;
@@ -728,7 +729,7 @@
             this.btnNuevoItem.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNuevoItem.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevoItem.Image")));
             this.btnNuevoItem.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnNuevoItem.Location = new System.Drawing.Point(158, 6);
+            this.btnNuevoItem.Location = new System.Drawing.Point(50, 6);
             this.btnNuevoItem.Name = "btnNuevoItem";
             this.btnNuevoItem.Size = new System.Drawing.Size(138, 111);
             this.btnNuevoItem.TabIndex = 0;

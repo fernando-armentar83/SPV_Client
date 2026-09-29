@@ -1316,5 +1316,21 @@ WHERE id_producto = @idProducto";
 
             btnHabilitarEdicion.Enabled = false;
         }
+
+        private void btnKardexItem_Click(object sender, EventArgs e)
+        {
+            if (idProducto <= 0)
+            {
+                MessageBox.Show(
+                    "Debe guardar el producto antes de consultar su historial.",
+                    "Sistema",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            FrmConsultaProducto frm = new FrmConsultaProducto(idProducto);
+            frm.ShowDialog();
+        }
     }
 }
