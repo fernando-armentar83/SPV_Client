@@ -1332,5 +1332,10 @@ WHERE id_producto = @idProducto";
             FrmConsultaProducto frm = new FrmConsultaProducto(idProducto);
             frm.ShowDialog();
         }
+
+        private void btnConvertir_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

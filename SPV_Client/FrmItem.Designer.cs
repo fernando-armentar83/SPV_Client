@@ -34,10 +34,8 @@
             this.lblIdProducto = new System.Windows.Forms.Label();
             this.txtModelo = new System.Windows.Forms.TextBox();
             this.lblModelo = new System.Windows.Forms.Label();
-            this.btnMarca = new System.Windows.Forms.Button();
             this.cmbMarca = new System.Windows.Forms.ComboBox();
             this.lblMarca = new System.Windows.Forms.Label();
-            this.btnCategoria = new System.Windows.Forms.Button();
             this.cmbCategoria = new System.Windows.Forms.ComboBox();
             this.lblCategoria = new System.Windows.Forms.Label();
             this.txtProducto = new System.Windows.Forms.TextBox();
@@ -53,13 +51,10 @@
             this.lblStockMinimo = new System.Windows.Forms.Label();
             this.txtStockActual = new System.Windows.Forms.TextBox();
             this.lblStockActual = new System.Windows.Forms.Label();
-            this.btnSocio = new System.Windows.Forms.Button();
             this.cmbSocio = new System.Windows.Forms.ComboBox();
             this.lblSocio = new System.Windows.Forms.Label();
-            this.btnProveedor = new System.Windows.Forms.Button();
             this.cmbProveedor = new System.Windows.Forms.ComboBox();
             this.lblProveedor = new System.Windows.Forms.Label();
-            this.btnUnidad = new System.Windows.Forms.Button();
             this.cmbUnidad = new System.Windows.Forms.ComboBox();
             this.lblUnidad = new System.Windows.Forms.Label();
             this.lblTituloInventario = new System.Windows.Forms.Label();
@@ -79,11 +74,17 @@
             this.txtObservaciones = new System.Windows.Forms.TextBox();
             this.lblTituloObservaciones = new System.Windows.Forms.Label();
             this.pnlBotones = new System.Windows.Forms.Panel();
+            this.btnConvertir = new System.Windows.Forms.Button();
             this.btnCerrarItem = new System.Windows.Forms.Button();
             this.btnKardexItem = new System.Windows.Forms.Button();
             this.btnDesactivarItem = new System.Windows.Forms.Button();
             this.btnGuardarItem = new System.Windows.Forms.Button();
             this.btnNuevoItem = new System.Windows.Forms.Button();
+            this.btnSocio = new System.Windows.Forms.Button();
+            this.btnProveedor = new System.Windows.Forms.Button();
+            this.btnUnidad = new System.Windows.Forms.Button();
+            this.btnMarca = new System.Windows.Forms.Button();
+            this.btnCategoria = new System.Windows.Forms.Button();
             this.pnlDatosGenerales.SuspendLayout();
             this.pnlInventarioCompras.SuspendLayout();
             this.pnlVentas.SuspendLayout();
@@ -118,7 +119,7 @@
             // 
             this.btnHabilitarEdicion.BackColor = System.Drawing.Color.MediumSpringGreen;
             this.btnHabilitarEdicion.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHabilitarEdicion.Location = new System.Drawing.Point(1110, 51);
+            this.btnHabilitarEdicion.Location = new System.Drawing.Point(1059, 51);
             this.btnHabilitarEdicion.Name = "btnHabilitarEdicion";
             this.btnHabilitarEdicion.Size = new System.Drawing.Size(108, 78);
             this.btnHabilitarEdicion.TabIndex = 42;
@@ -156,18 +157,6 @@
             this.lblModelo.TabIndex = 9;
             this.lblModelo.Text = "Modelo";
             // 
-            // btnMarca
-            // 
-            this.btnMarca.BackColor = System.Drawing.Color.LightCyan;
-            this.btnMarca.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMarca.BackgroundImage")));
-            this.btnMarca.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMarca.Location = new System.Drawing.Point(698, 146);
-            this.btnMarca.Name = "btnMarca";
-            this.btnMarca.Size = new System.Drawing.Size(40, 33);
-            this.btnMarca.TabIndex = 41;
-            this.btnMarca.UseVisualStyleBackColor = false;
-            this.btnMarca.Click += new System.EventHandler(this.btnMarca_Click);
-            // 
             // cmbMarca
             // 
             this.cmbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -187,18 +176,6 @@
             this.lblMarca.Size = new System.Drawing.Size(82, 22);
             this.lblMarca.TabIndex = 6;
             this.lblMarca.Text = "Marca *";
-            // 
-            // btnCategoria
-            // 
-            this.btnCategoria.BackColor = System.Drawing.Color.LightCyan;
-            this.btnCategoria.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCategoria.BackgroundImage")));
-            this.btnCategoria.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCategoria.Location = new System.Drawing.Point(378, 146);
-            this.btnCategoria.Name = "btnCategoria";
-            this.btnCategoria.Size = new System.Drawing.Size(40, 33);
-            this.btnCategoria.TabIndex = 40;
-            this.btnCategoria.UseVisualStyleBackColor = false;
-            this.btnCategoria.Click += new System.EventHandler(this.btnCategoria_Click);
             // 
             // cmbCategoria
             // 
@@ -370,18 +347,6 @@
             this.lblStockActual.TabIndex = 10;
             this.lblStockActual.Text = "Stock Actual";
             // 
-            // btnSocio
-            // 
-            this.btnSocio.BackColor = System.Drawing.Color.LightCyan;
-            this.btnSocio.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSocio.BackgroundImage")));
-            this.btnSocio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSocio.Location = new System.Drawing.Point(1036, 70);
-            this.btnSocio.Name = "btnSocio";
-            this.btnSocio.Size = new System.Drawing.Size(40, 33);
-            this.btnSocio.TabIndex = 44;
-            this.btnSocio.UseVisualStyleBackColor = false;
-            this.btnSocio.Click += new System.EventHandler(this.btnSocio_Click);
-            // 
             // cmbSocio
             // 
             this.cmbSocio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -402,18 +367,6 @@
             this.lblSocio.TabIndex = 7;
             this.lblSocio.Text = "Socio *";
             // 
-            // btnProveedor
-            // 
-            this.btnProveedor.BackColor = System.Drawing.Color.LightCyan;
-            this.btnProveedor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnProveedor.BackgroundImage")));
-            this.btnProveedor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnProveedor.Location = new System.Drawing.Point(706, 68);
-            this.btnProveedor.Name = "btnProveedor";
-            this.btnProveedor.Size = new System.Drawing.Size(40, 33);
-            this.btnProveedor.TabIndex = 43;
-            this.btnProveedor.UseVisualStyleBackColor = false;
-            this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
-            // 
             // cmbProveedor
             // 
             this.cmbProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -433,18 +386,6 @@
             this.lblProveedor.Size = new System.Drawing.Size(119, 22);
             this.lblProveedor.TabIndex = 4;
             this.lblProveedor.Text = "Proveedor *";
-            // 
-            // btnUnidad
-            // 
-            this.btnUnidad.BackColor = System.Drawing.Color.LightCyan;
-            this.btnUnidad.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUnidad.BackgroundImage")));
-            this.btnUnidad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnUnidad.Location = new System.Drawing.Point(346, 68);
-            this.btnUnidad.Name = "btnUnidad";
-            this.btnUnidad.Size = new System.Drawing.Size(40, 33);
-            this.btnUnidad.TabIndex = 42;
-            this.btnUnidad.UseVisualStyleBackColor = false;
-            this.btnUnidad.Click += new System.EventHandler(this.btnUnidad_Click);
             // 
             // cmbUnidad
             // 
@@ -647,6 +588,7 @@
             // 
             this.pnlBotones.BackColor = System.Drawing.Color.LightBlue;
             this.pnlBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlBotones.Controls.Add(this.btnConvertir);
             this.pnlBotones.Controls.Add(this.btnCerrarItem);
             this.pnlBotones.Controls.Add(this.btnKardexItem);
             this.pnlBotones.Controls.Add(this.btnDesactivarItem);
@@ -657,6 +599,20 @@
             this.pnlBotones.Name = "pnlBotones";
             this.pnlBotones.Size = new System.Drawing.Size(1276, 130);
             this.pnlBotones.TabIndex = 4;
+            // 
+            // btnConvertir
+            // 
+            this.btnConvertir.BackColor = System.Drawing.Color.MintCream;
+            this.btnConvertir.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConvertir.Image = global::SPV_Client.Properties.Resources.transformation;
+            this.btnConvertir.Location = new System.Drawing.Point(469, 6);
+            this.btnConvertir.Name = "btnConvertir";
+            this.btnConvertir.Size = new System.Drawing.Size(138, 111);
+            this.btnConvertir.TabIndex = 5;
+            this.btnConvertir.Text = "Convertir";
+            this.btnConvertir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnConvertir.UseVisualStyleBackColor = false;
+            this.btnConvertir.Click += new System.EventHandler(this.btnConvertir_Click);
             // 
             // btnCerrarItem
             // 
@@ -697,7 +653,7 @@
             this.btnDesactivarItem.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDesactivarItem.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDesactivarItem.Image = global::SPV_Client.Properties.Resources.switch_32px;
-            this.btnDesactivarItem.Location = new System.Drawing.Point(643, 6);
+            this.btnDesactivarItem.Location = new System.Drawing.Point(659, 6);
             this.btnDesactivarItem.Name = "btnDesactivarItem";
             this.btnDesactivarItem.Size = new System.Drawing.Size(138, 111);
             this.btnDesactivarItem.TabIndex = 2;
@@ -738,6 +694,66 @@
             this.btnNuevoItem.UseCompatibleTextRendering = true;
             this.btnNuevoItem.UseVisualStyleBackColor = false;
             this.btnNuevoItem.Click += new System.EventHandler(this.btnNuevoItem_Click);
+            // 
+            // btnSocio
+            // 
+            this.btnSocio.BackColor = System.Drawing.Color.LightCyan;
+            this.btnSocio.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSocio.BackgroundImage")));
+            this.btnSocio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSocio.Location = new System.Drawing.Point(1036, 70);
+            this.btnSocio.Name = "btnSocio";
+            this.btnSocio.Size = new System.Drawing.Size(40, 33);
+            this.btnSocio.TabIndex = 44;
+            this.btnSocio.UseVisualStyleBackColor = false;
+            this.btnSocio.Click += new System.EventHandler(this.btnSocio_Click);
+            // 
+            // btnProveedor
+            // 
+            this.btnProveedor.BackColor = System.Drawing.Color.LightCyan;
+            this.btnProveedor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnProveedor.BackgroundImage")));
+            this.btnProveedor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnProveedor.Location = new System.Drawing.Point(706, 68);
+            this.btnProveedor.Name = "btnProveedor";
+            this.btnProveedor.Size = new System.Drawing.Size(40, 33);
+            this.btnProveedor.TabIndex = 43;
+            this.btnProveedor.UseVisualStyleBackColor = false;
+            this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
+            // 
+            // btnUnidad
+            // 
+            this.btnUnidad.BackColor = System.Drawing.Color.LightCyan;
+            this.btnUnidad.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUnidad.BackgroundImage")));
+            this.btnUnidad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnUnidad.Location = new System.Drawing.Point(346, 68);
+            this.btnUnidad.Name = "btnUnidad";
+            this.btnUnidad.Size = new System.Drawing.Size(40, 33);
+            this.btnUnidad.TabIndex = 42;
+            this.btnUnidad.UseVisualStyleBackColor = false;
+            this.btnUnidad.Click += new System.EventHandler(this.btnUnidad_Click);
+            // 
+            // btnMarca
+            // 
+            this.btnMarca.BackColor = System.Drawing.Color.LightCyan;
+            this.btnMarca.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMarca.BackgroundImage")));
+            this.btnMarca.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnMarca.Location = new System.Drawing.Point(698, 146);
+            this.btnMarca.Name = "btnMarca";
+            this.btnMarca.Size = new System.Drawing.Size(40, 33);
+            this.btnMarca.TabIndex = 41;
+            this.btnMarca.UseVisualStyleBackColor = false;
+            this.btnMarca.Click += new System.EventHandler(this.btnMarca_Click);
+            // 
+            // btnCategoria
+            // 
+            this.btnCategoria.BackColor = System.Drawing.Color.LightCyan;
+            this.btnCategoria.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCategoria.BackgroundImage")));
+            this.btnCategoria.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCategoria.Location = new System.Drawing.Point(378, 146);
+            this.btnCategoria.Name = "btnCategoria";
+            this.btnCategoria.Size = new System.Drawing.Size(40, 33);
+            this.btnCategoria.TabIndex = 40;
+            this.btnCategoria.UseVisualStyleBackColor = false;
+            this.btnCategoria.Click += new System.EventHandler(this.btnCategoria_Click);
             // 
             // FrmItem
             // 
@@ -827,5 +843,6 @@
         private System.Windows.Forms.Label lblIdProducto;
         private System.Windows.Forms.CheckBox chkPermiteVentaImporte;
         private System.Windows.Forms.Button btnHabilitarEdicion;
+        private System.Windows.Forms.Button btnConvertir;
     }
 }

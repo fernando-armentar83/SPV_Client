@@ -118,85 +118,88 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="new-item (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\new-item (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="file_new_14966" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\file_new_14966.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="confirmation (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\confirmation (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="close32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="guardar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\guardar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="new-item (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\new-item (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="shopping-cart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shopping-cart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="room (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\room (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="point-of-sale (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\point-of-sale (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="kardex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kardex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="new-item" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\new-item.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="kardex232px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\kardex232px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="kardex" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\kardex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="point-of-sale" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\point-of-sale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="shopping-cart 32px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shopping-cart 32px1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="updated" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\updated.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="inventorykardex32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\inventorykardex32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="inventory24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\inventory24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="diskette_save_saveas_1514" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\diskette_save_saveas_1514.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="confirmation" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\confirmation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="closed-sign" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\closed-sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="switch 32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\switch 32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="switch1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\switch1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="guardar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\guardar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="list" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\list.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="diskette_save_saveas_1514" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\diskette_save_saveas_1514.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="switch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\switch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="closed-sign" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\closed-sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="point-of-sale (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\point-of-sale (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inventorykardex32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inventorykardex32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="updated" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\updated.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="room (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\room (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shopping-cart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shopping-cart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="point-of-sale (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\point-of-sale (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="switch1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\switch1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shopping-cart 32px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shopping-cart 32px1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="confirmation (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\confirmation (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="shopping-cart 32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shopping-cart 32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="point-of-sale (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\point-of-sale (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="point-of-sale" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\point-of-sale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inventory24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inventory24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kardex232px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kardex232px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="confirmation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\confirmation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="transformation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\transformation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

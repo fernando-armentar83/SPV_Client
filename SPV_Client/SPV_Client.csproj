@@ -221,6 +221,12 @@
     <Compile Include="FrmConteoEfectivo.Designer.cs">
       <DependentUpon>FrmConteoEfectivo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmConversionStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConversionStock.Designer.cs">
+      <DependentUpon>FrmConversionStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmDepartamentos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -428,6 +434,9 @@
     <EmbeddedResource Include="FrmConteoEfectivo.resx">
       <DependentUpon>FrmConteoEfectivo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmConversionStock.resx">
+      <DependentUpon>FrmConversionStock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmDepartamentos.resx">
       <DependentUpon>FrmDepartamentos.cs</DependentUpon>
     </EmbeddedResource>
@@ -605,7 +614,9 @@
   <ItemGroup>
     <None Include="Resources\point-of-sale %282%29.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\transformation.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\QuestPDF.2026.7.2\build\net4\QuestPDF.targets" Condition="Exists('..\packages\QuestPDF.2026.7.2\build\net4\QuestPDF.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
