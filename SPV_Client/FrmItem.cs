@@ -1335,7 +1335,21 @@ WHERE id_producto = @idProducto";
 
         private void btnConvertir_Click(object sender, EventArgs e)
         {
+            if (Session.NombreRol == "Administrador")
+            {
+                FrmConversionStock frm = new FrmConversionStock();
+                frm.ShowDialog();
+                return;
+            }
 
+            using (FrmLoginTemporal login = new FrmLoginTemporal("Conversión de stock"))
+            {
+                if (login.ShowDialog() != DialogResult.OK)
+                    return;
+            }
+
+            FrmConversionStock frmAutorizado = new FrmConversionStock(idProducto);
+            frmAutorizado.ShowDialog();
         }
     }
 }

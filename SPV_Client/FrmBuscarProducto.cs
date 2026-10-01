@@ -267,8 +267,8 @@ namespace SPV_Client
                                 reader.GetDecimal("precio_compra"),
                                 reader.GetDecimal("precio_venta"),
                                 reader.GetDecimal("stock_actual"),
-                                reader.GetString("codigo_barras"),
-                                reader.GetString("codigo_compra"),
+                                reader["codigo_barras"] == DBNull.Value ? "" : reader.GetString("codigo_barras"),
+                                reader["codigo_compra"] == DBNull.Value ? "" : reader.GetString("codigo_compra"),
 
                                 reader.GetInt32("id_medida"),
                                 reader.GetString("abreviatura"),

@@ -16,15 +16,27 @@ namespace SPV_Client
         private int idProductoOrigen = 0;
         private decimal stockOrigenActual = 0m;
         private DataTable dtConversiones;
+        private bool origenFijo = false;
 
         public FrmConversionStock()
         {
             InitializeComponent();
         }
 
+        public FrmConversionStock(int idProductoOrigenFijo)
+        {
+            InitializeComponent();
+            origenFijo = true;
+            idProductoOrigen = idProductoOrigenFijo;
+        }
+
         private void FrmConversionStock_Load(object sender, EventArgs e)
         {
-
+            if (origenFijo)
+            {
+                btnBuscarOrigen.Enabled = false;
+                CargarProductoOrigen(idProductoOrigen);
+            }
         }
 
         private void btnBuscarOrigen_Click(object sender, EventArgs e)
@@ -139,6 +151,16 @@ WHERE pc.id_producto_origen = @id
 
         private void btnConvertir_Click(object sender, EventArgs e)
         {
+            if (Session.IdUsuario == 0 || Session.IdTurno == 0)
+            {
+                MessageBox.Show(
+                    "No hay una sesión o turno activo. Abra un turno antes de realizar conversiones.",
+                    "Sesión requerida",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             if (idProductoOrigen == 0)
             {
                 MessageBox.Show(
@@ -258,6 +280,15 @@ VALUES (@id_producto, @id_usuario, 'ENTRADA', @cantidad, @descripcion);";
         private void btnCerrarConversion_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void FrmConversionStock_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2 && !origenFijo)
+            {
+                e.SuppressKeyPress = true;
+                btnBuscarOrigen_Click(sender, e);
+            }
         }
     }
 }
