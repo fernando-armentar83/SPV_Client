@@ -1337,7 +1337,7 @@ WHERE id_producto = @idProducto";
         {
             if (Session.NombreRol == "Administrador")
             {
-                FrmConversionStock frm = new FrmConversionStock();
+                FrmConversionStock frm = new FrmConversionStock(idProducto);
                 frm.ShowDialog();
                 return;
             }

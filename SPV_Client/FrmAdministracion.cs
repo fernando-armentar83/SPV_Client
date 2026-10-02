@@ -77,5 +77,15 @@ namespace SPV_Client
         {
             FormManager.AbrirFormularioUnico<FrmUsuarios>();
         }
+
+        private void btnConversiones_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmConversiones>();
+        }
+
+        private void btnConversionStock_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmConversionStock>();
+        }
     }
 }

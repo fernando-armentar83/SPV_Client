@@ -221,6 +221,12 @@
     <Compile Include="FrmConteoEfectivo.Designer.cs">
       <DependentUpon>FrmConteoEfectivo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmConversiones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConversiones.Designer.cs">
+      <DependentUpon>FrmConversiones.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmConversionStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -433,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmConteoEfectivo.resx">
       <DependentUpon>FrmConteoEfectivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConversiones.resx">
+      <DependentUpon>FrmConversiones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmConversionStock.resx">
       <DependentUpon>FrmConversionStock.cs</DependentUpon>

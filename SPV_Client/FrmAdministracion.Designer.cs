@@ -33,14 +33,16 @@
             this.btnAbrirArqueo = new System.Windows.Forms.Button();
             this.pnlencabezado = new System.Windows.Forms.Panel();
             this.pnlOperacion = new System.Windows.Forms.Panel();
-            this.btnCategorías = new System.Windows.Forms.Button();
-            this.btnDepartamentos = new System.Windows.Forms.Button();
-            this.btnMarcas = new System.Windows.Forms.Button();
-            this.btnProductos = new System.Windows.Forms.Button();
-            this.btnSocios = new System.Windows.Forms.Button();
-            this.btnUnidadesMedida = new System.Windows.Forms.Button();
-            this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnProveedores = new System.Windows.Forms.Button();
+            this.btnUsuarios = new System.Windows.Forms.Button();
+            this.btnUnidadesMedida = new System.Windows.Forms.Button();
+            this.btnSocios = new System.Windows.Forms.Button();
+            this.btnProductos = new System.Windows.Forms.Button();
+            this.btnMarcas = new System.Windows.Forms.Button();
+            this.btnDepartamentos = new System.Windows.Forms.Button();
+            this.btnCategorías = new System.Windows.Forms.Button();
+            this.btnConversiones = new System.Windows.Forms.Button();
+            this.btnConversionStock = new System.Windows.Forms.Button();
             this.pnlencabezado.SuspendLayout();
             this.pnlOperacion.SuspendLayout();
             this.SuspendLayout();
@@ -91,6 +93,8 @@
             // pnlOperacion
             // 
             this.pnlOperacion.BackColor = System.Drawing.Color.Honeydew;
+            this.pnlOperacion.Controls.Add(this.btnConversionStock);
+            this.pnlOperacion.Controls.Add(this.btnConversiones);
             this.pnlOperacion.Controls.Add(this.btnProveedores);
             this.pnlOperacion.Controls.Add(this.btnUsuarios);
             this.pnlOperacion.Controls.Add(this.btnUnidadesMedida);
@@ -103,8 +107,85 @@
             this.pnlOperacion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOperacion.Location = new System.Drawing.Point(0, 70);
             this.pnlOperacion.Name = "pnlOperacion";
-            this.pnlOperacion.Size = new System.Drawing.Size(800, 380);
+            this.pnlOperacion.Size = new System.Drawing.Size(800, 400);
             this.pnlOperacion.TabIndex = 4;
+            // 
+            // btnProveedores
+            // 
+            this.btnProveedores.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProveedores.Location = new System.Drawing.Point(260, 300);
+            this.btnProveedores.Name = "btnProveedores";
+            this.btnProveedores.Size = new System.Drawing.Size(164, 62);
+            this.btnProveedores.TabIndex = 9;
+            this.btnProveedores.Text = "Proveedores";
+            this.btnProveedores.UseVisualStyleBackColor = true;
+            this.btnProveedores.Click += new System.EventHandler(this.btnProveedores_Click);
+            // 
+            // btnUsuarios
+            // 
+            this.btnUsuarios.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUsuarios.Location = new System.Drawing.Point(460, 210);
+            this.btnUsuarios.Name = "btnUsuarios";
+            this.btnUsuarios.Size = new System.Drawing.Size(162, 64);
+            this.btnUsuarios.TabIndex = 12;
+            this.btnUsuarios.Text = "Usuarios";
+            this.btnUsuarios.UseVisualStyleBackColor = true;
+            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
+            // 
+            // btnUnidadesMedida
+            // 
+            this.btnUnidadesMedida.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUnidadesMedida.Location = new System.Drawing.Point(460, 120);
+            this.btnUnidadesMedida.Name = "btnUnidadesMedida";
+            this.btnUnidadesMedida.Size = new System.Drawing.Size(162, 64);
+            this.btnUnidadesMedida.TabIndex = 11;
+            this.btnUnidadesMedida.Text = "Unidades de Medida";
+            this.btnUnidadesMedida.UseVisualStyleBackColor = true;
+            this.btnUnidadesMedida.Click += new System.EventHandler(this.btnUnidadesMedida_Click);
+            // 
+            // btnSocios
+            // 
+            this.btnSocios.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSocios.Location = new System.Drawing.Point(460, 30);
+            this.btnSocios.Name = "btnSocios";
+            this.btnSocios.Size = new System.Drawing.Size(162, 64);
+            this.btnSocios.TabIndex = 10;
+            this.btnSocios.Text = "Socios";
+            this.btnSocios.UseVisualStyleBackColor = true;
+            this.btnSocios.Click += new System.EventHandler(this.btnSocios_Click);
+            // 
+            // btnProductos
+            // 
+            this.btnProductos.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProductos.Location = new System.Drawing.Point(260, 210);
+            this.btnProductos.Name = "btnProductos";
+            this.btnProductos.Size = new System.Drawing.Size(162, 64);
+            this.btnProductos.TabIndex = 8;
+            this.btnProductos.Text = "Productos";
+            this.btnProductos.UseVisualStyleBackColor = true;
+            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
+            // 
+            // btnMarcas
+            // 
+            this.btnMarcas.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMarcas.Location = new System.Drawing.Point(260, 120);
+            this.btnMarcas.Name = "btnMarcas";
+            this.btnMarcas.Size = new System.Drawing.Size(162, 64);
+            this.btnMarcas.TabIndex = 7;
+            this.btnMarcas.Text = "Marcas";
+            this.btnMarcas.UseVisualStyleBackColor = true;
+            this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
+            // 
+            // btnDepartamentos
+            // 
+            this.btnDepartamentos.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDepartamentos.Location = new System.Drawing.Point(260, 30);
+            this.btnDepartamentos.Name = "btnDepartamentos";
+            this.btnDepartamentos.Size = new System.Drawing.Size(162, 64);
+            this.btnDepartamentos.TabIndex = 6;
+            this.btnDepartamentos.Text = "Departamentos";
+            this.btnDepartamentos.UseVisualStyleBackColor = true;
+            this.btnDepartamentos.Click += new System.EventHandler(this.btnDepartamentos_Click);
             // 
             // btnCategorías
             // 
@@ -117,88 +198,33 @@
             this.btnCategorías.UseVisualStyleBackColor = true;
             this.btnCategorías.Click += new System.EventHandler(this.btnCategorías_Click);
             // 
-            // btnDepartamentos
+            // btnConversiones
             // 
-            this.btnDepartamentos.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDepartamentos.Location = new System.Drawing.Point(60, 210);
-            this.btnDepartamentos.Name = "btnDepartamentos";
-            this.btnDepartamentos.Size = new System.Drawing.Size(162, 64);
-            this.btnDepartamentos.TabIndex = 4;
-            this.btnDepartamentos.Text = "Departamentos";
-            this.btnDepartamentos.UseVisualStyleBackColor = true;
-            this.btnDepartamentos.Click += new System.EventHandler(this.btnDepartamentos_Click);
+            this.btnConversiones.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConversiones.Location = new System.Drawing.Point(60, 210);
+            this.btnConversiones.Name = "btnConversiones";
+            this.btnConversiones.Size = new System.Drawing.Size(162, 64);
+            this.btnConversiones.TabIndex = 4;
+            this.btnConversiones.Text = "Conversión";
+            this.btnConversiones.UseVisualStyleBackColor = true;
+            this.btnConversiones.Click += new System.EventHandler(this.btnConversiones_Click);
             // 
-            // btnMarcas
+            // btnConversionStock
             // 
-            this.btnMarcas.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMarcas.Location = new System.Drawing.Point(260, 30);
-            this.btnMarcas.Name = "btnMarcas";
-            this.btnMarcas.Size = new System.Drawing.Size(162, 64);
-            this.btnMarcas.TabIndex = 5;
-            this.btnMarcas.Text = "Marcas";
-            this.btnMarcas.UseVisualStyleBackColor = true;
-            this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
-            // 
-            // btnProductos
-            // 
-            this.btnProductos.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProductos.Location = new System.Drawing.Point(260, 120);
-            this.btnProductos.Name = "btnProductos";
-            this.btnProductos.Size = new System.Drawing.Size(162, 64);
-            this.btnProductos.TabIndex = 6;
-            this.btnProductos.Text = "Productos";
-            this.btnProductos.UseVisualStyleBackColor = true;
-            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
-            // 
-            // btnSocios
-            // 
-            this.btnSocios.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSocios.Location = new System.Drawing.Point(460, 30);
-            this.btnSocios.Name = "btnSocios";
-            this.btnSocios.Size = new System.Drawing.Size(162, 64);
-            this.btnSocios.TabIndex = 8;
-            this.btnSocios.Text = "Socios";
-            this.btnSocios.UseVisualStyleBackColor = true;
-            this.btnSocios.Click += new System.EventHandler(this.btnSocios_Click);
-            // 
-            // btnUnidadesMedida
-            // 
-            this.btnUnidadesMedida.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUnidadesMedida.Location = new System.Drawing.Point(460, 120);
-            this.btnUnidadesMedida.Name = "btnUnidadesMedida";
-            this.btnUnidadesMedida.Size = new System.Drawing.Size(162, 64);
-            this.btnUnidadesMedida.TabIndex = 9;
-            this.btnUnidadesMedida.Text = "Unidades de Medida";
-            this.btnUnidadesMedida.UseVisualStyleBackColor = true;
-            this.btnUnidadesMedida.Click += new System.EventHandler(this.btnUnidadesMedida_Click);
-            // 
-            // btnUsuarios
-            // 
-            this.btnUsuarios.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUsuarios.Location = new System.Drawing.Point(460, 210);
-            this.btnUsuarios.Name = "btnUsuarios";
-            this.btnUsuarios.Size = new System.Drawing.Size(162, 64);
-            this.btnUsuarios.TabIndex = 10;
-            this.btnUsuarios.Text = "Usuarios";
-            this.btnUsuarios.UseVisualStyleBackColor = true;
-            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
-            // 
-            // btnProveedores
-            // 
-            this.btnProveedores.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProveedores.Location = new System.Drawing.Point(260, 210);
-            this.btnProveedores.Name = "btnProveedores";
-            this.btnProveedores.Size = new System.Drawing.Size(164, 62);
-            this.btnProveedores.TabIndex = 7;
-            this.btnProveedores.Text = "Proveedores";
-            this.btnProveedores.UseVisualStyleBackColor = true;
-            this.btnProveedores.Click += new System.EventHandler(this.btnProveedores_Click);
+            this.btnConversionStock.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConversionStock.Location = new System.Drawing.Point(60, 300);
+            this.btnConversionStock.Name = "btnConversionStock";
+            this.btnConversionStock.Size = new System.Drawing.Size(162, 64);
+            this.btnConversionStock.TabIndex = 5;
+            this.btnConversionStock.Text = "Conversión de Stock";
+            this.btnConversionStock.UseVisualStyleBackColor = true;
+            this.btnConversionStock.Click += new System.EventHandler(this.btnConversionStock_Click);
             // 
             // FrmAdministracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 470);
             this.Controls.Add(this.pnlOperacion);
             this.Controls.Add(this.pnlencabezado);
             this.MaximizeBox = false;
@@ -230,5 +256,7 @@
         private System.Windows.Forms.Button btnUsuarios;
         private System.Windows.Forms.Button btnUnidadesMedida;
         private System.Windows.Forms.Button btnProveedores;
+        private System.Windows.Forms.Button btnConversionStock;
+        private System.Windows.Forms.Button btnConversiones;
     }
 }
