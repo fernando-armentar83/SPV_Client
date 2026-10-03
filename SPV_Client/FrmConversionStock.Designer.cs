@@ -45,6 +45,7 @@
             this.pnlBotones = new System.Windows.Forms.Panel();
             this.btnCerrarConversion = new System.Windows.Forms.Button();
             this.btnConvertir = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.pnlEncabezado.SuspendLayout();
             this.pnlControles.SuspendLayout();
             this.pnlBotones.SuspendLayout();
@@ -73,6 +74,7 @@
             // pnlControles
             // 
             this.pnlControles.BackColor = System.Drawing.Color.Azure;
+            this.pnlControles.Controls.Add(this.lblInfo);
             this.pnlControles.Controls.Add(this.txtObservacionesConversion);
             this.pnlControles.Controls.Add(this.lblObservaciones);
             this.pnlControles.Controls.Add(this.lblCantidadResultante);
@@ -236,6 +238,19 @@
             this.btnConvertir.UseVisualStyleBackColor = false;
             this.btnConvertir.Click += new System.EventHandler(this.btnConvertir_Click);
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lblInfo.Font = new System.Drawing.Font("Consolas", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.ForeColor = System.Drawing.Color.Black;
+            this.lblInfo.Location = new System.Drawing.Point(584, 48);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(100, 22);
+            this.lblInfo.TabIndex = 11;
+            this.lblInfo.Text = "InfoClick";
+            this.lblInfo.Click += new System.EventHandler(this.lblInfo_Click);
+            // 
             // FrmConversionStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -281,5 +296,6 @@
         private System.Windows.Forms.Panel pnlBotones;
         private System.Windows.Forms.Button btnConvertir;
         private System.Windows.Forms.Button btnCerrarConversion;
+        private System.Windows.Forms.Label lblInfo;
     }
 }

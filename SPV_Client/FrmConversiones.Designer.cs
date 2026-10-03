@@ -29,40 +29,42 @@
         private void InitializeComponent()
         {
             this.pnlEncabezado = new System.Windows.Forms.Panel();
-            this.lblProductoOrigen = new System.Windows.Forms.Label();
-            this.txtProductoOrigenConv = new System.Windows.Forms.TextBox();
-            this.btnBuscarOrigenConv = new System.Windows.Forms.Button();
-            this.lblProductoDestino = new System.Windows.Forms.Label();
-            this.txtProductoDestinoConv = new System.Windows.Forms.TextBox();
             this.btnBuscarDestinoConv = new System.Windows.Forms.Button();
+            this.txtProductoDestinoConv = new System.Windows.Forms.TextBox();
+            this.lblProductoDestino = new System.Windows.Forms.Label();
+            this.btnBuscarOrigenConv = new System.Windows.Forms.Button();
+            this.txtProductoOrigenConv = new System.Windows.Forms.TextBox();
+            this.lblProductoOrigen = new System.Windows.Forms.Label();
             this.pnlConversiones = new System.Windows.Forms.Panel();
-            this.lblFactor = new System.Windows.Forms.Label();
-            this.txtFactorConversion = new System.Windows.Forms.TextBox();
             this.chkActivoConversion = new System.Windows.Forms.CheckBox();
+            this.txtFactorConversion = new System.Windows.Forms.TextBox();
+            this.lblFactor = new System.Windows.Forms.Label();
             this.pnldgvConversiones = new System.Windows.Forms.Panel();
-            this.pnlBotones = new System.Windows.Forms.Panel();
             this.dgvConversiones = new System.Windows.Forms.DataGridView();
-            this.btnNuevoConversion = new System.Windows.Forms.Button();
-            this.btnGuardarConversion = new System.Windows.Forms.Button();
-            this.btnEditarConversion = new System.Windows.Forms.Button();
-            this.btnDesactivarConversion = new System.Windows.Forms.Button();
-            this.btnCerrarConversiones = new System.Windows.Forms.Button();
             this.colIdConversion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlBotones = new System.Windows.Forms.Panel();
+            this.btnCerrarConversiones = new System.Windows.Forms.Button();
+            this.btnDesactivarConversion = new System.Windows.Forms.Button();
+            this.btnEditarConversion = new System.Windows.Forms.Button();
+            this.btnGuardarConversion = new System.Windows.Forms.Button();
+            this.btnNuevoConversion = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.pnlEncabezado.SuspendLayout();
             this.pnlConversiones.SuspendLayout();
             this.pnldgvConversiones.SuspendLayout();
-            this.pnlBotones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConversiones)).BeginInit();
+            this.pnlBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlEncabezado
             // 
             this.pnlEncabezado.BackColor = System.Drawing.Color.MintCream;
             this.pnlEncabezado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlEncabezado.Controls.Add(this.lblInfo);
             this.pnlEncabezado.Controls.Add(this.btnBuscarDestinoConv);
             this.pnlEncabezado.Controls.Add(this.txtProductoDestinoConv);
             this.pnlEncabezado.Controls.Add(this.lblProductoDestino);
@@ -75,24 +77,35 @@
             this.pnlEncabezado.Size = new System.Drawing.Size(872, 158);
             this.pnlEncabezado.TabIndex = 0;
             // 
-            // lblProductoOrigen
+            // btnBuscarDestinoConv
             // 
-            this.lblProductoOrigen.AutoSize = true;
-            this.lblProductoOrigen.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductoOrigen.Location = new System.Drawing.Point(83, 20);
-            this.lblProductoOrigen.Name = "lblProductoOrigen";
-            this.lblProductoOrigen.Size = new System.Drawing.Size(158, 25);
-            this.lblProductoOrigen.TabIndex = 0;
-            this.lblProductoOrigen.Text = "Producto Origen:";
+            this.btnBuscarDestinoConv.BackColor = System.Drawing.Color.LightCyan;
+            this.btnBuscarDestinoConv.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscarDestinoConv.Location = new System.Drawing.Point(433, 110);
+            this.btnBuscarDestinoConv.Name = "btnBuscarDestinoConv";
+            this.btnBuscarDestinoConv.Size = new System.Drawing.Size(125, 35);
+            this.btnBuscarDestinoConv.TabIndex = 5;
+            this.btnBuscarDestinoConv.Text = "Buscar (F3)";
+            this.btnBuscarDestinoConv.UseVisualStyleBackColor = false;
             // 
-            // txtProductoOrigenConv
+            // txtProductoDestinoConv
             // 
-            this.txtProductoOrigenConv.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProductoOrigenConv.Location = new System.Drawing.Point(83, 50);
-            this.txtProductoOrigenConv.Name = "txtProductoOrigenConv";
-            this.txtProductoOrigenConv.ReadOnly = true;
-            this.txtProductoOrigenConv.Size = new System.Drawing.Size(340, 31);
-            this.txtProductoOrigenConv.TabIndex = 1;
+            this.txtProductoDestinoConv.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProductoDestinoConv.Location = new System.Drawing.Point(83, 110);
+            this.txtProductoDestinoConv.Name = "txtProductoDestinoConv";
+            this.txtProductoDestinoConv.ReadOnly = true;
+            this.txtProductoDestinoConv.Size = new System.Drawing.Size(340, 31);
+            this.txtProductoDestinoConv.TabIndex = 4;
+            // 
+            // lblProductoDestino
+            // 
+            this.lblProductoDestino.AutoSize = true;
+            this.lblProductoDestino.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductoDestino.Location = new System.Drawing.Point(83, 85);
+            this.lblProductoDestino.Name = "lblProductoDestino";
+            this.lblProductoDestino.Size = new System.Drawing.Size(165, 25);
+            this.lblProductoDestino.TabIndex = 3;
+            this.lblProductoDestino.Text = "Producto Destino:";
             // 
             // btnBuscarOrigenConv
             // 
@@ -105,35 +118,24 @@
             this.btnBuscarOrigenConv.Text = "Buscar (F2)";
             this.btnBuscarOrigenConv.UseVisualStyleBackColor = false;
             // 
-            // lblProductoDestino
+            // txtProductoOrigenConv
             // 
-            this.lblProductoDestino.AutoSize = true;
-            this.lblProductoDestino.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductoDestino.Location = new System.Drawing.Point(83, 85);
-            this.lblProductoDestino.Name = "lblProductoDestino";
-            this.lblProductoDestino.Size = new System.Drawing.Size(165, 25);
-            this.lblProductoDestino.TabIndex = 3;
-            this.lblProductoDestino.Text = "Producto Destino:";
+            this.txtProductoOrigenConv.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProductoOrigenConv.Location = new System.Drawing.Point(83, 50);
+            this.txtProductoOrigenConv.Name = "txtProductoOrigenConv";
+            this.txtProductoOrigenConv.ReadOnly = true;
+            this.txtProductoOrigenConv.Size = new System.Drawing.Size(340, 31);
+            this.txtProductoOrigenConv.TabIndex = 1;
             // 
-            // txtProductoDestinoConv
+            // lblProductoOrigen
             // 
-            this.txtProductoDestinoConv.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProductoDestinoConv.Location = new System.Drawing.Point(83, 110);
-            this.txtProductoDestinoConv.Name = "txtProductoDestinoConv";
-            this.txtProductoDestinoConv.ReadOnly = true;
-            this.txtProductoDestinoConv.Size = new System.Drawing.Size(340, 31);
-            this.txtProductoDestinoConv.TabIndex = 4;
-            // 
-            // btnBuscarDestinoConv
-            // 
-            this.btnBuscarDestinoConv.BackColor = System.Drawing.Color.LightCyan;
-            this.btnBuscarDestinoConv.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscarDestinoConv.Location = new System.Drawing.Point(433, 110);
-            this.btnBuscarDestinoConv.Name = "btnBuscarDestinoConv";
-            this.btnBuscarDestinoConv.Size = new System.Drawing.Size(125, 35);
-            this.btnBuscarDestinoConv.TabIndex = 5;
-            this.btnBuscarDestinoConv.Text = "Buscar (F3)";
-            this.btnBuscarDestinoConv.UseVisualStyleBackColor = false;
+            this.lblProductoOrigen.AutoSize = true;
+            this.lblProductoOrigen.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductoOrigen.Location = new System.Drawing.Point(83, 20);
+            this.lblProductoOrigen.Name = "lblProductoOrigen";
+            this.lblProductoOrigen.Size = new System.Drawing.Size(158, 25);
+            this.lblProductoOrigen.TabIndex = 0;
+            this.lblProductoOrigen.Text = "Producto Origen:";
             // 
             // pnlConversiones
             // 
@@ -148,24 +150,6 @@
             this.pnlConversiones.Size = new System.Drawing.Size(872, 106);
             this.pnlConversiones.TabIndex = 1;
             // 
-            // lblFactor
-            // 
-            this.lblFactor.AutoSize = true;
-            this.lblFactor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFactor.Location = new System.Drawing.Point(20, 20);
-            this.lblFactor.Name = "lblFactor";
-            this.lblFactor.Size = new System.Drawing.Size(261, 25);
-            this.lblFactor.TabIndex = 0;
-            this.lblFactor.Text = "Factor (1 origen = X destino):";
-            // 
-            // txtFactorConversion
-            // 
-            this.txtFactorConversion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFactorConversion.Location = new System.Drawing.Point(20, 50);
-            this.txtFactorConversion.Name = "txtFactorConversion";
-            this.txtFactorConversion.Size = new System.Drawing.Size(150, 31);
-            this.txtFactorConversion.TabIndex = 1;
-            // 
             // chkActivoConversion
             // 
             this.chkActivoConversion.AutoSize = true;
@@ -177,6 +161,24 @@
             this.chkActivoConversion.Text = "Activa";
             this.chkActivoConversion.UseVisualStyleBackColor = true;
             // 
+            // txtFactorConversion
+            // 
+            this.txtFactorConversion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFactorConversion.Location = new System.Drawing.Point(20, 50);
+            this.txtFactorConversion.Name = "txtFactorConversion";
+            this.txtFactorConversion.Size = new System.Drawing.Size(150, 31);
+            this.txtFactorConversion.TabIndex = 1;
+            // 
+            // lblFactor
+            // 
+            this.lblFactor.AutoSize = true;
+            this.lblFactor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFactor.Location = new System.Drawing.Point(20, 20);
+            this.lblFactor.Name = "lblFactor";
+            this.lblFactor.Size = new System.Drawing.Size(261, 25);
+            this.lblFactor.TabIndex = 0;
+            this.lblFactor.Text = "Factor (1 origen = X destino):";
+            // 
             // pnldgvConversiones
             // 
             this.pnldgvConversiones.BackColor = System.Drawing.Color.LightCyan;
@@ -186,20 +188,6 @@
             this.pnldgvConversiones.Name = "pnldgvConversiones";
             this.pnldgvConversiones.Size = new System.Drawing.Size(872, 364);
             this.pnldgvConversiones.TabIndex = 2;
-            // 
-            // pnlBotones
-            // 
-            this.pnlBotones.BackColor = System.Drawing.Color.AliceBlue;
-            this.pnlBotones.Controls.Add(this.btnCerrarConversiones);
-            this.pnlBotones.Controls.Add(this.btnDesactivarConversion);
-            this.pnlBotones.Controls.Add(this.btnEditarConversion);
-            this.pnlBotones.Controls.Add(this.btnGuardarConversion);
-            this.pnlBotones.Controls.Add(this.btnNuevoConversion);
-            this.pnlBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBotones.Location = new System.Drawing.Point(0, 528);
-            this.pnlBotones.Name = "pnlBotones";
-            this.pnlBotones.Size = new System.Drawing.Size(872, 100);
-            this.pnlBotones.TabIndex = 3;
             // 
             // dgvConversiones
             // 
@@ -225,67 +213,6 @@
             this.dgvConversiones.Size = new System.Drawing.Size(872, 364);
             this.dgvConversiones.TabIndex = 0;
             this.dgvConversiones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConversiones_CellClick);
-            // 
-            // btnNuevoConversion
-            // 
-            this.btnNuevoConversion.BackColor = System.Drawing.Color.Cyan;
-            this.btnNuevoConversion.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNuevoConversion.Location = new System.Drawing.Point(84, 30);
-            this.btnNuevoConversion.Name = "btnNuevoConversion";
-            this.btnNuevoConversion.Size = new System.Drawing.Size(100, 40);
-            this.btnNuevoConversion.TabIndex = 0;
-            this.btnNuevoConversion.Text = "Nuevo";
-            this.btnNuevoConversion.UseVisualStyleBackColor = false;
-            this.btnNuevoConversion.Click += new System.EventHandler(this.btnNuevoConversion_Click);
-            // 
-            // btnGuardarConversion
-            // 
-            this.btnGuardarConversion.BackColor = System.Drawing.Color.Cyan;
-            this.btnGuardarConversion.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarConversion.Location = new System.Drawing.Point(214, 30);
-            this.btnGuardarConversion.Name = "btnGuardarConversion";
-            this.btnGuardarConversion.Size = new System.Drawing.Size(100, 40);
-            this.btnGuardarConversion.TabIndex = 1;
-            this.btnGuardarConversion.Text = "Guardar";
-            this.btnGuardarConversion.UseVisualStyleBackColor = false;
-            this.btnGuardarConversion.Click += new System.EventHandler(this.btnGuardarConversion_Click);
-            // 
-            // btnEditarConversion
-            // 
-            this.btnEditarConversion.BackColor = System.Drawing.Color.Cyan;
-            this.btnEditarConversion.Enabled = false;
-            this.btnEditarConversion.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditarConversion.Location = new System.Drawing.Point(344, 30);
-            this.btnEditarConversion.Name = "btnEditarConversion";
-            this.btnEditarConversion.Size = new System.Drawing.Size(100, 40);
-            this.btnEditarConversion.TabIndex = 2;
-            this.btnEditarConversion.Text = "Editar";
-            this.btnEditarConversion.UseVisualStyleBackColor = false;
-            this.btnEditarConversion.Click += new System.EventHandler(this.btnEditarConversion_Click);
-            // 
-            // btnDesactivarConversion
-            // 
-            this.btnDesactivarConversion.BackColor = System.Drawing.Color.Cyan;
-            this.btnDesactivarConversion.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDesactivarConversion.Location = new System.Drawing.Point(474, 30);
-            this.btnDesactivarConversion.Name = "btnDesactivarConversion";
-            this.btnDesactivarConversion.Size = new System.Drawing.Size(115, 40);
-            this.btnDesactivarConversion.TabIndex = 3;
-            this.btnDesactivarConversion.Text = "Desactivar";
-            this.btnDesactivarConversion.UseVisualStyleBackColor = false;
-            this.btnDesactivarConversion.Click += new System.EventHandler(this.btnDesactivarConversion_Click);
-            // 
-            // btnCerrarConversiones
-            // 
-            this.btnCerrarConversiones.BackColor = System.Drawing.Color.Cyan;
-            this.btnCerrarConversiones.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrarConversiones.Location = new System.Drawing.Point(624, 30);
-            this.btnCerrarConversiones.Name = "btnCerrarConversiones";
-            this.btnCerrarConversiones.Size = new System.Drawing.Size(100, 40);
-            this.btnCerrarConversiones.TabIndex = 4;
-            this.btnCerrarConversiones.Text = "Cerrar";
-            this.btnCerrarConversiones.UseVisualStyleBackColor = false;
-            this.btnCerrarConversiones.Click += new System.EventHandler(this.btnCerrarConversiones_Click);
             // 
             // colIdConversion
             // 
@@ -328,6 +255,93 @@
             this.colEstado.Name = "colEstado";
             this.colEstado.ReadOnly = true;
             // 
+            // pnlBotones
+            // 
+            this.pnlBotones.BackColor = System.Drawing.Color.AliceBlue;
+            this.pnlBotones.Controls.Add(this.btnCerrarConversiones);
+            this.pnlBotones.Controls.Add(this.btnDesactivarConversion);
+            this.pnlBotones.Controls.Add(this.btnEditarConversion);
+            this.pnlBotones.Controls.Add(this.btnGuardarConversion);
+            this.pnlBotones.Controls.Add(this.btnNuevoConversion);
+            this.pnlBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBotones.Location = new System.Drawing.Point(0, 528);
+            this.pnlBotones.Name = "pnlBotones";
+            this.pnlBotones.Size = new System.Drawing.Size(872, 100);
+            this.pnlBotones.TabIndex = 3;
+            // 
+            // btnCerrarConversiones
+            // 
+            this.btnCerrarConversiones.BackColor = System.Drawing.Color.Cyan;
+            this.btnCerrarConversiones.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrarConversiones.Location = new System.Drawing.Point(624, 30);
+            this.btnCerrarConversiones.Name = "btnCerrarConversiones";
+            this.btnCerrarConversiones.Size = new System.Drawing.Size(100, 40);
+            this.btnCerrarConversiones.TabIndex = 4;
+            this.btnCerrarConversiones.Text = "Cerrar";
+            this.btnCerrarConversiones.UseVisualStyleBackColor = false;
+            this.btnCerrarConversiones.Click += new System.EventHandler(this.btnCerrarConversiones_Click);
+            // 
+            // btnDesactivarConversion
+            // 
+            this.btnDesactivarConversion.BackColor = System.Drawing.Color.Cyan;
+            this.btnDesactivarConversion.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDesactivarConversion.Location = new System.Drawing.Point(474, 30);
+            this.btnDesactivarConversion.Name = "btnDesactivarConversion";
+            this.btnDesactivarConversion.Size = new System.Drawing.Size(115, 40);
+            this.btnDesactivarConversion.TabIndex = 3;
+            this.btnDesactivarConversion.Text = "Desactivar";
+            this.btnDesactivarConversion.UseVisualStyleBackColor = false;
+            this.btnDesactivarConversion.Click += new System.EventHandler(this.btnDesactivarConversion_Click);
+            // 
+            // btnEditarConversion
+            // 
+            this.btnEditarConversion.BackColor = System.Drawing.Color.Cyan;
+            this.btnEditarConversion.Enabled = false;
+            this.btnEditarConversion.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditarConversion.Location = new System.Drawing.Point(344, 30);
+            this.btnEditarConversion.Name = "btnEditarConversion";
+            this.btnEditarConversion.Size = new System.Drawing.Size(100, 40);
+            this.btnEditarConversion.TabIndex = 2;
+            this.btnEditarConversion.Text = "Editar";
+            this.btnEditarConversion.UseVisualStyleBackColor = false;
+            this.btnEditarConversion.Click += new System.EventHandler(this.btnEditarConversion_Click);
+            // 
+            // btnGuardarConversion
+            // 
+            this.btnGuardarConversion.BackColor = System.Drawing.Color.Cyan;
+            this.btnGuardarConversion.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarConversion.Location = new System.Drawing.Point(214, 30);
+            this.btnGuardarConversion.Name = "btnGuardarConversion";
+            this.btnGuardarConversion.Size = new System.Drawing.Size(100, 40);
+            this.btnGuardarConversion.TabIndex = 1;
+            this.btnGuardarConversion.Text = "Guardar";
+            this.btnGuardarConversion.UseVisualStyleBackColor = false;
+            this.btnGuardarConversion.Click += new System.EventHandler(this.btnGuardarConversion_Click);
+            // 
+            // btnNuevoConversion
+            // 
+            this.btnNuevoConversion.BackColor = System.Drawing.Color.Cyan;
+            this.btnNuevoConversion.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuevoConversion.Location = new System.Drawing.Point(84, 30);
+            this.btnNuevoConversion.Name = "btnNuevoConversion";
+            this.btnNuevoConversion.Size = new System.Drawing.Size(100, 40);
+            this.btnNuevoConversion.TabIndex = 0;
+            this.btnNuevoConversion.Text = "Nuevo";
+            this.btnNuevoConversion.UseVisualStyleBackColor = false;
+            this.btnNuevoConversion.Click += new System.EventHandler(this.btnNuevoConversion_Click);
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lblInfo.Font = new System.Drawing.Font("Consolas", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Location = new System.Drawing.Point(718, 23);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(100, 22);
+            this.lblInfo.TabIndex = 6;
+            this.lblInfo.Text = "InfoClick";
+            this.lblInfo.Click += new System.EventHandler(this.lblInfo_Click);
+            // 
             // FrmConversiones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -351,8 +365,8 @@
             this.pnlConversiones.ResumeLayout(false);
             this.pnlConversiones.PerformLayout();
             this.pnldgvConversiones.ResumeLayout(false);
-            this.pnlBotones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConversiones)).EndInit();
+            this.pnlBotones.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -383,5 +397,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDestino;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactor;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEstado;
+        private System.Windows.Forms.Label lblInfo;
     }
 }

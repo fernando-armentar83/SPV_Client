@@ -290,5 +290,37 @@ VALUES (@id_producto, @id_usuario, 'ENTRADA', @cantidad, @descripcion);";
                 btnBuscarOrigen_Click(sender, e);
             }
         }
+
+        private void lblInfo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+        @"CONVERSIÓN DE STOCK
+--->  Recuerda si no se ha convertido el producto hacerlo primero en Conversión <---
+
+BUSCAR (Click en Botón o F2)
+Elige el producto de origen (Caja, Bolsa, Kilo, Metro, Litro).
+1.-Este puede ser usado desde Item y no será necesario realizar la busqueda.
+2.-Si es abierto desde administrador, verificar si el producto ya se encuentra
+en la lista de conversiones.
+
+CONVERTIR A
+Lista las conversiones ya definidas para el producto
+origen (ver catálogo de Conversiones).
+
+CANTIDAD A CONVERTIR (ORIGEN)
+Cuánto del producto origen se va a descontar.
+El movimiento depende de la cantidad del producto (caja con 100 pz, bolsa con 25 pz).
+*Resultante ----> Indica la cantidad que se transfiere de unidad a piezas.
+
+BOTÓN CONVERTIR
+Pide autorización y ejecuta el movimiento: resta del
+origen, suma al destino. Queda registrado en el
+historial (Kardex) de ambos productos.
+
+No se puede convertir más de lo que hay en existencia.",
+                "Información",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
     }
 }

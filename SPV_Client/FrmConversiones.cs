@@ -356,5 +356,37 @@ VALUES (@origen, @destino, @factor, @activo);";
         {
             this.Close();
         }
+
+        private void lblInfo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+        @"CATÁLOGO DE CONVERSIONES
+
+Este Formulario enlaza los productos a  en
+Conversión de Stock.
+
+BUSCAR BOTÓN/(F2) ORIGEN ------> BUSCAR BOTÓN/(F3) DESTINO
+Elige los dos productos de la conversión.
+
+FACTOR
+Cuánto del destino equivale a 1 unidad del origen.
+Ejemplo: caja de 100 piezas → factor 100.
+Ejemplo: tramo de 6 metros → factor 6.
+
+ACTIVA
+Si está desmarcada, esta conversión no aparece como
+opción en Conversión de Stock. No se borra, solo se
+oculta. Se puede volver a activar cuando se requiera.
+
+En la Lista encontraras los Productos que ya están
+con su conversión y no es necesario volverlo a hacer,
+ya se puede realizar en Conversión de Stock.
+
+No se puede editar el origen/destino de una conversión
+ya guardada: hay que crear una nueva si eso cambia.",
+                "Información",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
     }
 }

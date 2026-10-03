@@ -33,6 +33,8 @@
             this.btnAbrirArqueo = new System.Windows.Forms.Button();
             this.pnlencabezado = new System.Windows.Forms.Panel();
             this.pnlOperacion = new System.Windows.Forms.Panel();
+            this.btnConversionStock = new System.Windows.Forms.Button();
+            this.btnConversiones = new System.Windows.Forms.Button();
             this.btnProveedores = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnUnidadesMedida = new System.Windows.Forms.Button();
@@ -41,8 +43,7 @@
             this.btnMarcas = new System.Windows.Forms.Button();
             this.btnDepartamentos = new System.Windows.Forms.Button();
             this.btnCategorías = new System.Windows.Forms.Button();
-            this.btnConversiones = new System.Windows.Forms.Button();
-            this.btnConversionStock = new System.Windows.Forms.Button();
+            this.btnAjusteStock = new System.Windows.Forms.Button();
             this.pnlencabezado.SuspendLayout();
             this.pnlOperacion.SuspendLayout();
             this.SuspendLayout();
@@ -93,6 +94,7 @@
             // pnlOperacion
             // 
             this.pnlOperacion.BackColor = System.Drawing.Color.Honeydew;
+            this.pnlOperacion.Controls.Add(this.btnAjusteStock);
             this.pnlOperacion.Controls.Add(this.btnConversionStock);
             this.pnlOperacion.Controls.Add(this.btnConversiones);
             this.pnlOperacion.Controls.Add(this.btnProveedores);
@@ -109,6 +111,28 @@
             this.pnlOperacion.Name = "pnlOperacion";
             this.pnlOperacion.Size = new System.Drawing.Size(800, 400);
             this.pnlOperacion.TabIndex = 4;
+            // 
+            // btnConversionStock
+            // 
+            this.btnConversionStock.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConversionStock.Location = new System.Drawing.Point(60, 300);
+            this.btnConversionStock.Name = "btnConversionStock";
+            this.btnConversionStock.Size = new System.Drawing.Size(162, 64);
+            this.btnConversionStock.TabIndex = 5;
+            this.btnConversionStock.Text = "Conversión de Stock";
+            this.btnConversionStock.UseVisualStyleBackColor = true;
+            this.btnConversionStock.Click += new System.EventHandler(this.btnConversionStock_Click);
+            // 
+            // btnConversiones
+            // 
+            this.btnConversiones.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConversiones.Location = new System.Drawing.Point(60, 210);
+            this.btnConversiones.Name = "btnConversiones";
+            this.btnConversiones.Size = new System.Drawing.Size(162, 64);
+            this.btnConversiones.TabIndex = 4;
+            this.btnConversiones.Text = "Conversión";
+            this.btnConversiones.UseVisualStyleBackColor = true;
+            this.btnConversiones.Click += new System.EventHandler(this.btnConversiones_Click);
             // 
             // btnProveedores
             // 
@@ -198,27 +222,16 @@
             this.btnCategorías.UseVisualStyleBackColor = true;
             this.btnCategorías.Click += new System.EventHandler(this.btnCategorías_Click);
             // 
-            // btnConversiones
+            // btnAjusteStock
             // 
-            this.btnConversiones.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConversiones.Location = new System.Drawing.Point(60, 210);
-            this.btnConversiones.Name = "btnConversiones";
-            this.btnConversiones.Size = new System.Drawing.Size(162, 64);
-            this.btnConversiones.TabIndex = 4;
-            this.btnConversiones.Text = "Conversión";
-            this.btnConversiones.UseVisualStyleBackColor = true;
-            this.btnConversiones.Click += new System.EventHandler(this.btnConversiones_Click);
-            // 
-            // btnConversionStock
-            // 
-            this.btnConversionStock.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConversionStock.Location = new System.Drawing.Point(60, 300);
-            this.btnConversionStock.Name = "btnConversionStock";
-            this.btnConversionStock.Size = new System.Drawing.Size(162, 64);
-            this.btnConversionStock.TabIndex = 5;
-            this.btnConversionStock.Text = "Conversión de Stock";
-            this.btnConversionStock.UseVisualStyleBackColor = true;
-            this.btnConversionStock.Click += new System.EventHandler(this.btnConversionStock_Click);
+            this.btnAjusteStock.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAjusteStock.Location = new System.Drawing.Point(460, 300);
+            this.btnAjusteStock.Name = "btnAjusteStock";
+            this.btnAjusteStock.Size = new System.Drawing.Size(162, 64);
+            this.btnAjusteStock.TabIndex = 13;
+            this.btnAjusteStock.Text = "Ajuste";
+            this.btnAjusteStock.UseVisualStyleBackColor = true;
+            this.btnAjusteStock.Click += new System.EventHandler(this.btnAjusteStock_Click);
             // 
             // FrmAdministracion
             // 
@@ -258,5 +271,6 @@
         private System.Windows.Forms.Button btnProveedores;
         private System.Windows.Forms.Button btnConversionStock;
         private System.Windows.Forms.Button btnConversiones;
+        private System.Windows.Forms.Button btnAjusteStock;
     }
 }
