@@ -161,6 +161,12 @@
     <Compile Include="FrmAutorizacionStock.Designer.cs">
       <DependentUpon>FrmAutorizacionStock.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBackup.Designer.cs">
+      <DependentUpon>FrmBackup.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmBuscarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +268,12 @@
     </Compile>
     <Compile Include="FrmEditarPrecioVenta.Designer.cs">
       <DependentUpon>FrmEditarPrecioVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHerramientas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHerramientas.Designer.cs">
+      <DependentUpon>FrmHerramientas.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmHistorialCompras.cs">
       <SubType>Form</SubType>
@@ -416,6 +428,9 @@
     <EmbeddedResource Include="FrmAutorizacionStock.resx">
       <DependentUpon>FrmAutorizacionStock.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmBackup.resx">
+      <DependentUpon>FrmBackup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmBuscarProducto.resx">
       <DependentUpon>FrmBuscarProducto.cs</DependentUpon>
     </EmbeddedResource>
@@ -466,6 +481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEditarPrecioVenta.resx">
       <DependentUpon>FrmEditarPrecioVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHerramientas.resx">
+      <DependentUpon>FrmHerramientas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmHistorialCompras.resx">
       <DependentUpon>FrmHistorialCompras.cs</DependentUpon>

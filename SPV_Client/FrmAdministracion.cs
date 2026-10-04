@@ -92,5 +92,10 @@ namespace SPV_Client
         {
             FormManager.AbrirFormularioUnico<FrmAjusteStock>();
         }
+
+        private void btnHerramientas_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmHerramientas>();
+        }
     }
 }

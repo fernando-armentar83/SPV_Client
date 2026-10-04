@@ -1262,52 +1262,37 @@ WHERE id_producto = @idProducto";
 
         private void btnCategoria_Click(object sender, EventArgs e)
         {
-            FrmCategorias frm =
-        new FrmCategorias();
-
-            frm.ShowDialog();
-
-            CargarCategorias();
+            FrmCategorias frm = new FrmCategorias();
+            frm.FormClosed += (s, args) => CargarCategorias();
+            frm.Show();
         }
 
         private void btnMarca_Click(object sender, EventArgs e)
         {
-            FrmMarcas frm =
-        new FrmMarcas();
-
-            frm.ShowDialog();
-
-            CargarMarcas();
+            FrmMarcas frm = new FrmMarcas();
+            frm.FormClosed += (s, args) => CargarMarcas();
+            frm.Show();
         }
 
         private void btnUnidad_Click(object sender, EventArgs e)
         {
-            FrmUnidadesMedida frm =
-        new FrmUnidadesMedida();
-
-            frm.ShowDialog();
-
-            CargarUnidades();
+            FrmUnidadesMedida frm = new FrmUnidadesMedida();
+            frm.FormClosed += (s, args) => CargarUnidades();
+            frm.Show();
         }
 
         private void btnProveedor_Click(object sender, EventArgs e)
         {
-            FrmProveedores frm =
-        new FrmProveedores();
-
-            frm.ShowDialog();
-
-            CargarProveedores();
+            FrmProveedores frm = new FrmProveedores();
+            frm.FormClosed += (s, args) => CargarProveedores();
+            frm.Show();
         }
 
         private void btnSocio_Click(object sender, EventArgs e)
         {
-            FrmSocios frm =
-        new FrmSocios();
-
-            frm.ShowDialog();
-
-            CargarSocios();
+            FrmSocios frm = new FrmSocios();
+            frm.FormClosed += (s, args) => CargarSocios();
+            frm.Show();
         }
 
         private void btnHabilitarEdicion_Click(object sender, EventArgs e)

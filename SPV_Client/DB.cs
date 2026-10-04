@@ -13,6 +13,11 @@ namespace SPV_Client
         private static string database = "spv_tlapaleria";
         private static string user = "fer";
         private static string password = "129112"; // si tienes contraseña, ponla aquí
+        public static string Server => server;
+        public static string Port => port;
+        public static string Database => database;
+        public static string User => user;
+        public static string Password => password;
         // --------------------------------------------------------
 
         public static string ConnectionString =>

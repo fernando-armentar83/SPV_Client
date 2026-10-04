@@ -33,6 +33,7 @@
             this.btnAbrirArqueo = new System.Windows.Forms.Button();
             this.pnlencabezado = new System.Windows.Forms.Panel();
             this.pnlOperacion = new System.Windows.Forms.Panel();
+            this.btnAjusteStock = new System.Windows.Forms.Button();
             this.btnConversionStock = new System.Windows.Forms.Button();
             this.btnConversiones = new System.Windows.Forms.Button();
             this.btnProveedores = new System.Windows.Forms.Button();
@@ -43,7 +44,7 @@
             this.btnMarcas = new System.Windows.Forms.Button();
             this.btnDepartamentos = new System.Windows.Forms.Button();
             this.btnCategorías = new System.Windows.Forms.Button();
-            this.btnAjusteStock = new System.Windows.Forms.Button();
+            this.btnHerramientas = new System.Windows.Forms.Button();
             this.pnlencabezado.SuspendLayout();
             this.pnlOperacion.SuspendLayout();
             this.SuspendLayout();
@@ -88,12 +89,13 @@
             this.pnlencabezado.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlencabezado.Location = new System.Drawing.Point(0, 0);
             this.pnlencabezado.Name = "pnlencabezado";
-            this.pnlencabezado.Size = new System.Drawing.Size(800, 70);
+            this.pnlencabezado.Size = new System.Drawing.Size(880, 70);
             this.pnlencabezado.TabIndex = 3;
             // 
             // pnlOperacion
             // 
             this.pnlOperacion.BackColor = System.Drawing.Color.Honeydew;
+            this.pnlOperacion.Controls.Add(this.btnHerramientas);
             this.pnlOperacion.Controls.Add(this.btnAjusteStock);
             this.pnlOperacion.Controls.Add(this.btnConversionStock);
             this.pnlOperacion.Controls.Add(this.btnConversiones);
@@ -109,8 +111,19 @@
             this.pnlOperacion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOperacion.Location = new System.Drawing.Point(0, 70);
             this.pnlOperacion.Name = "pnlOperacion";
-            this.pnlOperacion.Size = new System.Drawing.Size(800, 400);
+            this.pnlOperacion.Size = new System.Drawing.Size(880, 400);
             this.pnlOperacion.TabIndex = 4;
+            // 
+            // btnAjusteStock
+            // 
+            this.btnAjusteStock.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAjusteStock.Location = new System.Drawing.Point(460, 300);
+            this.btnAjusteStock.Name = "btnAjusteStock";
+            this.btnAjusteStock.Size = new System.Drawing.Size(162, 64);
+            this.btnAjusteStock.TabIndex = 13;
+            this.btnAjusteStock.Text = "Ajuste";
+            this.btnAjusteStock.UseVisualStyleBackColor = true;
+            this.btnAjusteStock.Click += new System.EventHandler(this.btnAjusteStock_Click);
             // 
             // btnConversionStock
             // 
@@ -222,22 +235,22 @@
             this.btnCategorías.UseVisualStyleBackColor = true;
             this.btnCategorías.Click += new System.EventHandler(this.btnCategorías_Click);
             // 
-            // btnAjusteStock
+            // btnHerramientas
             // 
-            this.btnAjusteStock.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAjusteStock.Location = new System.Drawing.Point(460, 300);
-            this.btnAjusteStock.Name = "btnAjusteStock";
-            this.btnAjusteStock.Size = new System.Drawing.Size(162, 64);
-            this.btnAjusteStock.TabIndex = 13;
-            this.btnAjusteStock.Text = "Ajuste";
-            this.btnAjusteStock.UseVisualStyleBackColor = true;
-            this.btnAjusteStock.Click += new System.EventHandler(this.btnAjusteStock_Click);
+            this.btnHerramientas.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHerramientas.Location = new System.Drawing.Point(660, 30);
+            this.btnHerramientas.Name = "btnHerramientas";
+            this.btnHerramientas.Size = new System.Drawing.Size(162, 64);
+            this.btnHerramientas.TabIndex = 14;
+            this.btnHerramientas.Text = "Herramientas";
+            this.btnHerramientas.UseVisualStyleBackColor = true;
+            this.btnHerramientas.Click += new System.EventHandler(this.btnHerramientas_Click);
             // 
             // FrmAdministracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 470);
+            this.ClientSize = new System.Drawing.Size(880, 470);
             this.Controls.Add(this.pnlOperacion);
             this.Controls.Add(this.pnlencabezado);
             this.MaximizeBox = false;
@@ -272,5 +285,6 @@
         private System.Windows.Forms.Button btnConversionStock;
         private System.Windows.Forms.Button btnConversiones;
         private System.Windows.Forms.Button btnAjusteStock;
+        private System.Windows.Forms.Button btnHerramientas;
     }
 }
