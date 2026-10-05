@@ -20,7 +20,7 @@ namespace SPV_Client
 
         private void FrmAdministracion_Load(object sender, EventArgs e)
         {
-            lblUsuarioActivo.Text = "Usuario actual: " + Session.NombreUsuario;
+            lblUsuarioActivo.Text = "Usuario : " + Session.NombreUsuario;
         }
 
         private void btnAbrirArqueo_Click(object sender, EventArgs e)

@@ -17,20 +17,21 @@ namespace SPV_Client.Helpers
         private const int SW_RESTORE = 9;
 
         // Formularios con constructor sin parámetros
-        public static void AbrirFormularioUnico<T>() where T : Form, new()
+        public static T AbrirFormularioUnico<T>() where T : Form, new()
         {
             Form frmAbierto = Application.OpenForms
-                                         .OfType<T>()
-                                         .FirstOrDefault();
+                .OfType<T>()
+                .FirstOrDefault();
 
             if (frmAbierto != null)
             {
                 RestaurarYActivar(frmAbierto);
-                return;
+                return (T)frmAbierto;
             }
 
             T frm = new T();
             frm.Show();
+            return frm;
         }
 
         // Formularios con constructor que recibe un parámetro

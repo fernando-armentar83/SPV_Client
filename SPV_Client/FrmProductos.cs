@@ -557,11 +557,9 @@ WHERE id_producto = @id";
             frm.ShowDialog();
         }
 
-       
 
-        private void dgvProductos_CellDoubleClick(
-    object sender,
-    DataGridViewCellEventArgs e)
+
+        private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
                 return;
@@ -572,13 +570,33 @@ WHERE id_producto = @id";
                     .Cells["colIdProducto"]
                     .Value);
 
+            FrmItem frmExistente = Application.OpenForms
+                .OfType<FrmItem>()
+                .FirstOrDefault();
+
+            if (frmExistente != null)
+            {
+                frmExistente.WindowState = FormWindowState.Normal;
+                frmExistente.BringToFront();
+                frmExistente.Activate();
+                return;
+            }
+
             FrmItem frm = new FrmItem();
 
             frm.IdProducto = idProducto;
 
-            frm.ShowDialog();
+            frm.FormClosed -= ItemForm_Closed;
+            frm.FormClosed += ItemForm_Closed;
+
+            frm.Show();
         }
-        
+
+        private void ItemForm_Closed(object sender, EventArgs e)
+        {
+            CargarProductos();
+        }
+
 
         private void dgvProductos_KeyDown(object sender, KeyEventArgs e)
         {

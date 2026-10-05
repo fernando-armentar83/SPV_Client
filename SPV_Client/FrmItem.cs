@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using SPV_Client.Enums;
+using SPV_Client.Helpers;
 
 namespace SPV_Client
 {
@@ -1262,37 +1263,62 @@ WHERE id_producto = @idProducto";
 
         private void btnCategoria_Click(object sender, EventArgs e)
         {
-            FrmCategorias frm = new FrmCategorias();
-            frm.FormClosed += (s, args) => CargarCategorias();
-            frm.Show();
+            FrmCategorias frm = FormManager.AbrirFormularioUnico<FrmCategorias>();
+            frm.FormClosed -= CategoriasForm_Closed;
+            frm.FormClosed += CategoriasForm_Closed;
+        }
+
+        private void CategoriasForm_Closed(object sender, EventArgs e)
+        {
+            CargarCategorias();
         }
 
         private void btnMarca_Click(object sender, EventArgs e)
         {
-            FrmMarcas frm = new FrmMarcas();
-            frm.FormClosed += (s, args) => CargarMarcas();
-            frm.Show();
+            FrmMarcas frm = FormManager.AbrirFormularioUnico<FrmMarcas>();
+            frm.FormClosed -= MarcasForm_Closed;
+            frm.FormClosed += MarcasForm_Closed;
+        }
+
+        private void MarcasForm_Closed(object sender, EventArgs e)
+        {
+            CargarMarcas();
         }
 
         private void btnUnidad_Click(object sender, EventArgs e)
         {
-            FrmUnidadesMedida frm = new FrmUnidadesMedida();
-            frm.FormClosed += (s, args) => CargarUnidades();
-            frm.Show();
+            FrmUnidadesMedida frm = FormManager.AbrirFormularioUnico<FrmUnidadesMedida>();
+            frm.FormClosed -= UnidadForm_Closed;
+            frm.FormClosed += UnidadForm_Closed;
+        }
+
+        private void UnidadForm_Closed(object sender, EventArgs e)
+        {
+            CargarUnidades();
         }
 
         private void btnProveedor_Click(object sender, EventArgs e)
         {
-            FrmProveedores frm = new FrmProveedores();
-            frm.FormClosed += (s, args) => CargarProveedores();
-            frm.Show();
+            FrmProveedores frm = FormManager.AbrirFormularioUnico<FrmProveedores>();
+            frm.FormClosed -= ProveedorForm_Closed;
+            frm.FormClosed += ProveedorForm_Closed;
+        }
+
+        private void ProveedorForm_Closed(object sender, EventArgs e)
+        {
+            CargarProveedores();
         }
 
         private void btnSocio_Click(object sender, EventArgs e)
         {
-            FrmSocios frm = new FrmSocios();
-            frm.FormClosed += (s, args) => CargarSocios();
-            frm.Show();
+            FrmSocios frm = FormManager.AbrirFormularioUnico<FrmSocios>();
+            frm.FormClosed -= SocioForm_Closed;
+            frm.FormClosed += SocioForm_Closed;
+        }
+
+        private void SocioForm_Closed(object sender, EventArgs e)
+        {
+            CargarSocios();
         }
 
         private void btnHabilitarEdicion_Click(object sender, EventArgs e)

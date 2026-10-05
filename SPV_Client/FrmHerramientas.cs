@@ -30,7 +30,7 @@ namespace SPV_Client
 
         private void btnCarga_Click(object sender, EventArgs e)
         {
-
+            FormManager.AbrirFormularioUnico<FrmImportacionProductos>();
         }
     }
 }
