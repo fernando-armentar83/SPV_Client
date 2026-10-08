@@ -30,12 +30,13 @@
         {
             this.btnBackup = new System.Windows.Forms.Button();
             this.btnCarga = new System.Windows.Forms.Button();
+            this.btnConexion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnBackup
             // 
             this.btnBackup.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBackup.Location = new System.Drawing.Point(87, 87);
+            this.btnBackup.Location = new System.Drawing.Point(87, 41);
             this.btnBackup.Name = "btnBackup";
             this.btnBackup.Size = new System.Drawing.Size(157, 66);
             this.btnBackup.TabIndex = 0;
@@ -46,7 +47,7 @@
             // btnCarga
             // 
             this.btnCarga.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCarga.Location = new System.Drawing.Point(87, 231);
+            this.btnCarga.Location = new System.Drawing.Point(87, 154);
             this.btnCarga.Name = "btnCarga";
             this.btnCarga.Size = new System.Drawing.Size(157, 66);
             this.btnCarga.TabIndex = 1;
@@ -54,12 +55,24 @@
             this.btnCarga.UseVisualStyleBackColor = true;
             this.btnCarga.Click += new System.EventHandler(this.btnCarga_Click);
             // 
+            // btnConexion
+            // 
+            this.btnConexion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConexion.Location = new System.Drawing.Point(87, 271);
+            this.btnConexion.Name = "btnConexion";
+            this.btnConexion.Size = new System.Drawing.Size(157, 66);
+            this.btnConexion.TabIndex = 2;
+            this.btnConexion.Text = "Conexion BD";
+            this.btnConexion.UseVisualStyleBackColor = true;
+            this.btnConexion.Click += new System.EventHandler(this.btnConexion_Click);
+            // 
             // FrmHerramientas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
             this.ClientSize = new System.Drawing.Size(344, 371);
+            this.Controls.Add(this.btnConexion);
             this.Controls.Add(this.btnCarga);
             this.Controls.Add(this.btnBackup);
             this.MaximizeBox = false;
@@ -77,5 +90,6 @@
 
         private System.Windows.Forms.Button btnBackup;
         private System.Windows.Forms.Button btnCarga;
+        private System.Windows.Forms.Button btnConexion;
     }
 }

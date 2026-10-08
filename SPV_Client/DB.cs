@@ -12,8 +12,8 @@ namespace SPV_Client
         public string Server { get; set; } = "localhost";
         public string Port { get; set; } = "3306";
         public string Database { get; set; } = "spv_tlapaleria";
-        public string User { get; set; } = "root";
-        public string Password { get; set; } = "";
+        public string User { get; set; } = "fer";
+        public string Password { get; set; } = "129112";
     }
 
     public static class DB
@@ -63,7 +63,7 @@ namespace SPV_Client
         public static string Password => config.Password;
 
         public static string ConnectionString =>
-            $"Server={config.Server};Port={config.Port};Database={config.Database};Uid={config.User};Pwd={config.Password};AllowPublicKeyRetrieval=True;SslMode=none;";
+            $"Server={config.Server};Port={config.Port};Database={config.Database};Uid={config.User};Pwd={config.Password};AllowPublicKeyRetrieval=True;SslMode=None;";
 
         public static MySqlConnection GetConnection()
         {
@@ -94,7 +94,7 @@ namespace SPV_Client
             errorMessage = string.Empty;
             string cs =
                 $"Server={configPrueba.Server};Port={configPrueba.Port};Database={configPrueba.Database};" +
-                $"Uid={configPrueba.User};Pwd={configPrueba.Password};AllowPublicKeyRetrieval=True;SslMode=none;";
+                $"Uid={configPrueba.User};Pwd={configPrueba.Password};AllowPublicKeyRetrieval=True;SslMode=None;";
 
             try
             {
@@ -107,7 +107,13 @@ namespace SPV_Client
             }
             catch (Exception ex)
             {
-                errorMessage = ex.Message;
+                //errorMessage = ex.Message;
+                //return false;
+                errorMessage = ex.GetType().FullName + ": " + ex.Message;
+
+                if (ex.InnerException != null)
+                    errorMessage += " | INNER: " + ex.InnerException.GetType().FullName + ": " + ex.InnerException.Message;
+
                 return false;
             }
         }

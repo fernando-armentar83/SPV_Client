@@ -32,5 +32,10 @@ namespace SPV_Client
         {
             FormManager.AbrirFormularioUnico<FrmImportacionProductos>();
         }
+
+        private void btnConexion_Click(object sender, EventArgs e)
+        {
+            FormManager.AbrirFormularioUnico<FrmConexion>();
+        }
     }
 }
