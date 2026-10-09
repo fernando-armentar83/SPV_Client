@@ -63,30 +63,12 @@ namespace SPV_Client
         public static string Password => config.Password;
 
         public static string ConnectionString =>
-            $"Server={config.Server};Port={config.Port};Database={config.Database};Uid={config.User};Pwd={config.Password};AllowPublicKeyRetrieval=True;SslMode=None;";
+    $"Server={config.Server};Port={config.Port};Database={config.Database};Uid={config.User};Pwd={config.Password};";
+
 
         public static MySqlConnection GetConnection()
         {
             return new MySqlConnection(ConnectionString);
-        }
-
-        public static bool TestConnection(out string errorMessage)
-        {
-            errorMessage = string.Empty;
-            try
-            {
-                using (var conn = GetConnection())
-                {
-                    conn.Open();
-                    conn.Close();
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                errorMessage = ex.Message;
-                return false;
-            }
         }
 
         public static bool TestConnection(ConfiguracionConexion configPrueba, out string errorMessage)
@@ -94,7 +76,7 @@ namespace SPV_Client
             errorMessage = string.Empty;
             string cs =
                 $"Server={configPrueba.Server};Port={configPrueba.Port};Database={configPrueba.Database};" +
-                $"Uid={configPrueba.User};Pwd={configPrueba.Password};AllowPublicKeyRetrieval=True;SslMode=None;";
+                $"Uid={configPrueba.User};Pwd={configPrueba.Password};";
 
             try
             {
@@ -107,13 +89,7 @@ namespace SPV_Client
             }
             catch (Exception ex)
             {
-                //errorMessage = ex.Message;
-                //return false;
-                errorMessage = ex.GetType().FullName + ": " + ex.Message;
-
-                if (ex.InnerException != null)
-                    errorMessage += " | INNER: " + ex.InnerException.GetType().FullName + ": " + ex.InnerException.Message;
-
+                errorMessage = ex.Message;
                 return false;
             }
         }
