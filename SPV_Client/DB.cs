@@ -71,6 +71,25 @@ namespace SPV_Client
             return new MySqlConnection(ConnectionString);
         }
 
+        public static bool TestConnection(out string errorMessage)
+        {
+            errorMessage = string.Empty;
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    conn.Open();
+                    conn.Close();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+                return false;
+            }
+        }
+
         public static bool TestConnection(ConfiguracionConexion configPrueba, out string errorMessage)
         {
             errorMessage = string.Empty;
