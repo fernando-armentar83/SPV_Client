@@ -24,7 +24,7 @@ namespace SPV_Client
         private decimal totalElectronicoArqueos = 0m;
         private decimal totalRetiradoArqueos = 0m;
 
-        private readonly string connString = "server=localhost;database=spv_tlapaleria;uid=fer;pwd=129112;";
+        
         
         public FrmCierreSesion()
         {
@@ -158,7 +158,7 @@ WHERE id_turno = @id_turno;";
         {
             CierreReimpresion cierre = null;
 
-            using (var cn = new MySqlConnection(connString))
+            using (var cn = DB.GetConnection())
             {
                 cn.Open();
 
@@ -280,7 +280,7 @@ WHERE id_turno = @id_turno;";
         {
             try
             {
-                using (var cn = new MySqlConnection(connString))
+                using (var cn = DB.GetConnection())
                 {
                     cn.Open();
 
@@ -456,7 +456,7 @@ ORDER BY
 
             try
             {
-                using (var cn = new MySqlConnection(connString))
+                using (var cn = DB.GetConnection())
                 {
                     cn.Open();
                     string validarTurno = @"

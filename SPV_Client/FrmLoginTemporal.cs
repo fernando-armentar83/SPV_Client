@@ -17,8 +17,7 @@ namespace SPV_Client
     {
         private readonly string _modulo;
 
-        // Ajusta esta cadena si tu base de datos usa otro nombre o credenciales
-        private readonly string _connString = "server=localhost;database=spv_tlapaleria;uid=fer;pwd=129112;";
+        
 
         public FrmLoginTemporal(string modulo)
         {
@@ -48,7 +47,7 @@ namespace SPV_Client
 
             try
             {
-                using (var cn = new MySqlConnection(_connString))
+                using (var cn = DB.GetConnection())
                 {
                     cn.Open();
 

@@ -16,8 +16,7 @@ namespace SPV_Client
 {
     public partial class LoginForm : Form
     {
-        private readonly string connString =
-            "server=localhost;database=spv_tlapaleria;uid=fer;pwd=129112;";
+        
 
         public LoginForm()
         {
@@ -47,8 +46,7 @@ namespace SPV_Client
 
             try
             {
-                using (MySqlConnection conexion = new MySqlConnection(
-                    "server=localhost;database=spv_tlapaleria;uid=fer;pwd=129112;"))
+                using (MySqlConnection conexion = DB.GetConnection())
                 {
                     conexion.Open();
 
