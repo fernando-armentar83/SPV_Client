@@ -101,10 +101,12 @@
             // 
             // txtVale
             // 
+            this.txtVale.Enabled = false;
             this.txtVale.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtVale.Location = new System.Drawing.Point(150, 214);
             this.txtVale.Multiline = true;
             this.txtVale.Name = "txtVale";
+            this.txtVale.ReadOnly = true;
             this.txtVale.Size = new System.Drawing.Size(165, 44);
             this.txtVale.TabIndex = 7;
             this.txtVale.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
