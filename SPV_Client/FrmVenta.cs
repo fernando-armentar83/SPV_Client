@@ -16,6 +16,9 @@ namespace SPV_Client
 {
     public partial class FrmVenta : Form
     {
+        
+        
+        private string categoriaActual = "";
         public FrmVenta()
         {
             InitializeComponent();
@@ -265,6 +268,7 @@ SELECT
     p.precio_venta,
     p.stock_actual,
     p.permite_venta_importe,
+     c.nombre AS categoria,
 
     um.abreviatura,
     um.permite_decimal,
@@ -275,6 +279,9 @@ FROM productos p
 
 INNER JOIN unidades_medida um
     ON p.id_medida = um.id_medida
+
+LEFT JOIN categorias c
+    ON p.id_categoria = c.id_categoria
 
 WHERE p.codigo_barras = @codigo
 AND p.activo = 1
@@ -507,6 +514,7 @@ LIMIT 1;";
 
             detalle.IdProducto = idProductoActual;
             detalle.IdCategoria = idCategoriaActual;
+            detalle.Categoria = categoriaActual;
 
             detalle.Producto = nombreProductoActual;
             detalle.Modelo = modeloActual;
@@ -583,10 +591,10 @@ LIMIT 1;";
             VentaDetalle detalle = detalleVenta[fila];
 
             // Recalcular subtotal
-            detalle.Subtotal =
-                detalle.Cantidad *
-                detalle.Precio *
-                (1 - (detalle.Descuento / 100m));
+            detalle.Subtotal = Math.Round(
+                detalle.Cantidad * detalle.Precio * (1 - (detalle.Descuento / 100m)),
+                2,
+                MidpointRounding.AwayFromZero);
 
             DataGridViewRow row = dgvDetalleVenta.Rows[fila];
 
@@ -682,6 +690,7 @@ LIMIT 1;";
 
             detalle.IdProducto = idProductoActual;
             detalle.IdCategoria = idCategoriaActual;
+            detalle.Categoria = categoriaActual;
 
             detalle.Producto = nombreProductoActual;
             detalle.Modelo = modeloActual;
@@ -839,6 +848,7 @@ SELECT
     p.precio_venta,
     p.stock_actual,
     p.permite_venta_importe,
+     c.nombre AS categoria,
 
     um.abreviatura,
     um.permite_decimal,
@@ -848,6 +858,9 @@ SELECT
 FROM productos p
 INNER JOIN unidades_medida um
     ON p.id_medida = um.id_medida
+
+LEFT JOIN categorias c
+    ON p.id_categoria = c.id_categoria
 
 WHERE p.id_producto=@id
 LIMIT 1;";
@@ -862,7 +875,8 @@ LIMIT 1;";
                                 return false;
 
                             idProductoActual = Convert.ToInt32(dr["id_producto"]);
-                            idCategoriaActual = Convert.ToInt32(dr["id_categoria"]);
+                            idCategoriaActual = dr["id_categoria"] == DBNull.Value ? 0 : Convert.ToInt32(dr["id_categoria"]);
+                            categoriaActual = dr["categoria"] == DBNull.Value ? "" : dr["categoria"].ToString();
 
                             nombreProductoActual = dr["nombre"].ToString();
                             modeloActual = dr["modelo"].ToString();
@@ -941,7 +955,8 @@ LIMIT 1;";
         private void CargarProductoDesdeReader(MySqlDataReader dr)
         {
             idProductoActual = Convert.ToInt32(dr["id_producto"]);
-            idCategoriaActual = Convert.ToInt32(dr["id_categoria"]);
+            idCategoriaActual = dr["id_categoria"] == DBNull.Value ? 0 : Convert.ToInt32(dr["id_categoria"]);
+            categoriaActual = dr["categoria"] == DBNull.Value ? "" : dr["categoria"].ToString();
 
             nombreProductoActual = dr["nombre"].ToString();
             modeloActual = dr["modelo"].ToString();
@@ -1077,11 +1092,12 @@ LIMIT 1;";
                 detalle.SubtotalOriginal =
      detalle.Cantidad * detalle.Precio;
 
-                if (detalle.TipoDescuento == "Porcentaje")
-                {
-                    detalle.ImporteDescuento =
-                        detalle.SubtotalOriginal * (detalle.Descuento / 100m);
-                }
+
+                detalle.ImporteDescuento = Math.Round(
+                    detalle.SubtotalOriginal * (detalle.Descuento / 100m),
+                    2,
+                    MidpointRounding.AwayFromZero);
+
 
                 detalle.Subtotal =
                     detalle.SubtotalOriginal - detalle.ImporteDescuento;
@@ -1433,6 +1449,11 @@ LIMIT 1;";
             {
                 frm.ShowDialog();
             }
+        }
+
+        private void dgvDetalleVenta_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

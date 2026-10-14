@@ -98,22 +98,38 @@ namespace SPV_Client
             if (!decimal.TryParse(txtValorDescuento.Text.Trim(), out decimal valor))
                 valor = 0;
 
-            decimal importeDescuento = 0;
+            string tipoSeleccionado = cboTipoDescuento.SelectedIndex == 0 ? "Porcentaje" : "Importe";
 
-            if (cboTipoDescuento.SelectedIndex == 0)
-                importeDescuento = subtotalOriginal * (valor / 100m);
+            decimal porcentajeEfectivo;
+            decimal importeDescuento;
+
+            if (tipoSeleccionado == "Porcentaje")
+            {
+                porcentajeEfectivo = valor;
+                importeDescuento = subtotalOriginal * (porcentajeEfectivo / 100m);
+            }
             else
+            {
                 importeDescuento = valor;
+                porcentajeEfectivo = subtotalOriginal > 0
+                    ? (importeDescuento / subtotalOriginal) * 100m
+                    : 0;
+            }
 
             if (importeDescuento > subtotalOriginal)
+            {
                 importeDescuento = subtotalOriginal;
+                porcentajeEfectivo = 100m;
+            }
+
+            importeDescuento = Math.Round(importeDescuento, 2, MidpointRounding.AwayFromZero);
 
             Resultado = new DescuentoResultado
             {
-                TipoDescuento = cboTipoDescuento.Text,
-                Porcentaje = cboTipoDescuento.SelectedIndex == 0 ? valor : 0,
+                TipoDescuento = tipoSeleccionado,
+                Porcentaje = porcentajeEfectivo,
                 ImporteDescuento = importeDescuento,
-                NuevoSubtotal = subtotalOriginal - importeDescuento
+                NuevoSubtotal = Math.Round(subtotalOriginal - importeDescuento, 2, MidpointRounding.AwayFromZero)
             };
 
             this.DialogResult = DialogResult.OK;

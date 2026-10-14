@@ -149,7 +149,9 @@ INSERT INTO detalle_ventas
     cantidad,
     precio_unitario,
     subtotal,
-    descuento
+    descuento,
+    importe_descuento,
+    tipo_descuento
 )
 VALUES
 (
@@ -158,22 +160,21 @@ VALUES
     @cantidad,
     @precio,
     @subtotal,
-    @descuento
+    @descuento,
+    @importe_descuento,
+    @tipo_descuento
 );";
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn, trans))
                 {
                     cmd.Parameters.AddWithValue("@id_venta", idVenta);
-
                     cmd.Parameters.AddWithValue("@id_producto", item.IdProducto);
-
                     cmd.Parameters.AddWithValue("@cantidad", item.Cantidad);
-
                     cmd.Parameters.AddWithValue("@precio", item.Precio);
-
-                    cmd.Parameters.AddWithValue("@subtotal", item.SubtotalOriginal);
-
+                    cmd.Parameters.AddWithValue("@subtotal", item.Subtotal);
                     cmd.Parameters.AddWithValue("@descuento", item.Descuento);
-
+                    cmd.Parameters.AddWithValue("@importe_descuento", item.ImporteDescuento);
+                    cmd.Parameters.AddWithValue("@tipo_descuento",
+                        string.IsNullOrEmpty(item.TipoDescuento) ? (object)DBNull.Value : item.TipoDescuento);
                     cmd.ExecuteNonQuery();
                 }
             }
